@@ -15,3 +15,14 @@ yarn storybook
 ```
 
 For more information on storybooks, you can view the docs [here](https://storybook.js.org/docs/react/get-started/whats-a-story)
+
+## Publishing
+
+1. Increment version number in `package.json`. 
+    - increment last digit for minor changes and bugfixes
+    - increment middle digit for new features and/or changes to current ones
+    - increment first digit in the event of complete overhauls/major changes
+    - for testing, append with `-beta<revision_number>`
+2. Commit changes
+3. Create PR and have it approved for merging into `master` branch
+4. Run `yarn publish`

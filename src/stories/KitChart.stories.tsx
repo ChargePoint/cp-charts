@@ -1,7 +1,6 @@
-import React from 'react';
 import KitCharts, { ChartSeries } from '../components/KitCharts';
 import styled from 'styled-components';
-import { createDataPoints } from '../constants';
+import { createDataPoints } from '../common/constants';
 
 const Chart = styled(KitCharts)`
   width: 700px;

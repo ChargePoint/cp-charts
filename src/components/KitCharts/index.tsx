@@ -10,7 +10,7 @@ import { ThemeConstants } from '@chargepoint/cp-toolkit';
 
 am4core.useTheme(am4themes_animated);
 
-export interface KitChartDataPoint {
+export interface KitChartDataPointProps {
   date: Date;
   value: number;
 }
@@ -18,7 +18,7 @@ export interface KitChartDataPoint {
 export interface KitChartProps {
   id: string;
   className?: string;
-  data: Array<KitChartDataPoint>;
+  data: Array<KitChartDataPointProps>;
   chartSeries: Constructor<ColumnSeries | LineSeries>;
   showScrollbar?: boolean;
   dateAxisTitle?: string;
@@ -40,13 +40,13 @@ const Wrapper = styled.div`
 `;
 
 function KitChart(props: KitChartProps) {
-  const barChart = useRef(null);
+  const barChart = useRef({});
   const themeContext = useContext(ThemeContext);
 
   useLayoutEffect(() => {
     const chart = am4core.create(props.id, am4charts.XYChart);
     chart.data = props.data;
-    chart.dateFormatter.intlLocales = props.intlLocales;
+    chart.dateFormatter.intlLocales = props.intlLocales ?? '';
 
     const dateAxis = chart.xAxes.push(new am4charts.DateAxis());
     dateAxis.baseInterval = {
@@ -69,7 +69,7 @@ function KitChart(props: KitChartProps) {
     dateAxis.renderer.labels.template.fill = am4core.color(themeContext.page.body.text.toString());
 
     const yAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    yAxis.tooltip.disabled = true;
+    yAxis.tooltip!.disabled = true;
     if (props.yAxisTitle) {
       yAxis.title.text = props.yAxisTitle;
     }
@@ -79,7 +79,7 @@ function KitChart(props: KitChartProps) {
     const series = chart.series.push(new props.chartSeries());
     series.dataFields.dateX = 'date';
     series.dataFields.valueY = 'value';
-    series.tooltipText = props.tooltipText; // "[bold]{valueY}[/] kWh";
+    series.tooltipText = props.tooltipText ?? '';
     series.fillOpacity = 0.3;
 
     chart.cursor = new am4charts.XYCursor();
@@ -101,22 +101,27 @@ function KitChart(props: KitChartProps) {
   }, [props.data]);
 
   useEffect(() => {
+    // @ts-ignore
     barChart.current.scrollbarX.disabled = !props.showScrollbar;
   }, [props.showScrollbar]);
 
   useEffect(() => {
+    // @ts-ignore
     barChart.current.xAxes.values[0].title.text = props.dateAxisTitle;
   }, [props.dateAxisTitle]);
 
   useEffect(() => {
+    // @ts-ignore
     barChart.current.yAxes.values[0].title.text = props.yAxisTitle;
   }, [props.yAxisTitle]);
 
   useEffect(() => {
+    // @ts-ignore
     barChart.current.dateFormatter.intlLocales = props.intlLocales;
   }, [props.intlLocales]);
 
   useEffect(() => {
+    // @ts-ignore
     barChart.current.series.values[0].tooltipText = props.tooltipText;
   }, [props.tooltipText]);
 
