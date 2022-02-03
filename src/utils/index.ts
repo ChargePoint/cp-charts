@@ -1,3 +1,4 @@
+import { LegendPayload } from "recharts";
 import { TimeSeriesRecord } from "../models";
 import { TimeSeriesData } from "../types";
 
@@ -37,7 +38,8 @@ export const getAllDataSetKeys = (
 // converts timeseries api response format to common format that recharts uses
 export const processTimeSeriesResponse = (
   response: TimeSeriesRecord[]
-): { results: TimeSeriesData[] } => {
+): { results: TimeSeriesData[]; labels: Record<string, string> } => {
+  const labels = {};
   const results = response.map(({ time, data }) => {
     const record: TimeSeriesData = {
       timestamp: new Date(time).getTime(),
@@ -47,6 +49,7 @@ export const processTimeSeriesResponse = (
       // convert item name to safe key
       const key = name.replace(/[\s\':+-.]/g, "_").toLocaleLowerCase();
       record[key] = value;
+      labels[key] = name;
     });
 
     return record;
@@ -54,5 +57,27 @@ export const processTimeSeriesResponse = (
 
   return {
     results,
+    labels,
   };
+};
+
+export const parseReChartsEventProps = ({
+  payload,
+}: {
+  payload: LegendPayload[];
+}) => {
+  if (payload && payload.length) {
+    return payload?.map(
+      ({ dataKey, name, stroke, fill: color, unit, shape, value }) => ({
+        color,
+        key: dataKey,
+        label: name,
+        shape,
+        value,
+        unit,
+      })
+    );
+  }
+
+  return [];
 };

@@ -69,8 +69,10 @@ export const Categorical = () => {
     CPChartColors.lightGreen,
     CPChartColors.orange,
     CPChartColors.lightPurple,
-    CPChartColors.fault,
-    CPChartColors.lightGray,
+    CPChartColors.pink,
+    CPChartColors.darkYellow,
+    CPChartColors.darkPurple,
+    CPChartColors.lightOrange,
   ]);
   const domain4 = scale4.domain(keys);
 

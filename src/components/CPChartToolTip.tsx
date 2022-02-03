@@ -6,6 +6,7 @@ import { Surface } from "recharts";
 import { renderSymbol, SymbolMap } from "../common/helpers";
 import { CPChartColors } from "../common/theme";
 import { DataKeysProps } from "../types";
+import { hasValue, parseReChartsEventProps } from "../utils";
 
 const { spacing, fontSize, fontWeight } = ThemeConstants;
 
@@ -126,20 +127,22 @@ const CPChartTooltip: FC<CPChartTooltipProps> = (props) => {
   if (payload && payload.length) {
     const row = payload[0].payload as Record<string, number>;
     const mappedFields: CPChartTooltipItem[] = items
-      ?.filter((v) => hasValue(v))
-      .map((item) => {
-        const { key, shape } = item;
-        return {
-          ...item,
-          shape: shape ?? SymbolMap[type],
-          value: row[key],
-        };
-      })
-      .filter((item) => hasValue(item.value));
+      ? items
+          .filter((v) => hasValue(v))
+          .map((item) => {
+            const { key, shape } = item;
+            return {
+              ...item,
+              shape: shape ?? SymbolMap[type],
+              value: row[key],
+            };
+          })
+          .filter((item) => hasValue(item.value))
+      : parseReChartsEventProps(props);
     return (
       <CustomTooltipWrapper>
         <List>
-          {mappedFields.map((field) => (
+          {mappedFields?.map((field) => (
             <li key={field.label}>{renderSeriesItem(field, formatter)}</li>
           ))}
         </List>
