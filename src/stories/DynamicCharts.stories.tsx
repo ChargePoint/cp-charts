@@ -11,7 +11,12 @@ import {
 } from "d3-scale-chromatic";
 import { format } from "date-fns";
 import { extent } from "d3-array";
-import { KitSpinner, KitSelect, KitForm } from "@chargepoint/cp-toolkit";
+import {
+  KitSpinner,
+  KitSelect,
+  KitForm,
+  KitCheck,
+} from "@chargepoint/cp-toolkit";
 
 import {
   ComposedChart,
@@ -102,7 +107,7 @@ export const ChartExplorer = ({
   const [initialized, setInitialized] = useState(false);
   const [seriesType, setSeriesType] = useState(SeriesType.Bar);
   const [colors, setColors] = useState(schemeDark2);
-  const [chartWidth, setChartWidth] = useState(800);
+  const [showGrid, setShowGrid] = useState(false);
 
   const { results, labels } = processTimeSeriesResponse(
     ChartService.getPowerByVehicle()
@@ -130,10 +135,6 @@ export const ChartExplorer = ({
 
   useEffect(() => {
     setInitialized(true);
-    setTimeout(() => {
-      // hack to make legend align correctly
-      setChartWidth(window.innerWidth - 100);
-    }, 250);
   }, []);
 
   return (
@@ -189,12 +190,20 @@ export const ChartExplorer = ({
               ]}
             />
           </KitForm.Group>
+          <KitForm.Group>
+            <KitForm.Label htmlFor="showGrid" text="Show Grid" />
+            <KitCheck
+              id="showGrid"
+              onChange={(e) => setShowGrid(e.target.checked)}
+              checked={showGrid}
+            />
+          </KitForm.Group>
         </KitForm>
       </ControlBar>
       <ChartWrapper>
         <ResponsiveContainer minHeight={350} width={"100%"}>
           <ComposedChart data={results} height={300} width={800}>
-            <CartesianGrid />
+            {showGrid && <CartesianGrid />}
             <Tooltip content={getCustomToolTip} />
             <Legend />
             <YAxis
