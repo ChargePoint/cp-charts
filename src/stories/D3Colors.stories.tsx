@@ -8,6 +8,7 @@ import {
   schemeDark2,
 } from "d3-scale-chromatic";
 import { CPChartColors } from "../common/theme";
+import { StoryWrapper } from "../components/Styled";
 const { spacing, fontSize } = ThemeConstants;
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -40,7 +41,7 @@ export default {
   component: ColorStory,
 };
 
-export const Categorical = () => {
+export const Ordinal = () => {
   const keys = [
     "key1",
     "key2",
@@ -65,7 +66,7 @@ export const Categorical = () => {
 
   const scale4 = scaleOrdinal([
     CPChartColors.darkGray,
-    CPChartColors.turquiseBlue,
+    CPChartColors.turquoiseBlue,
     CPChartColors.lightGreen,
     CPChartColors.orange,
     CPChartColors.lightPurple,
@@ -78,41 +79,41 @@ export const Categorical = () => {
 
   return (
     <>
-      <ColorStory>
-        <h2>Using d3-scale to dynamically generate chart colors</h2>
-      </ColorStory>
-      <ColorStory>
-        <h3>schemeCategory10</h3>
-        <ColorSwatchContainer>
-          {keys.map((key) => (
-            <ColorSwatch color={domain1(key)} />
-          ))}
-        </ColorSwatchContainer>
-      </ColorStory>
-      <ColorStory>
-        <h3>schemeTableau10</h3>
-        <ColorSwatchContainer>
-          {keys.map((key) => (
-            <ColorSwatch color={domain2(key)} />
-          ))}
-        </ColorSwatchContainer>
-      </ColorStory>
-      <ColorStory>
-        <h3>schemeDark2</h3>
-        <ColorSwatchContainer>
-          {keys.map((key) => (
-            <ColorSwatch color={domain3(key)} />
-          ))}
-        </ColorSwatchContainer>
-      </ColorStory>
-      <ColorStory>
-        <h3>cpChartColors</h3>
-        <ColorSwatchContainer>
-          {keys.map((key) => (
-            <ColorSwatch color={domain4(key)} />
-          ))}
-        </ColorSwatchContainer>
-      </ColorStory>
+      <StoryWrapper>
+        <h1>Using d3-scale to dynamically generate chart colors</h1>
+        <ColorStory>
+          <h3>schemeCategory10</h3>
+          <ColorSwatchContainer>
+            {keys.map((key) => (
+              <ColorSwatch color={domain1(key)} />
+            ))}
+          </ColorSwatchContainer>
+        </ColorStory>
+        <ColorStory>
+          <h3>schemeTableau10</h3>
+          <ColorSwatchContainer>
+            {keys.map((key) => (
+              <ColorSwatch color={domain2(key)} />
+            ))}
+          </ColorSwatchContainer>
+        </ColorStory>
+        <ColorStory>
+          <h3>schemeDark2</h3>
+          <ColorSwatchContainer>
+            {keys.map((key) => (
+              <ColorSwatch color={domain3(key)} />
+            ))}
+          </ColorSwatchContainer>
+        </ColorStory>
+        <ColorStory>
+          <h3>cpChartColors</h3>
+          <ColorSwatchContainer>
+            {keys.map((key) => (
+              <ColorSwatch color={domain4(key)} />
+            ))}
+          </ColorSwatchContainer>
+        </ColorStory>
+      </StoryWrapper>
     </>
   );
 };

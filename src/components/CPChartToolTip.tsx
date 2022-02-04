@@ -6,7 +6,7 @@ import { Surface } from "recharts";
 import { renderSymbol, SymbolMap } from "../common/helpers";
 import { CPChartColors } from "../common/theme";
 import { DataKeysProps } from "../types";
-import { hasValue, parseReChartsEventProps } from "../utils";
+import { hasValue, parseReChartsEventProps } from "../common/utils";
 
 const { spacing, fontSize, fontWeight } = ThemeConstants;
 

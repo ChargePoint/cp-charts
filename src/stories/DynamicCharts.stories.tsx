@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { unstable_batchedUpdates } from "react-dom";
+import { ScaleOrdinal, scaleOrdinal } from "d3-scale";
+import { schemeDark2 } from "d3-scale-chromatic";
 import { format } from "date-fns";
 import { extent } from "d3-array";
-
-import { getAllDataSetKeys, processTimeSeriesResponse } from "../utils/index";
+import { KitSpinner, KitSelect, KitForm } from "@chargepoint/cp-toolkit";
 
 import {
   ComposedChart,
@@ -11,9 +14,15 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
 } from "recharts";
 
-import { Info } from "../components/Styled";
+import { AxisDomain, D3Scale } from "recharts/types/util/types";
+
+import {
+  getAllDataSetKeys,
+  processTimeSeriesResponse,
+} from "../common/utils/index";
 
 import ChartService from "../tests/fixtures/ChartService";
 import {
@@ -22,23 +31,32 @@ import {
   SeriesType,
   TimeSeriesData,
 } from "../types";
-import { renderSeries } from "../common/helpers";
-import { KitSpinner } from "@chargepoint/cp-toolkit";
-import styled from "styled-components";
-import { unstable_batchedUpdates } from "react-dom";
-import { scaleOrdinal } from "d3-scale";
-import { schemeDark2 } from "d3-scale-chromatic";
-import CPChartTooltip from "../components/CPChartToolTip";
-import { ISO_DATE_TIME } from "../common/constants";
 
-const ChartWrapper = styled.div``;
+import { ISO_DATE_TIME } from "../common/constants";
+import { renderSeries } from "../common/helpers";
+import CPChartTooltip from "../components/CPChartToolTip";
+import { initialCaps } from "../common/lang";
+import {
+  ControlBar,
+  Info,
+  List,
+  ListItem,
+  SectionHeader,
+  Title,
+} from "../components/Styled";
+
+const ChartWrapper = styled.div`
+  min-width: 600px;
+  width: 100%;
+  height: 350px;
+`;
 
 function getSeries(
   dataKeys: string[],
   seriesType: SeriesType,
   seriesProps: Partial<ChartElementProps>,
-  colorDomain,
-  labels
+  colorDomain: ScaleOrdinal<string, string>,
+  labels: Record<string, string>
 ): ChartElementProps[] {
   return dataKeys.map((dataKey, index: number) => {
     return {
@@ -71,11 +89,22 @@ function getCustomToolTip(props) {
   );
 }
 
-export const DynamicSeries = ({ interpolationType }) => {
+export const ChartExplorer = ({
+  interpolationType,
+}: {
+  interpolationType: InterpolationType;
+}) => {
+  const [initialized, setInitialized] = useState(false);
+  const [seriesType, setSeriesType] = useState(SeriesType.Bar);
+  const [chartWidth, setChartWidth] = useState(800);
+
   const { results, labels } = processTimeSeriesResponse(
     ChartService.getPowerByVehicle()
   );
-  const xDomain = extent(results, (d: TimeSeriesData) => d.timestamp);
+  const xDomain = extent(
+    results,
+    (d: TimeSeriesData) => d.timestamp
+  ) as AxisDomain;
 
   const seriesProps = {
     type: interpolationType ?? InterpolationType.monotone,
@@ -87,35 +116,84 @@ export const DynamicSeries = ({ interpolationType }) => {
   const colorDomain = colorScale.domain(allFields);
   const chartSeries = getSeries(
     allFields,
-    SeriesType.Area,
+    seriesType,
     seriesProps,
     colorDomain,
     labels
   );
 
+  useEffect(() => {
+    setInitialized(true);
+    setTimeout(() => {
+      // hack to make legend align correctly
+      setChartWidth(window.innerWidth - 100);
+    }, 250);
+  }, []);
+
   return (
     <>
-      <Info>
-        Demonstrating how to handle rendering an unknown number of chart series.
-      </Info>
-      <ComposedChart data={results} height={300} width={800}>
-        <CartesianGrid />
-        <Tooltip content={getCustomToolTip} />
-        <Legend />
-        <YAxis />
-        <XAxis
-          domain={xDomain}
-          dataKey="timestamp"
-          name="Time"
-          type="number"
-          tickFormatter={(unixTime) => format(unixTime, "HH:mm")}
-        />
-        {chartSeries?.map((series) => renderSeries(series))}
-      </ComposedChart>
+      <SectionHeader>
+        <h3>Chart Explorer</h3>
+        <Title>This story demonstrates the following things:</Title>
+        <List type="circle">
+          <ListItem>
+            Use of the `ResponsiveContainer` Recharts component
+          </ListItem>
+          <ListItem>Rendering an unknown number of series</ListItem>
+          <ListItem>
+            Transforming dataset from response to chart-friendly
+          </ListItem>
+          <ListItem>Custom Tooltip</ListItem>
+        </List>
+      </SectionHeader>
+      <ControlBar>
+        <KitForm>
+          <KitForm.Label htmlFor="seriesType" text="Chart Type" />
+          <KitSelect
+            id="seriesType"
+            name="seriesType"
+            defaultValue={{ value: seriesType, label: initialCaps(seriesType) }}
+            onChange={(item: { value: SeriesType }) =>
+              setSeriesType(item.value)
+            }
+            options={[
+              { label: "Area", value: SeriesType.Area },
+              { label: "Bar", value: SeriesType.Bar },
+              { label: "Line", value: SeriesType.Line },
+            ]}
+          />
+        </KitForm>
+      </ControlBar>
+      <ChartWrapper>
+        <ResponsiveContainer minHeight={350} width={"100%"}>
+          <ComposedChart data={results} height={300} width={800}>
+            <CartesianGrid />
+            <Tooltip content={getCustomToolTip} />
+            <Legend />
+            <YAxis
+              label={{
+                value: "kW",
+                position: "insideLeft",
+                angle: -90,
+              }}
+            />
+            <XAxis
+              domain={xDomain}
+              dataKey="timestamp"
+              name="Time"
+              type="number"
+              tickCount={10}
+              tickFormatter={(unixTime) => format(unixTime, "HH:mm")}
+              padding="gap"
+            />
+            {chartSeries?.map((series) => renderSeries(series))}
+          </ComposedChart>
+        </ResponsiveContainer>
+      </ChartWrapper>
     </>
   );
 };
 
-DynamicSeries.args = {
+ChartExplorer.args = {
   interpolationType: InterpolationType.monotone,
 };

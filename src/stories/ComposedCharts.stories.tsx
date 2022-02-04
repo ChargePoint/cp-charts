@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 
 import {
@@ -15,11 +14,10 @@ import {
 import { TimeSeriesData } from "../types";
 
 import styled from "styled-components";
-import { unstable_batchedUpdates } from "react-dom";
-import { KitSpinner, KitUtils } from "@chargepoint/cp-toolkit";
 import { extent } from "d3-array";
-import CPChartTooltip from "../components/CPChartToolTip";
 import { ISO_DATE_TIME } from "../common/constants";
+import CPChartTooltip from "../components/CPChartToolTip";
+import { StoryWrapper } from "../components/Styled";
 
 const mockData = [
   {
@@ -90,12 +88,9 @@ export default {
   control: ChartWrapper,
 };
 
-//
-// items={toolTipItems}
 function getCustomToolTip(props) {
   return (
     <CPChartTooltip
-      items={[]}
       formatTimeStamp={(row) => format(row.timestamp, ISO_DATE_TIME)}
       formatter={(key: string, value: number) => {
         if (key === "soc") {
@@ -112,22 +107,25 @@ export const ComposedLineAndAreaChart = ({ interpolationType }) => {
   const xDomain = extent(data, (d: TimeSeriesData) => d.timestamp);
 
   return (
-    <ComposedChart data={data} height={300} width={500}>
-      <CartesianGrid />
-      <Tooltip />
-      <Legend />
-      <YAxis unit=" kW" />
-      <XAxis
-        domain={xDomain}
-        dataKey="timestamp"
-        name="Time"
-        type="number"
-        scale="time"
-        tickFormatter={(unixTime) => format(unixTime, "HH:mm")}
-      />
-      <Line dataKey="soc" name="SOC" stroke="gray" />
-      <Area dataKey="power" name="Power" stroke="green" fill="green" />
-    </ComposedChart>
+    <StoryWrapper>
+      <h1>Composed Line and Area chart</h1>
+      <ComposedChart data={data} height={300} width={500}>
+        <CartesianGrid />
+        <Tooltip />
+        <Legend />
+        <YAxis unit=" kW" />
+        <XAxis
+          domain={xDomain}
+          dataKey="timestamp"
+          name="Time"
+          type="number"
+          scale="time"
+          tickFormatter={(unixTime) => format(unixTime, "HH:mm")}
+        />
+        <Line dataKey="soc" name="SOC" stroke="gray" />
+        <Area dataKey="power" name="Power" stroke="green" fill="green" />
+      </ComposedChart>
+    </StoryWrapper>
   );
 };
 
@@ -136,21 +134,24 @@ export const WithCustomToolTip = ({ interpolationType }) => {
   const xDomain = extent(data, (d: TimeSeriesData) => d.timestamp);
 
   return (
-    <ComposedChart data={data} height={300} width={500}>
-      <CartesianGrid />
-      <Tooltip content={getCustomToolTip} />
-      <Legend />
-      <YAxis unit=" kW" />
-      <XAxis
-        domain={xDomain}
-        dataKey="timestamp"
-        name="Time"
-        type="number"
-        scale="time"
-        tickFormatter={(unixTime) => format(unixTime, "HH:mm")}
-      />
-      <Line dataKey="soc" name="SOC" stroke="gray" />
-      <Area dataKey="power" name="Power" stroke="green" fill="green" />
-    </ComposedChart>
+    <StoryWrapper>
+      <h1>Composed Line and Area chart w/ custom ToolTip</h1>
+      <ComposedChart data={data} height={300} width={500}>
+        <CartesianGrid />
+        <Tooltip content={getCustomToolTip} />
+        <Legend />
+        <YAxis unit=" kW" />
+        <XAxis
+          domain={xDomain}
+          dataKey="timestamp"
+          name="Time"
+          type="number"
+          scale="time"
+          tickFormatter={(unixTime) => format(unixTime, "HH:mm")}
+        />
+        <Line dataKey="soc" name="SOC" stroke="gray" />
+        <Area dataKey="power" name="Power" stroke="green" fill="green" />
+      </ComposedChart>
+    </StoryWrapper>
   );
 };

@@ -1,6 +1,6 @@
-import { LegendPayload } from "recharts";
-import { TimeSeriesRecord } from "../models";
-import { TimeSeriesData } from "../types";
+import { TimeSeriesRecord } from "@models";
+import { TimeSeriesData } from "@types";
+import { LegendProps } from "recharts";
 
 // basic test for required fields
 export const hasValue = (val: unknown | unknown[]): boolean =>
@@ -64,7 +64,7 @@ export const processTimeSeriesResponse = (
 export const parseReChartsEventProps = ({
   payload,
 }: {
-  payload: LegendPayload[];
+  payload: LegendProps[];
 }) => {
   if (payload && payload.length) {
     return payload?.map(
@@ -81,3 +81,7 @@ export const parseReChartsEventProps = ({
 
   return [];
 };
+
+// const mergeDataSetsOnTimeStamp = (arr1, arr2, arr3, arr4, arr5? TimeSeriesData[]) => {
+
+// }

@@ -8,15 +8,10 @@ export const CPChartColors = {
   orange: ThemeColors.cp_orange,
   // charting colors used in mockups, but not used anywhere else
   lightGreen: "#C7CFC0",
-  turquiseBlue: "#20D0C9",
+  turquoiseBlue: "#20D0C9",
   lightPurple: "#C67FBD",
   pink: "#DD5182",
   lightOrange: "#FF6E54",
   darkPurple: "#444E86",
   darkYellow: "#FFA600",
-  fault: ThemeColors.medium_red,
-  power: ThemeColors.medium_blue,
-  setpoint: ThemeColors.medium_red,
-  referenceLine: ThemeColors.dark_gray,
-  referenceLine2: ThemeColors.gray,
 };

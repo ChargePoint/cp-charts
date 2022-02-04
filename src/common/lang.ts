@@ -1,5 +1,5 @@
 import { NumberFormatOptions } from "../types";
-import { hasValue } from "../utils";
+import { hasValue } from "./utils";
 
 const defaultLocale = "en-US";
 let locale = window.navigator.language ?? defaultLocale;
@@ -41,3 +41,6 @@ export const formatCurrency = (num: number): string | unknown => {
   }
   return num ?? "--";
 };
+
+export const initialCaps = (s: string) =>
+  `${s[0].toUpperCase()}${s.substring(1)}`;
