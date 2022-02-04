@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { unstable_batchedUpdates } from "react-dom";
 import { ScaleOrdinal, scaleOrdinal } from "d3-scale";
-import { schemeDark2 } from "d3-scale-chromatic";
+import {
+  schemeDark2,
+  schemeCategory10,
+  schemePaired,
+  schemeAccent,
+  schemeTableau10,
+} from "d3-scale-chromatic";
 import { format } from "date-fns";
 import { extent } from "d3-array";
 import { KitSpinner, KitSelect, KitForm } from "@chargepoint/cp-toolkit";
@@ -38,7 +44,6 @@ import CPChartTooltip from "../components/CPChartToolTip";
 import { initialCaps } from "../common/lang";
 import {
   ControlBar,
-  Info,
   List,
   ListItem,
   SectionHeader,
@@ -96,6 +101,7 @@ export const ChartExplorer = ({
 }) => {
   const [initialized, setInitialized] = useState(false);
   const [seriesType, setSeriesType] = useState(SeriesType.Bar);
+  const [colors, setColors] = useState(schemeDark2);
   const [chartWidth, setChartWidth] = useState(800);
 
   const { results, labels } = processTimeSeriesResponse(
@@ -112,7 +118,7 @@ export const ChartExplorer = ({
     connectNulls: true,
   };
   const allFields = getAllDataSetKeys(results, ["timestamp"]);
-  const colorScale = scaleOrdinal(schemeDark2);
+  const colorScale = scaleOrdinal(colors);
   const colorDomain = colorScale.domain(allFields);
   const chartSeries = getSeries(
     allFields,
@@ -148,20 +154,41 @@ export const ChartExplorer = ({
       </SectionHeader>
       <ControlBar>
         <KitForm>
-          <KitForm.Label htmlFor="seriesType" text="Chart Type" />
-          <KitSelect
-            id="seriesType"
-            name="seriesType"
-            defaultValue={{ value: seriesType, label: initialCaps(seriesType) }}
-            onChange={(item: { value: SeriesType }) =>
-              setSeriesType(item.value)
-            }
-            options={[
-              { label: "Area", value: SeriesType.Area },
-              { label: "Bar", value: SeriesType.Bar },
-              { label: "Line", value: SeriesType.Line },
-            ]}
-          />
+          <KitForm.Group>
+            <KitForm.Label htmlFor="seriesType" text="Chart Type" />
+            <KitSelect
+              id="seriesType"
+              name="seriesType"
+              defaultValue={{
+                value: seriesType,
+                label: initialCaps(seriesType),
+              }}
+              onChange={(item: { value: SeriesType }) =>
+                setSeriesType(item.value)
+              }
+              options={[
+                { label: "Area", value: SeriesType.Area },
+                { label: "Bar", value: SeriesType.Bar },
+                { label: "Line", value: SeriesType.Line },
+              ]}
+            />
+          </KitForm.Group>
+          <KitForm.Group>
+            <KitForm.Label htmlFor="colorScale" text="Color Scale" />
+            <KitSelect
+              id="colorScale"
+              name="colorScale"
+              defaultValue={{ value: "schemeDark2", label: "schemeDark2" }}
+              onChange={(item: { value: SeriesType }) => setColors(item.value)}
+              options={[
+                { label: "schemeDark2", value: schemeDark2 },
+                { label: "schemeCategory10", value: schemeCategory10 },
+                { label: "schemePaired", value: schemePaired },
+                { label: "schemeAccent", value: schemeAccent },
+                { label: "schemeTableau10", value: schemeTableau10 },
+              ]}
+            />
+          </KitForm.Group>
         </KitForm>
       </ControlBar>
       <ChartWrapper>

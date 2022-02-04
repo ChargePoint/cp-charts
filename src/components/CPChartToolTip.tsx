@@ -7,6 +7,7 @@ import { renderSymbol, SymbolMap } from "../common/helpers";
 import { CPChartColors } from "../common/theme";
 import { DataKeysProps } from "../types";
 import { hasValue, parseReChartsEventProps } from "../common/utils";
+import { Spacer } from "./Styled";
 
 const { spacing, fontSize, fontWeight } = ThemeConstants;
 

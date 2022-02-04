@@ -1,5 +1,5 @@
 import { ThemeConstants, ThemeColors } from "@chargepoint/cp-toolkit";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const { spacing, fontSize, fontWeight } = ThemeConstants;
 
@@ -41,10 +41,25 @@ export const Title = styled.div`
 `;
 
 export const ControlBar = styled.div`
+  form {
+    display: flex;
+    width: 100%;
+    > div {
+      width: 250px;
+      margin-right: ${spacing.absolute.m}px;
+    }
+  }
   padding: ${spacing.absolute.s}px;
   margin-bottom: ${spacing.absolute.s}px;
-  > * {
-    max-width: 250px;
-    margin-right: ${spacing.absolute.m}px;
-  }
+`;
+
+export const Spacer = styled.div<{ orientation?: string; size: number }>`
+  ${({ orientation, size }) =>
+    orientation === "vertical"
+      ? css`
+          height: ${size}px;
+        `
+      : css`
+          width: ${size}px;
+        `}
 `;
