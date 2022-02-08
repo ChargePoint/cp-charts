@@ -1,0 +1,874 @@
+[
+    {
+        "time": "2022-01-04 15:15:00.000000000",
+        "data": [
+            {
+                "name": "Chewbaccanal",
+                "value": 6.174
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 15:30:00.000000000",
+        "data": [
+            {
+                "name": "Chewbaccanal",
+                "value": 6.4618
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 15:45:00.000000000",
+        "data": [
+            {
+                "name": "Chewbaccanal",
+                "value": 6.4771
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 16:00:00.000000000",
+        "data": [
+            {
+                "name": "Chewbaccanal",
+                "value": 6.4675
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 16:15:00.000000000",
+        "data": [
+            {
+                "name": "Chewbaccanal",
+                "value": 6.4835
+            },
+            {
+                "name": "Bone Crusher",
+                "value": 5.4
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 16:30:00.000000000",
+        "data": [
+            {
+                "name": "Bone Crusher",
+                "value": 6.4799
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.205
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 16:45:00.000000000",
+        "data": [
+            {
+                "name": "Bone Crusher",
+                "value": 6.4578
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.4395
+            },
+            {
+                "name": "Baconator",
+                "value": 3.0727
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 17:00:00.000000000",
+        "data": [
+            {
+                "name": "Hossein EV",
+                "value": 6.4188
+            },
+            {
+                "name": "Bone Crusher",
+                "value": 6.4323
+            },
+            {
+                "name": "Baconator",
+                "value": 3.1543
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 17:15:00.000000000",
+        "data": [
+            {
+                "name": "Baconator",
+                "value": 3.1704
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.4141
+            },
+            {
+                "name": "Nibbles",
+                "value": 6.3784
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 17:30:00.000000000",
+        "data": [
+            {
+                "name": "Hossein EV",
+                "value": 6.2053
+            },
+            {
+                "name": "Bone Crusher",
+                "value": 3.1839
+            },
+            {
+                "name": "Baconator",
+                "value": 6.0565
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 17:45:00.000000000",
+        "data": [
+            {
+                "name": "Hossein EV",
+                "value": 6.4611
+            },
+            {
+                "name": "Nibbles",
+                "value": 3.4751
+            },
+            {
+                "name": "Limited Edition",
+                "value": 3.1904
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 18:00:00.000000000",
+        "data": [
+            {
+                "name": "Bone Crusher",
+                "value": 3.1855
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.4703
+            },
+            {
+                "name": "Baconator",
+                "value": 3.4924
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 18:15:00.000000000",
+        "data": [
+            {
+                "name": "Bone Crusher",
+                "value": 2.194
+            },
+            {
+                "name": "Baconator",
+                "value": 3.5007
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.4737
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 18:30:00.000000000",
+        "data": [
+            {
+                "name": "Bone Crusher",
+                "value": 3.1353
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.5022
+            },
+            {
+                "name": "Baconator",
+                "value": 3.5024
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 18:45:00.000000000",
+        "data": [
+            {
+                "name": "Hossein EV",
+                "value": 6.549
+            },
+            {
+                "name": "Bone Crusher",
+                "value": 3.5091
+            },
+            {
+                "name": "Baconator",
+                "value": 1.7831
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 19:00:00.000000000",
+        "data": [
+            {
+                "name": "Baconator",
+                "value": 3.5108
+            },
+            {
+                "name": "Nibbles",
+                "value": 0.8557
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.575
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 19:15:00.000000000",
+        "data": [
+            {
+                "name": "Baconator",
+                "value": 3.5105
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.5462
+            },
+            {
+                "name": "Nibbles",
+                "value": 0.4133
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 19:30:00.000000000",
+        "data": [
+            {
+                "name": "Baconator",
+                "value": 0
+            },
+            {
+                "name": "Nibbles",
+                "value": 3.5091
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.5353
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 19:45:00.000000000",
+        "data": [
+            {
+                "name": "Baconator",
+                "value": 0
+            },
+            {
+                "name": "Nibbles",
+                "value": 3.5148
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.5889
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 20:00:00.000000000",
+        "data": [
+            {
+                "name": "Baconator",
+                "value": 0
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.5603
+            },
+            {
+                "name": "Nibbles",
+                "value": 2.2986
+            },
+            {
+                "name": "Limited Edition",
+                "value": 3.1814
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 20:15:00.000000000",
+        "data": [
+            {
+                "name": "Hossein EV",
+                "value": 6.5428
+            },
+            {
+                "name": "Nibbles",
+                "value": 1.1017
+            },
+            {
+                "name": "Limited Edition",
+                "value": 5.2513
+            },
+            {
+                "name": "Unknown-7",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 20:30:00.000000000",
+        "data": [
+            {
+                "name": "Nibbles",
+                "value": 5.8299
+            },
+            {
+                "name": "Limited Edition",
+                "value": 0
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.5443
+            },
+            {
+                "name": "Unknown-7",
+                "value": 1.1046
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 20:45:00.000000000",
+        "data": [
+            {
+                "name": "Nibbles",
+                "value": 1.1033
+            },
+            {
+                "name": "Limited Edition",
+                "value": 5.728
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.577
+            },
+            {
+                "name": "Unknown-7",
+                "value": 0
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 6.0846
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 21:00:00.000000000",
+        "data": [
+            {
+                "name": "Nibbles",
+                "value": 6.8057
+            },
+            {
+                "name": "Hossein EV",
+                "value": 6.5205
+            },
+            {
+                "name": "Limited Edition",
+                "value": 0
+            },
+            {
+                "name": "Unknown-7",
+                "value": 1.6214
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 0.8418
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 21:15:00.000000000",
+        "data": [
+            {
+                "name": "Nibbles",
+                "value": 0
+            },
+            {
+                "name": "Limited Edition",
+                "value": 6.7882
+            },
+            {
+                "name": "Unknown-7",
+                "value": 1.1069
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 0
+            },
+            {
+                "name": "Green Machine",
+                "value": 4.5468
+            },
+            {
+                "name": "Hossein EV",
+                "value": 4.3859
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 21:30:00.000000000",
+        "data": [
+            {
+                "name": "Nibbles",
+                "value": 0
+            },
+            {
+                "name": "Limited Edition",
+                "value": 3.9049
+            },
+            {
+                "name": "Unknown-7",
+                "value": 6.6586
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 0
+            },
+            {
+                "name": "Hossein EV",
+                "value": 0.8434
+            },
+            {
+                "name": "Green Machine",
+                "value": 1.1123
+            },
+            {
+                "name": "Zark Xuckerburg",
+                "value": 6.4798
+            },
+            {
+                "name": "WTF",
+                "value": 3.3864
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 21:45:00.000000000",
+        "data": [
+            {
+                "name": "Bone Crusher",
+                "value": 0
+            },
+            {
+                "name": "Hossein EV",
+                "value": 0
+            },
+            {
+                "name": "Nibbles",
+                "value": 1.1098
+            },
+            {
+                "name": "Limited Edition",
+                "value": 6.6763
+            },
+            {
+                "name": "Unknown-7",
+                "value": 3.8257
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 6.5978
+            },
+            {
+                "name": "Green Machine",
+                "value": 0
+            },
+            {
+                "name": "Zark Xuckerburg",
+                "value": 3.5044
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 22:00:00.000000000",
+        "data": [
+            {
+                "name": "Limited Edition",
+                "value": 0
+            },
+            {
+                "name": "Unknown-7",
+                "value": 1.1121
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 6.7868
+            },
+            {
+                "name": "Green Machine",
+                "value": 6.6698
+            },
+            {
+                "name": "Zark Xuckerburg",
+                "value": 0
+            },
+            {
+                "name": "WTF",
+                "value": 6.5934
+            },
+            {
+                "name": "Hossein EV",
+                "value": 0
+            },
+            {
+                "name": "Grumpy Cat",
+                "value": 3.5091
+            },
+            {
+                "name": "Hot Dogs",
+                "value": 37.4852
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 22:15:00.000000000",
+        "data": [
+            {
+                "name": "Nibbles",
+                "value": 6.7979
+            },
+            {
+                "name": "Limited Edition",
+                "value": 0
+            },
+            {
+                "name": "Unknown-7",
+                "value": 6.6802
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 1.1106
+            },
+            {
+                "name": "Green Machine",
+                "value": 6.0948
+            },
+            {
+                "name": "Zark Xuckerburg",
+                "value": 0
+            },
+            {
+                "name": "WTF",
+                "value": 47.5773
+            },
+            {
+                "name": "Grumpy Cat",
+                "value": 34.012
+            },
+            {
+                "name": "Hot Dogs",
+                "value": 3.5045
+            },
+            {
+                "name": "Beermobile",
+                "value": 6.5942
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 22:30:00.000000000",
+        "data": [
+            {
+                "name": "Bone Crusher",
+                "value": 6.732
+            },
+            {
+                "name": "Baconator",
+                "value": 4.952
+            },
+            {
+                "name": "Nibbles",
+                "value": 3.5001
+            },
+            {
+                "name": "Limited Edition",
+                "value": 3.0515
+            },
+            {
+                "name": "Unknown-7",
+                "value": 6.1686
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 0
+            },
+            {
+                "name": "Green Machine",
+                "value": 1.1106
+            },
+            {
+                "name": "Zark Xuckerburg",
+                "value": 0
+            },
+            {
+                "name": "WTF",
+                "value": 49.056
+            },
+            {
+                "name": "Grumpy Cat",
+                "value": 6.6057
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 22:45:00.000000000",
+        "data": [
+            {
+                "name": "Bone Crusher",
+                "value": 6.3683
+            },
+            {
+                "name": "Baconator",
+                "value": 0
+            },
+            {
+                "name": "Nibbles",
+                "value": 6.7599
+            },
+            {
+                "name": "Limited Edition",
+                "value": 35.416
+            },
+            {
+                "name": "Unknown-7",
+                "value": 0
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 0
+            },
+            {
+                "name": "Green Machine",
+                "value": 6.6286
+            },
+            {
+                "name": "Zark Xuckerburg",
+                "value": 3.5097
+            },
+            {
+                "name": "WTF",
+                "value": 1.1106
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 23:00:00.000000000",
+        "data": [
+            {
+                "name": "Bone Crusher",
+                "value": 22.364
+            },
+            {
+                "name": "Baconator",
+                "value": 0
+            },
+            {
+                "name": "Nibbles",
+                "value": 6.3792
+            },
+            {
+                "name": "Limited Edition",
+                "value": 6.6222
+            },
+            {
+                "name": "Unknown-7",
+                "value": 1.1107
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 23:15:00.000000000",
+        "data": [
+            {
+                "name": "Baconator",
+                "value": 0
+            },
+            {
+                "name": "Nibbles",
+                "value": 8.9428
+            },
+            {
+                "name": "Limited Edition",
+                "value": 6.616
+            },
+            {
+                "name": "Unknown-7",
+                "value": 1.111
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 6.4029
+            },
+            {
+                "name": "Green Machine",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 23:30:00.000000000",
+        "data": [
+            {
+                "name": "Baconator",
+                "value": 1.1109
+            },
+            {
+                "name": "Nibbles",
+                "value": 0
+            },
+            {
+                "name": "Limited Edition",
+                "value": 6.3925
+            },
+            {
+                "name": "Unknown-7",
+                "value": 0
+            },
+            {
+                "name": "Unknown-7",
+                "value": 6.6143
+            }
+        ]
+    },
+    {
+        "time": "2022-01-04 23:45:00.000000000",
+        "data": [
+            {
+                "name": "Baconator",
+                "value": 0
+            },
+            {
+                "name": "Nibbles",
+                "value": 1.1107
+            },
+            {
+                "name": "Limited Edition",
+                "value": 6.4015
+            },
+            {
+                "name": "Unknown-7",
+                "value": 0
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 6.6222
+            }
+        ]
+    },
+    {
+        "time": "2022-01-05 00:00:00.000000000",
+        "data": [
+            {
+                "name": "Baconator",
+                "value": 1.1109
+            },
+            {
+                "name": "Nibbles",
+                "value": 0
+            },
+            {
+                "name": "Limited Edition",
+                "value": 3.0481
+            },
+            {
+                "name": "Unknown-7",
+                "value": 0
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 6.6341
+            }
+        ]
+    },
+    {
+        "time": "2022-01-05 00:15:00.000000000",
+        "data": [
+            {
+                "name": "Nibbles",
+                "value": 0
+            },
+            {
+                "name": "Limited Edition",
+                "value": 0
+            },
+            {
+                "name": "Limited Edition",
+                "value": 6.6543
+            }
+        ]
+    },
+    {
+        "time": "2022-01-05 00:30:00.000000000",
+        "data": [
+            {
+                "name": "Limited Edition",
+                "value": 0
+            },
+            {
+                "name": "Unknown-7",
+                "value": 6.6438
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "time": "2022-01-05 00:45:00.000000000",
+        "data": [
+            {
+                "name": "Limited Edition",
+                "value": 0
+            },
+            {
+                "name": "Unknown-7",
+                "value": 6.6245
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 0
+            }
+        ]
+    },
+    {
+        "time": "2022-01-05 01:00:00.000000000",
+        "data": [
+            {
+                "name": "Limited Edition",
+                "value": 3.8856
+            },
+            {
+                "name": "Unknown-7",
+                "value": 0
+            },
+            {
+                "name": "Erlon Nusk",
+                "value": 0
+            }
+        ]
+    }
+]
