@@ -185,6 +185,7 @@ export const ZoomableBarChart = () => {
           <XAxis
             allowDataOverflow
             height={48}
+            // These values will change as you zoom in
             domain={[left, right]}
             type="number"
             dataKey="timestamp"
@@ -197,6 +198,7 @@ export const ZoomableBarChart = () => {
               />
             ))}
           </Bar>
+          {/* This is to show the area that is being highlighted/selected */}
           {highlightLeftArea && highlightRightArea ? (
             <ReferenceArea x1={highlightLeftArea} x2={highlightRightArea} strokeOpacity={0.3} />
           ) : null}
