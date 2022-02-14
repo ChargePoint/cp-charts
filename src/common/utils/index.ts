@@ -81,7 +81,35 @@ export const parseReChartsEventProps = ({
 
   return [];
 };
-
 // const mergeDataSetsOnTimeStamp = (arr1, arr2, arr3, arr4, arr5? TimeSeriesData[]) => {
 
 // }
+
+// return the new top and bottom values of the yAxis for when zooming in 
+export const getYAxisDomain = (
+  data: any[],
+  from: any,
+  to: any,
+  xRef: string | number,
+  yRef: string | number,
+  offset?: number
+) => {
+  // Filter the data to show selected range based on X-Axis
+  let refData;
+  // Check data type
+  if (typeof data[0][xRef] === "string") {
+    const fromPoint = data.findIndex((item) => item[xRef] === from);
+    const toPoint = data.findIndex((item) => item[xRef] === to);
+    refData = data.slice(fromPoint, toPoint);
+  } else {
+    refData = data.filter((item) => item[xRef] <= to && item[xRef] >= from);
+  }
+  // Get Y-Axis lower and upper values
+  let [bottom, top] = [refData[0][yRef], refData[0][yRef]];
+  refData.forEach((data) => {
+    if (data[yRef] > top) top = data[yRef];
+    if (data[yRef] < bottom) bottom = data[yRef];
+  });
+  // Offset the data
+  return [(bottom || 0) - (offset ?? 0), (top || 0) + (offset ?? 0)];
+};
