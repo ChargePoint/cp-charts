@@ -98,18 +98,22 @@ export const getYAxisDomain = (
   let refData;
   // Check data type
   if (typeof data[0][xRef] === "string") {
+    // This section finds the array indexes of the from and to values and then slices the data between those values
+    // to get the range inbetween
     const fromPoint = data.findIndex((item) => item[xRef] === from);
     const toPoint = data.findIndex((item) => item[xRef] === to);
     refData = data.slice(fromPoint, toPoint);
   } else {
+    // Filter by all values that fit in the range between from - to
     refData = data.filter((item) => item[xRef] <= to && item[xRef] >= from);
   }
   // Get Y-Axis lower and upper values
   let [bottom, top] = [refData[0][yRef], refData[0][yRef]];
+  // This portion sets the lowest and highest (bottom and top respectively) values that will be on the y-Axis
   refData.forEach((data) => {
     if (data[yRef] > top) top = data[yRef];
     if (data[yRef] < bottom) bottom = data[yRef];
   });
-  // Offset the data
+  // Offset the data if an offset is provided
   return [(bottom || 0) - (offset ?? 0), (top || 0) + (offset ?? 0)];
 };
