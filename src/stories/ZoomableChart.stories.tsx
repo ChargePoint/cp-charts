@@ -131,7 +131,10 @@ export const ZoomableBarChart = () => {
       return;
     }
 
-    // set new left and right values of the xAxis domain
+    /* set new left and right values to highlight the selected area of the xAxis domain 
+       If the mouse pointer moves to the left of the initial point where the click event
+       occurred, then invert the left and right
+    */
     if (highlightLeftArea > highlightRightArea) {
       setHighlightLeftArea(highlightRightArea);
       setHighlightRightArea(highlightLeftArea);
@@ -151,6 +154,10 @@ export const ZoomableBarChart = () => {
     setData(data.slice());
     setLeft(highlightLeftArea);
     setRight(highlightRightArea);
+    /*
+      This is to reset the highlighted area for the <ReferenceArea> element 
+      so that after zooming in, it does not remain highlighted 
+    */
     setHighlightLeftArea("");
     setHighlightRightArea("");
     setBottom(_bottom);

@@ -85,35 +85,44 @@ export const parseReChartsEventProps = ({
 
 // }
 
-// return the new top and bottom values of the yAxis for when zooming in 
+// return the new top and bottom values of the yAxis for when zooming in .
+/* 
+   data - the dataset that is used to render the graph
+   from - the beginning of the range selection based on a key in your dataset. Eg. date, time, numbers, percentage etc... 
+   to -   the end of the range selection based on a key in your dataset. Eg date, time, numbers, percentage etc... 
+   xKey - the key that is used to populate the xAxis
+   yKey - the key that is used to populate the yAxis
+   offset - the value to offset the yAxis by. Eg if offset is 1 and the yAxis starts at 1, then it will instead start at 0
+*/
 export const getYAxisDomain = (
   data: any[],
   from: any,
   to: any,
-  xRef: string | number,
-  yRef: string | number,
+  xKey: string | number,
+  yKey: string | number,
   offset?: number
 ) => {
   // Filter the data to show selected range based on X-Axis
   let refData;
   // Check data type
-  if (typeof data[0][xRef] === "string") {
+  if (typeof data[0][xKey] === "string") {
     // This section finds the array indexes of the from and to values and then slices the data between those values
     // to get the range inbetween
-    const fromPoint = data.findIndex((item) => item[xRef] === from);
-    const toPoint = data.findIndex((item) => item[xRef] === to);
+    const fromPoint = data.findIndex((item) => item[xKey] === from);
+    const toPoint = data.findIndex((item) => item[xKey] === to);
     refData = data.slice(fromPoint, toPoint);
   } else {
     // Filter by all values that fit in the range between from - to
-    refData = data.filter((item) => item[xRef] <= to && item[xRef] >= from);
+    refData = data.filter((item) => item[xKey] <= to && item[xKey] >= from);
   }
   // Get Y-Axis lower and upper values
-  let [bottom, top] = [refData[0][yRef], refData[0][yRef]];
+  let [bottom, top] = [refData[0][yKey], refData[0][yKey]];
   // This portion sets the lowest and highest (bottom and top respectively) values that will be on the y-Axis
   refData.forEach((data) => {
-    if (data[yRef] > top) top = data[yRef];
-    if (data[yRef] < bottom) bottom = data[yRef];
+    if (data[yKey] > top) top = data[yKey];
+    if (data[yKey] < bottom) bottom = data[yKey];
   });
   // Offset the data if an offset is provided
+  // The first part is the lowest yAxis value, the second part is the highest yAxis value
   return [(bottom || 0) - (offset ?? 0), (top || 0) + (offset ?? 0)];
 };
