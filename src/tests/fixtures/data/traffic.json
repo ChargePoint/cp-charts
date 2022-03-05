@@ -102,16 +102,17 @@
     },
     {
         "timestamp": 1643774400000,
-        "traffic": 3,
-        "foo": 3.4
+        "traffic": 3
     },
     {
         "timestamp": 1643778000000,
-        "traffic": 2
+        "traffic": 2,
+        "foo": 2.5
     },
     {
         "timestamp": 1643781600000,
-        "traffic": 3
+        "traffic": 3,
+        "foo": 3
     },
     {
         "timestamp": 1643785200000,

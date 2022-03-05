@@ -2,11 +2,11 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "esModuleInterop": true,
     "isolatedModules": true,
     "lib": ["dom", "dom.iterable", "esnext"],
-    "skipLibCheck": true,
+
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "module": "esnext",
@@ -14,15 +14,17 @@
     "moduleResolution": "node",
     "noEmit": true,
     "resolveJsonModule": true,
+    "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "target": "es5",
     "paths": {
-      "@common": ["src/common"],
-      "@components": ["src/components"],
-      "@models": ["src/models"],
-      "@types": ["src/types"]
-    }
+      "@common": ["src/common/*"],
+      "@components": ["src/components/*"],
+      "@models": ["src/models/*"],
+      "@types": ["src/types/*"]
+    },
+    "typeRoots": ["src/types", "node_modules/@types"]
   },
   "include": ["src", "rollup.config.js"]
 }

@@ -73,7 +73,9 @@ function getSeries(
       ...seriesProps,
       name: labels[dataKey],
       key: `${dataKey}-${index}`,
-      stackId: `area`,
+      stackId: [SeriesType.Area, SeriesType.Bar].includes(seriesType)
+        ? "stack-it"
+        : null,
       seriesType,
       stroke: colorDomain(dataKey),
       fill: colorDomain(dataKey),
@@ -203,10 +205,11 @@ export const ChartExplorer = ({
       <ChartWrapper>
         <ResponsiveContainer minHeight={350} width={"100%"}>
           <ComposedChart data={results} height={300} width={800}>
-            {showGrid && <CartesianGrid />}
+            {showGrid && <CartesianGrid strokeDasharray="3 3" />}
             <Tooltip content={getCustomToolTip} />
             <Legend />
             <YAxis
+              domain={["dataMin", "auto"]}
               label={{
                 value: "kW",
                 position: "insideLeft",

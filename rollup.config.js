@@ -1,9 +1,7 @@
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import typescript from "rollup-plugin-typescript2";
-import postcss from "rollup-plugin-postcss";
-import { typescriptPaths } from "rollup-plugin-typescript-paths";
+import typescript from "@rollup/plugin-typescript";
 
 const packageJson = require("./package.json");
 
@@ -26,10 +24,6 @@ export default {
     peerDepsExternal(),
     resolve(),
     commonjs(),
-    typescriptPaths(),
-    typescript({ useTsconfigDeclarationDir: true }),
-    postcss({
-      extensions: [".css"],
-    }),
+    typescript({ tsconfig: "./tsconfig.json" }),
   ],
 };

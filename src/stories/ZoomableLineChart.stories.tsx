@@ -52,150 +52,41 @@ const DEFAULT_HIGHLIGHT_ZOOM: Rect = {
   y2: "dataMin",
 };
 
-export const ZoomableLineChart = () => {
+export const MultipleSeriesChartWithZoom = () => {
   const [isZooming, setIsZooming] = useState(false);
   const [isZoomedIn, setIsZoomedIn] = useState(false);
   const [bounds, setBounds] = useState<Rect>(DEFAULT_ZOOM);
-  const [zoomAreaHighLight, setZoomAreaHighLight] = useState(
-    DEFAULT_HIGHLIGHT_ZOOM
-  );
+  const [highLight, setHighLight] = useState(DEFAULT_HIGHLIGHT_ZOOM);
   const [data, setData] = useState(mockData);
   const xDataKey = "timestamp";
 
   function handleMouseDown(e: ChartEvent) {
-    setZoomAreaHighLight(ChartZoom.init(e, zoomAreaHighLight, xDataKey));
+    setHighLight(ChartZoom.init(e, highLight, xDataKey, MIN_ZOOM));
     setIsZooming(true);
   }
 
   function handleMouseMove(e: ChartEvent) {
     const x2 = ChartZoom.getEventPayloadValue(e, xDataKey);
     if (isZooming) {
-      setZoomAreaHighLight((prev) => ({ ...prev, x2 }));
+      setHighLight((prev) => ({ ...prev, x2 }));
     }
   }
 
   function handleMouseUp() {
     if (isZooming) {
       const { zoomed, zoomBounds } = ChartZoom.getBounds(
-        zoomAreaHighLight,
+        highLight,
         data,
         xDataKey,
-        "traffic",
-        MIN_ZOOM
-      );
-
-      if (zoomed) {
-        setIsZoomedIn(true);
-        setData(data.slice());
-        setZoomAreaHighLight(DEFAULT_HIGHLIGHT_ZOOM);
-        setBounds(zoomBounds as Rect);
-      }
-
-      setIsZooming(false);
-    }
-  }
-
-  function zoomOut() {
-    setIsZoomedIn(false);
-    setBounds(DEFAULT_ZOOM);
-    setData(() => data.slice());
-  }
-
-  return (
-    <StoryWrapper>
-      <h1>Line Chart with Zoom</h1>
-      <ChartContainer>
-        {isZoomedIn && (
-          <ZoomButton
-            className="zoom-button"
-            onClick={zoomOut}
-            ariaLabel="zoom out"
-          />
-        )}
-        <LineChart
-          data={data}
-          width={800}
-          height={300}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis
-            allowDataOverflow
-            // These values will change as you zoom in
-            domain={[bounds.x1, bounds.x2]}
-            type="number"
-            dataKey="timestamp"
-            tickFormatter={(unixTime) => format(new Date(unixTime), "HH:mm")}
-          />
-          <YAxis
-            allowDataOverflow
-            domain={[bounds.y2, bounds.y1]}
-            type="number"
-          />
-          <Line
-            isAnimationActive={true}
-            animationEasing={"ease-in-out"}
-            animationDuration={300}
-            type="natural"
-            dataKey={"traffic"}
-            stroke={CPChartColors.pink}
-            strokeWidth={2}
-          />
-          {/* This is to show the area that is being highlighted/selected */}
-          {isZooming ? (
-            <ReferenceArea
-              x1={zoomAreaHighLight.x1}
-              x2={zoomAreaHighLight.x2}
-              strokeOpacity={0.3}
-            />
-          ) : null}
-        </LineChart>
-      </ChartContainer>
-    </StoryWrapper>
-  );
-};
-
-export const ZoomableAreaChart = () => {
-  const [isZooming, setIsZooming] = useState(false);
-  const [isZoomedIn, setIsZoomedIn] = useState(false);
-  const [bounds, setBounds] = useState<Rect>(DEFAULT_ZOOM);
-  const [zoomAreaHighLight, setZoomAreaHighLight] = useState(
-    DEFAULT_HIGHLIGHT_ZOOM
-  );
-  const [data, setData] = useState(mockData);
-  const xDataKey = "timestamp";
-
-  function handleMouseDown(e: ChartEvent) {
-    setZoomAreaHighLight(
-      ChartZoom.init(e, zoomAreaHighLight, xDataKey, MIN_ZOOM)
-    );
-    setIsZooming(true);
-  }
-
-  function handleMouseMove(e: ChartEvent) {
-    const x2 = ChartZoom.getEventPayloadValue(e, xDataKey);
-    if (isZooming) {
-      setZoomAreaHighLight((prev) => ({ ...prev, x2 }));
-    }
-  }
-
-  function handleMouseUp() {
-    if (isZooming) {
-      const { zoomed, zoomBounds } = ChartZoom.getBounds(
-        zoomAreaHighLight,
-        data,
-        xDataKey,
-        "foo",
+        ["traffic", "foo"],
         MIN_ZOOM,
         0.5
       );
 
       if (zoomed) {
-        setIsZoomedIn(true);
         setData(data.slice());
-        setZoomAreaHighLight(DEFAULT_HIGHLIGHT_ZOOM);
+        setIsZoomedIn(true);
+        setHighLight(DEFAULT_HIGHLIGHT_ZOOM);
         setBounds(zoomBounds as Rect);
       }
 
@@ -264,8 +155,8 @@ export const ZoomableAreaChart = () => {
           {/* This is to show the area that is being highlighted/selected */}
           {isZooming ? (
             <ReferenceArea
-              x1={zoomAreaHighLight.x1}
-              x2={zoomAreaHighLight.x2}
+              x1={highLight.x1}
+              x2={highLight.x2}
               strokeOpacity={0.3}
             />
           ) : null}
@@ -276,6 +167,6 @@ export const ZoomableAreaChart = () => {
 };
 
 export default {
-  title: "Charts/Line",
-  component: LineChart,
+  title: "Charts/Composed",
+  component: ComposedChart,
 };

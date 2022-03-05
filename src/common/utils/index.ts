@@ -3,6 +3,10 @@ import { TimeSeriesData } from "@types";
 import { LegendProps } from "recharts";
 import { ChartEvent, Rect } from "types";
 
+export const cleanKey = (s: string) => {
+  return s?.replace(/[\s\':+-.]/g, "_").toLocaleLowerCase();
+};
+
 // basic test for required fields
 export const hasValue = (val: unknown | unknown[]): boolean =>
   Array.isArray(val)
@@ -17,7 +21,7 @@ export const hasValue = (val: unknown | unknown[]): boolean =>
 */
 export const getAllDataSetKeys = (
   data: TimeSeriesData[],
-  keysToRemove: string[]
+  keysToRemove?: string[]
 ) => {
   const keyList: string[] = [];
   for (let i = 0; i < data.length; i++) {
@@ -48,7 +52,7 @@ export const processTimeSeriesResponse = (
 
     data.forEach(({ name, value }) => {
       // convert item name to safe key
-      const key = name.replace(/[\s\':+-.]/g, "_").toLocaleLowerCase();
+      const key = cleanKey(name);
       record[key] = value;
       labels[key] = name;
     });
@@ -100,7 +104,7 @@ export const getYAxisDomain = (
   from: any,
   to: any,
   xKey: string | number,
-  yKey: string | number,
+  yKey: (string | number) | (string | number)[],
   offset?: number
 ) => {
   // Filter the data to show selected range based on X-Axis
@@ -116,18 +120,25 @@ export const getYAxisDomain = (
     // Filter by all values that fit in the range between from - to
     refData = data.filter((item) => item[xKey] <= to && item[xKey] >= from);
   }
+
   // Get Y-Axis lower and upper values
-  let [bottom, top] = [refData[0][yKey], refData[0][yKey]];
+  // handle the case where we have multiple series to evaluate zoom bounds for
+  const yKeys = Array.isArray(yKey) ? yKey : [yKey];
+  let [bottom, top] = [refData[0][yKeys[0]], 0];
+
   // This portion sets the lowest and highest (bottom and top respectively) values that will be on the y-Axis
   refData.forEach((data) => {
-    if (data[yKey] > top) top = data[yKey];
-    if (data[yKey] < bottom) bottom = data[yKey];
+    yKeys.forEach((key) => {
+      if (data[key] > top) top = data[key];
+      if (data[key] < bottom) bottom = data[key];
+    });
   });
   // Offset the data if an offset is provided
   // The first part is the lowest yAxis value, the second part is the highest yAxis value
   return [(bottom || 0) - (offset ?? 0), (top || 0) + (offset ?? 0)];
 };
 
+// Helpers for adding chart zoom
 export const ChartZoom = {
   init(e: ChartEvent, prevZoom: Rect, xKey: string, offset: number = 0) {
     const { activePayload } = e || {};
@@ -148,7 +159,7 @@ export const ChartZoom = {
     prevZoom: Rect,
     data: TimeSeriesData[],
     xKey: string,
-    yKey: string,
+    yKey: string | string[],
     minZoom: number,
     offset: number = 0
   ) {
