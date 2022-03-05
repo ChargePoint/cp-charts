@@ -1,7 +1,6 @@
 module.exports = {
   preset: "ts-jest/presets/js-with-ts",
   testEnvironment: "jsdom",
-  // TODO: convert tests to typescript
   testMatch: ["**/*.test.*"],
   testPathIgnorePatterns: ["./node_modules/"],
   roots: ["<rootDir>/src"],
