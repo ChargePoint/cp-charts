@@ -1,6 +1,7 @@
 import { TimeSeriesRecord } from "@models";
 import { TimeSeriesData } from "@types";
 import { LegendProps } from "recharts";
+import { ChartEvent, Rect } from "types";
 
 // basic test for required fields
 export const hasValue = (val: unknown | unknown[]): boolean =>
@@ -125,4 +126,49 @@ export const getYAxisDomain = (
   // Offset the data if an offset is provided
   // The first part is the lowest yAxis value, the second part is the highest yAxis value
   return [(bottom || 0) - (offset ?? 0), (top || 0) + (offset ?? 0)];
+};
+
+export const ChartZoom = {
+  init(e: ChartEvent, prevZoom: Rect, xKey: string, offset: number = 0) {
+    const { activePayload } = e || {};
+    const { payload } = activePayload[0];
+    return {
+      ...prevZoom,
+      x1: payload[xKey],
+      x2: payload[xKey] + offset,
+    };
+  },
+  getEventPayloadValue(e: ChartEvent, dataKey: string) {
+    const { activePayload } = e || {};
+    if (activePayload?.length) {
+      return activePayload[0].payload[dataKey];
+    }
+  },
+  getBounds(
+    prevZoom: Rect,
+    data: TimeSeriesData[],
+    xKey: string,
+    yKey: string,
+    minZoom: number,
+    offset: number = 0
+  ) {
+    let { x1, x2 } = prevZoom;
+    // don't zoom in if the user just clicked the chart without dragging a zoom area
+    if (Math.abs((x1 as number) - (x2 as number)) <= minZoom || !hasValue(x2)) {
+      return { zoomed: false };
+    }
+
+    // ensure x1 <= x2
+    if ((x1 as unknown as number) > (x2 as unknown as number)) {
+      [x1, x2] = [x2, x1];
+    }
+
+    // set new top and bottom values of the yAxis domain
+    const [_y2, _y1] = getYAxisDomain(data, x1, x2, xKey, yKey, offset);
+
+    return {
+      zoomed: true,
+      zoomBounds: { x1, x2, y1: _y1, y2: _y2 } as Rect,
+    };
+  },
 };

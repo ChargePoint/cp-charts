@@ -1,4 +1,5 @@
 import { ReactElement } from "react";
+import { CategoricalChartState } from "recharts/types/chart/generateCategoricalChart";
 
 export enum SeriesType {
   Area = "area",
@@ -70,4 +71,21 @@ export interface DataKeysProps {
   type?: SeriesType;
   unit?: string;
   color?: string;
+}
+
+export interface Rect {
+  height?: number;
+  width?: number;
+  x1?: number | string;
+  x2?: number | string;
+  y1?: number | string;
+  y2?: number | string;
+}
+
+export interface ChartEvent extends CategoricalChartState {
+  chartX: number;
+  chartY: number;
+  activePayload: {
+    payload: Record<string, number>;
+  }[];
 }

@@ -2,7 +2,14 @@ import { Component, ComponentType, ReactElement, ReactNode } from "react";
 import { Area, Bar, Line, ReferenceLine, Symbols } from "recharts";
 import { LegendType, SymbolType } from "recharts/types/util/types";
 import Shape from "../components/Shape";
-import { ChartElementProps, SeriesType, SymbolProps } from "../types";
+import {
+  ChartElementProps,
+  ChartEvent,
+  Rect,
+  SeriesType,
+  SymbolProps,
+} from "../types";
+import { hasValue } from "./utils";
 
 // tooltip symbols
 export const SymbolMap = {
