@@ -28,15 +28,15 @@ export const Group = styled.div`
 `;
 
 export const Item = styled.div`
-  color: ${ThemeColors.dark_gray};
+  color: ${ThemeColors.gray_70};
   margin-bottom: ${spacing.absolute.m}px;
 `;
 export const Info = styled.div`
-  color: ${ThemeColors.gray};
+  color: ${ThemeColors.gray_50};
 `;
 
 export const Title = styled.div`
-  color: ${ThemeColors.dark_gray};
+  color: ${ThemeColors.gray_70};
   font-weight: ${fontWeight.bold};
 `;
 

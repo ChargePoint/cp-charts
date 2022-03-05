@@ -52,7 +52,7 @@ const TooltipTitle = styled.div`
   margin-left: ${spacing.absolute.m + spacing.absolute.xs}px;
   margin-top: ${spacing.absolute.m}px;
   font-size: ${fontSize.text_12}rem;
-  color: ${ThemeColors.light_gray};
+  color: ${ThemeColors.gray_40};
 `;
 
 const List = styled.ul`
@@ -78,7 +78,7 @@ const Label = styled.span`
 `;
 
 const Value = styled.span`
-  color: ${ThemeColors.light_gray};
+  color: ${ThemeColors.gray_40};
 `;
 
 function renderSeriesItem(

@@ -20,7 +20,7 @@ const ColorStory = styled.div`
     font-size: ${fontSize.h2};
   }
   pre {
-    background: ${ThemeColors.faint_gray};
+    background: ${ThemeColors.gray_10};
     padding: ${spacing.absolute.m}px;
   }
   margin-bottom: ${spacing.absolute.l}px;

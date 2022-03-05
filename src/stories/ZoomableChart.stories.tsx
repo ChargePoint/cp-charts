@@ -185,7 +185,9 @@ export const ZoomableBarChart = () => {
           width={700}
           height={200}
           onMouseDown={(e) => setHighlightLeftArea(e?.activeLabel)}
-          onMouseMove={(e) => highlightLeftArea && setHighlightRightArea(e?.activeLabel)}
+          onMouseMove={(e) =>
+            highlightLeftArea && setHighlightRightArea(e?.activeLabel)
+          }
           onMouseUp={() => zoomIn()}
         >
           <CartesianGrid strokeDasharray="3 3" />
@@ -200,14 +202,18 @@ export const ZoomableBarChart = () => {
           <YAxis allowDataOverflow domain={[bottom, top]} />
           <Bar dataKey={"traffic"}>
             {data.map((entry) => (
-              <Cell key={entry.timestamp}
+              <Cell
+                key={entry.timestamp}
                 fill={entry.now ? CPChartColors.pink : CPChartColors.lightGray}
               />
             ))}
           </Bar>
-          {/* This is to show the area that is being highlighted/selected */}
           {highlightLeftArea && highlightRightArea ? (
-            <ReferenceArea x1={highlightLeftArea} x2={highlightRightArea} strokeOpacity={0.3} />
+            <ReferenceArea
+              x1={highlightLeftArea}
+              x2={highlightRightArea}
+              strokeOpacity={0.3}
+            />
           ) : null}
         </BarChart>
       </ResponsiveContainer>

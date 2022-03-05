@@ -1,6 +1,3 @@
-// Replace after tests get converted to typescript
-// testMatch: ['**/__tests__/**/*.ts?(x)', '**/?(*.)+(test).ts?(x)'],
-
 module.exports = {
   preset: "ts-jest/presets/js-with-ts",
   testEnvironment: "jsdom",
@@ -20,6 +17,8 @@ module.exports = {
   globals: {
     "ts-jest": {
       isolatedModules: true,
+      // turn off for now
+      diagnostics: false,
     },
   },
 };

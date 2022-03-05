@@ -140,7 +140,6 @@ export const LineChartWithZoom = () => {
             strokeWidth={2}
           />
           <Tooltip />
-          {/* This is to show the area that is being highlighted/selected */}
           {isZooming ? (
             <ReferenceArea
               x1={highLight.x1}

@@ -205,7 +205,6 @@ export const AreaChartWithCustomStyling = () => {
               content={CustomTooltip}
               isAnimationActive={false}
             />
-            {/* This is to show the area that is being highlighted/selected */}
             {isZooming ? (
               <ReferenceArea
                 x1={highLight.x1}
