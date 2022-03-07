@@ -8,7 +8,7 @@ export const createDataPoints = (numDataPoints: number) => {
   let value = numDataPoints;
 
   for (let i = 0; i < numDataPoints; i++) {
-    let newDate = new Date(firstDate);
+    const newDate = new Date(firstDate);
     // each time we add one minute
     newDate.setMinutes(newDate.getMinutes() + i);
     // some random number

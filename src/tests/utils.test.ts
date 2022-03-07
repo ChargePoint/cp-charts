@@ -3,37 +3,37 @@ import {
   getAllDataSetKeys,
   getYAxisDomain,
   hasValue,
-} from "../common/utils";
+} from '../common/utils';
 
-describe("Chart Utility tests", () => {
-  test("cleanKey strips invalid chars from string", () => {
-    expect(cleanKey("Name with spaces")).toEqual("name_with_spaces");
+describe('Chart Utility tests', () => {
+  test('cleanKey strips invalid chars from string', () => {
+    expect(cleanKey('Name with spaces')).toEqual('name_with_spaces');
     expect(cleanKey("Name with 'invalid chars': Test")).toEqual(
-      "name_with__invalid_chars___test"
+      'name_with__invalid_chars___test'
     );
-    expect(`${cleanKey(undefined as unknown as string)}`).toEqual("undefined");
+    expect(`${cleanKey(undefined as unknown as string)}`).toEqual('undefined');
   });
 
-  test("getAllDataSetKeys returns all unique keys found in dataset", () => {
+  test('getAllDataSetKeys returns all unique keys found in dataset', () => {
     const data = [
-      { a: "Hello", b: "World" },
-      { a: "Foo", b: "Bar" },
-      { b: "Farm", c: "Table" },
-      { a: "qux", d: "quux" },
+      { a: 'Hello', b: 'World' },
+      { a: 'Foo', b: 'Bar' },
+      { b: 'Farm', c: 'Table' },
+      { a: 'qux', d: 'quux' },
     ];
 
-    expect(getAllDataSetKeys(data)).toEqual(["a", "b", "c", "d"]);
+    expect(getAllDataSetKeys(data)).toEqual(['a', 'b', 'c', 'd']);
   });
 
   test('hasValue should return true when value is not undefined | null | ""', () => {
     expect(hasValue(null)).toEqual(false);
-    expect(hasValue("")).toEqual(false);
+    expect(hasValue('')).toEqual(false);
     expect(hasValue(undefined)).toEqual(false);
     expect(hasValue(0)).toEqual(true);
-    expect(hasValue("Hello")).toEqual(true);
+    expect(hasValue('Hello')).toEqual(true);
   });
 
-  test("getYAxisDomain should return minimum and maximum values from dataset between specific x-axis values", () => {
+  test('getYAxisDomain should return minimum and maximum values from dataset between specific x-axis values', () => {
     const data = [
       {
         time: 0,
@@ -64,7 +64,7 @@ describe("Chart Utility tests", () => {
         value: 4,
       },
     ];
-    const domain = getYAxisDomain(data, 3, 5, "time", "value");
+    const domain = getYAxisDomain(data, 3, 5, 'time', 'value');
     expect(domain).toEqual([0, 6]);
   });
 });

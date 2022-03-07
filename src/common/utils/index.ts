@@ -1,17 +1,17 @@
-import { TimeSeriesRecord } from "@models";
-import { TimeSeriesData } from "@types";
-import { LegendProps } from "recharts";
-import { ChartEvent, Rect } from "types";
+import { TimeSeriesRecord } from '@models';
+import { TimeSeriesData } from '@types';
+import { LegendProps } from 'recharts';
+import { ChartEvent, Rect } from 'types';
 
 export const cleanKey = (s: string) => {
-  return s?.replace(/[\s\':+-.]/g, "_").toLocaleLowerCase();
+  return s?.replace(/[\s\':+-.]/g, '_').toLocaleLowerCase();
 };
 
 // basic test for required fields
 export const hasValue = (val: unknown | unknown[]): boolean =>
   Array.isArray(val)
     ? val.filter((v) => hasValue(v)).length === val.length
-    : val !== undefined && val !== null && val !== "";
+    : val !== undefined && val !== null && val !== '';
 
 /*
  Returns a list of all the unique keys that are used in the dataset.
@@ -110,7 +110,7 @@ export const getYAxisDomain = (
   // Filter the data to show selected range based on X-Axis
   let refData;
   // Check data type
-  if (typeof data[0][xKey] === "string") {
+  if (typeof data[0][xKey] === 'string') {
     // This section finds the array indexes of the from and to values and then slices the data between those values
     // to get the range inbetween
     const fromPoint = data.findIndex((item) => item[xKey] === from);
@@ -140,7 +140,7 @@ export const getYAxisDomain = (
 
 // Helpers for adding chart zoom
 export const ChartZoom = {
-  init(e: ChartEvent, prevZoom: Rect, xKey: string, offset: number = 0) {
+  init(e: ChartEvent, prevZoom: Rect, xKey: string, offset = 0) {
     const { activePayload } = e || {};
     const { payload } = activePayload[0];
     return {
@@ -161,7 +161,7 @@ export const ChartZoom = {
     xKey: string,
     yKey: string | string[],
     minZoom: number,
-    offset: number = 0
+    offset = 0
   ) {
     let { x1, x2 } = prevZoom;
     // don't zoom in if the user just clicked the chart without dragging a zoom area

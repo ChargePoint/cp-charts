@@ -1,28 +1,28 @@
-import { ReactElement } from "react";
-import { CategoricalChartState } from "recharts/types/chart/generateCategoricalChart";
+import { ReactElement } from 'react';
+import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart';
 
 export enum SeriesType {
-  Area = "area",
-  Bar = "bar",
-  Line = "line",
-  ReferenceLine = "referenceLine",
+  Area = 'area',
+  Bar = 'bar',
+  Line = 'line',
+  ReferenceLine = 'referenceLine',
 }
 
 // curve interpolation type for chart series
 //  @see https://github.com/d3/d3-shape#curves
 export enum InterpolationType {
-  basis = "basis",
-  basisClosed = "basisClosed",
-  basisOpen = "basisOpen",
-  linear = "linear",
-  linearClosed = "linearClosed",
-  natural = "natural",
-  monotoneX = "monotoneX",
-  monotoneY = "monotoneY",
-  monotone = "monotone",
-  step = "step",
-  stepBefore = "stepBefore",
-  stepAfter = "stepAfter",
+  basis = 'basis',
+  basisClosed = 'basisClosed',
+  basisOpen = 'basisOpen',
+  linear = 'linear',
+  linearClosed = 'linearClosed',
+  natural = 'natural',
+  monotoneX = 'monotoneX',
+  monotoneY = 'monotoneY',
+  monotone = 'monotone',
+  step = 'step',
+  stepBefore = 'stepBefore',
+  stepAfter = 'stepAfter',
 }
 
 // chart element is a generic type that can handle ChartSeries
@@ -62,7 +62,7 @@ export interface NumberFormatOptions {
   maximumSignificantDigits?: number;
   maximumFractionDigits?: number;
   minimumFractionDigits?: number;
-  style?: "unit" | "currency" | "percent";
+  style?: 'unit' | 'currency' | 'percent';
   unit?: string;
 }
 

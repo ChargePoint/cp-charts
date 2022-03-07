@@ -1,7 +1,7 @@
-import { NumberFormatOptions } from "../types";
-import { hasValue } from "./utils";
+import { NumberFormatOptions } from '../types';
+import { hasValue } from './utils';
 
-const defaultLocale = "en-US";
+const defaultLocale = 'en-US';
 let locale = window.navigator.language ?? defaultLocale;
 
 export const setLocale = (loc: string) => {
@@ -16,7 +16,7 @@ export const formatNumber = (
   if (hasValue(num) && !Number.isNaN(num)) {
     return fmt.format(num);
   }
-  return num ?? "--";
+  return num ?? '--';
 };
 
 export const formatPercent = (
@@ -24,22 +24,22 @@ export const formatPercent = (
   opts?: NumberFormatOptions
 ): string => {
   const formatOptions = {
-    style: "percent",
+    style: 'percent',
     maximumFractionDigits: 2,
   };
   const formattedPercentage = Intl.NumberFormat(
     [locale],
     opts ?? formatOptions
   );
-  return value ? formattedPercentage.format(value * 0.01) : ("-- %" as string);
+  return value ? formattedPercentage.format(value * 0.01) : ('-- %' as string);
 };
 
 export const formatCurrency = (num: number): string | unknown => {
-  const fmt = Intl.NumberFormat([locale], { style: "currency" });
+  const fmt = Intl.NumberFormat([locale], { style: 'currency' });
   if (!Number.isNaN(num)) {
     return fmt.format(num);
   }
-  return num ?? "--";
+  return num ?? '--';
 };
 
 export const initialCaps = (s: string) =>

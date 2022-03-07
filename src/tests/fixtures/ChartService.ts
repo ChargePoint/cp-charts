@@ -1,4 +1,4 @@
-import kWByVehicle from "./data/avg-kw-per-vehicle.json";
+import kWByVehicle from './data/avg-kw-per-vehicle.json';
 
 // Mock service
 class ChartService {

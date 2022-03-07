@@ -1,26 +1,24 @@
-import { useState } from "react";
-import { format } from "date-fns";
+import { useState } from 'react';
+import { format } from 'date-fns';
 import {
   XAxis,
   YAxis,
   ReferenceArea,
   CartesianGrid,
-  LineChart,
   Line,
-  AreaChart,
   Area,
   Tooltip,
-} from "recharts";
-import styled from "styled-components";
-import { ThemeConstants } from "@chargepoint/cp-toolkit";
-import { ChartZoom } from "../common/utils";
-import { CPChartColors } from "../common/theme";
-import { StoryWrapper } from "../components/Styled";
-import ZoomButton from "../components/ZoomOutButton";
-import mockData from "../tests/fixtures/data/traffic.json";
-import { ComposedChart } from "recharts";
-import { ChartEvent, Rect } from "../types";
-import CPChartTooltip from "../components/CPChartToolTip";
+  ComposedChart,
+} from 'recharts';
+import styled from 'styled-components';
+import { ThemeConstants } from '@chargepoint/cp-toolkit';
+import { ChartZoom } from '../common/utils';
+import { CPChartColors } from '../common/theme';
+import { StoryWrapper } from '../components/Styled';
+import ZoomButton from '../components/ZoomOutButton';
+import mockData from '../tests/fixtures/data/traffic.json';
+import { ChartEvent, Rect } from '../types';
+import CPChartTooltip from '../components/CPChartToolTip';
 
 const { spacing } = ThemeConstants;
 
@@ -41,25 +39,25 @@ const ChartContainer = styled.div`
 
 const MIN_ZOOM = 2; // adjust based on your data
 const DEFAULT_ZOOM: Rect = {
-  x1: "dataMax",
-  y1: "dataMax + 1",
-  x2: "dataMin",
-  y2: "dataMin",
+  x1: 'dataMax',
+  y1: 'dataMax + 1',
+  x2: 'dataMin',
+  y2: 'dataMin',
 };
 const DEFAULT_HIGHLIGHT_ZOOM: Rect = {
   x1: undefined,
-  y1: "dataMax + 1",
+  y1: 'dataMax + 1',
   x2: undefined,
-  y2: "dataMin",
+  y2: 'dataMin',
 };
 
-export const MultipleSeriesChartWithZoom = () => {
+export function MultipleSeriesChartWithZoom() {
   const [isZooming, setIsZooming] = useState(false);
   const [isZoomedIn, setIsZoomedIn] = useState(false);
   const [bounds, setBounds] = useState<Rect>(DEFAULT_ZOOM);
   const [highLight, setHighLight] = useState(DEFAULT_HIGHLIGHT_ZOOM);
   const [data, setData] = useState(mockData);
-  const xDataKey = "timestamp";
+  const xDataKey = 'timestamp';
 
   function handleMouseDown(e: ChartEvent) {
     setHighLight(ChartZoom.init(e, highLight, xDataKey, MIN_ZOOM));
@@ -79,7 +77,7 @@ export const MultipleSeriesChartWithZoom = () => {
         highLight,
         data,
         xDataKey,
-        ["traffic", "foo"],
+        ['traffic', 'foo'],
         MIN_ZOOM,
         0.5
       );
@@ -127,7 +125,7 @@ export const MultipleSeriesChartWithZoom = () => {
             domain={[bounds.x1, bounds.x2]}
             type="number"
             dataKey="timestamp"
-            tickFormatter={(unixTime) => format(new Date(unixTime), "HH:mm")}
+            tickFormatter={(unixTime) => format(new Date(unixTime), 'HH:mm')}
           />
           <YAxis
             allowDataOverflow
@@ -135,20 +133,20 @@ export const MultipleSeriesChartWithZoom = () => {
             type="number"
           />
           <Area
-            isAnimationActive={true}
-            animationEasing={"ease-in-out"}
+            isAnimationActive
+            animationEasing="ease-in-out"
             animationDuration={300}
             type="natural"
-            dataKey={"traffic"}
+            dataKey="traffic"
             fill={CPChartColors.lightBlue}
             stroke={CPChartColors.blue}
             strokeWidth={2}
           />
           <Line
-            isAnimationActive={true}
+            isAnimationActive
             animationDuration={300}
             type="natural"
-            dataKey={"foo"}
+            dataKey="foo"
             stroke={CPChartColors.orange}
             strokeWidth={2}
           />
@@ -164,9 +162,9 @@ export const MultipleSeriesChartWithZoom = () => {
       </ChartContainer>
     </StoryWrapper>
   );
-};
+}
 
 export default {
-  title: "Charts/Composed",
+  title: 'Charts/Composed',
   component: ComposedChart,
 };

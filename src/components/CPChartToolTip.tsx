@@ -1,13 +1,13 @@
-import { FC } from "react";
-import styled from "styled-components";
+import { FC } from 'react';
+import styled from 'styled-components';
 
-import { ThemeColors, ThemeConstants } from "@chargepoint/cp-toolkit";
-import { Surface } from "recharts";
-import { renderSymbol, SymbolMap } from "../common/helpers";
-import { CPChartColors } from "../common/theme";
-import { DataKeysProps } from "../types";
-import { hasValue, parseReChartsEventProps } from "../common/utils";
-import { Spacer } from "./Styled";
+import { ThemeColors, ThemeConstants } from '@chargepoint/cp-toolkit';
+import { Surface } from 'recharts';
+import { renderSymbol, SymbolMap } from '../common/helpers';
+import { CPChartColors } from '../common/theme';
+import { DataKeysProps } from '../types';
+import { hasValue, parseReChartsEventProps } from '../common/utils';
+import { Spacer } from './Styled';
 
 const { spacing, fontSize, fontWeight } = ThemeConstants;
 
@@ -90,7 +90,7 @@ function renderSeriesItem(
     shape,
     strokeDasharray,
     value,
-    unit = "",
+    unit = '',
   }: CPChartTooltipItem,
   formatter?: (key: string, val: number) => string
 ) {

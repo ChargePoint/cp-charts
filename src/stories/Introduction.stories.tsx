@@ -1,12 +1,11 @@
-import styled from "styled-components";
-import { KitLink } from "@chargepoint/cp-toolkit";
-import { StoryWrapper, List, Item, Info, Title } from "../components/Styled";
+import { KitLink } from '@chargepoint/cp-toolkit';
+import { StoryWrapper, List, Item, Info, Title } from '../components/Styled';
 
 export default {
-  title: "Introduction",
+  title: 'Introduction',
 };
 
-export const Intro = () => {
+export function Intro() {
   return (
     <StoryWrapper>
       <h1>cp-charts</h1>
@@ -64,4 +63,4 @@ export const Intro = () => {
       </ul>
     </StoryWrapper>
   );
-};
+}

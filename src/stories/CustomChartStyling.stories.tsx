@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { format } from "date-fns";
+import { useState } from 'react';
+import { format } from 'date-fns';
 import {
   XAxis,
   YAxis,
@@ -9,15 +9,15 @@ import {
   Area,
   Tooltip,
   ResponsiveContainer,
-} from "recharts";
-import styled from "styled-components";
-import { ThemeColors, ThemeConstants } from "@chargepoint/cp-toolkit";
-import { ChartZoom } from "../common/utils";
-import { CPChartColors } from "../common/theme";
-import { StoryWrapper } from "../components/Styled";
-import ZoomButton from "../components/ZoomOutButton";
-import { ChartEvent, InterpolationType, Rect } from "../types";
-import { createDataPoints } from "../tests/testHelpers";
+} from 'recharts';
+import styled from 'styled-components';
+import { ThemeColors, ThemeConstants } from '@chargepoint/cp-toolkit';
+import { ChartZoom } from '../common/utils';
+import { CPChartColors } from '../common/theme';
+import { StoryWrapper } from '../components/Styled';
+import ZoomButton from '../components/ZoomOutButton';
+import { ChartEvent, InterpolationType, Rect } from '../types';
+import { createDataPoints } from '../tests/testHelpers';
 
 const { fontSize, spacing } = ThemeConstants;
 
@@ -25,10 +25,10 @@ const mockData = createDataPoints(30);
 
 function CustomTooltip({ active, payload, label }) {
   if (active) {
-    const value = payload[0].value;
+    const { value } = payload[0];
     return (
       <div className="tooltip">
-        <h4>{format(label, "MMM dd, yy")}</h4>
+        <h4>{format(label, 'MMM dd, yy')}</h4>
         <span>${value} USD</span>
       </div>
     );
@@ -69,23 +69,23 @@ const ChartContainer = styled.div`
 
 const MIN_ZOOM = 2; // adjust based on your data
 const DEFAULT_ZOOM: Rect = {
-  x1: "dataMax",
-  y1: "dataMax + 1",
-  x2: "dataMin",
-  y2: "dataMin + 1",
+  x1: 'dataMax',
+  y1: 'dataMax + 1',
+  x2: 'dataMin',
+  y2: 'dataMin + 1',
 };
 const DEFAULT_HIGHLIGHT_ZOOM: Rect = {
   x1: undefined,
-  y1: "dataMax",
+  y1: 'dataMax',
   x2: undefined,
-  y2: "dataMin",
+  y2: 'dataMin',
 };
 
 const axisStyle = {
   fontSize: `${fontSize.text_14}rem`,
 };
 
-export const AreaChartWithCustomStyling = () => {
+export function AreaChartWithCustomStyling() {
   const [data, setData] = useState(mockData);
   const [isZooming, setIsZooming] = useState(false);
   const [isZoomedIn, setIsZoomedIn] = useState(false);
@@ -93,7 +93,7 @@ export const AreaChartWithCustomStyling = () => {
   // data bounds a.k.a 'domain' -- used for zooming in o data using domain attribute in recharts
   const [bounds, setBounds] = useState<Rect>(DEFAULT_ZOOM);
   const [highLight, setHighLight] = useState<Rect>(DEFAULT_HIGHLIGHT_ZOOM);
-  const xDataKey = "date";
+  const xDataKey = 'date';
 
   function handleMouseDown(e: ChartEvent) {
     setHighLight(ChartZoom.init(e, highLight, xDataKey));
@@ -113,7 +113,7 @@ export const AreaChartWithCustomStyling = () => {
         highLight,
         data,
         xDataKey,
-        "value",
+        'value',
         MIN_ZOOM
       );
 
@@ -144,7 +144,7 @@ export const AreaChartWithCustomStyling = () => {
             ariaLabel="zoom out"
           />
         )}
-        <ResponsiveContainer minHeight={350} width={"100%"}>
+        <ResponsiveContainer minHeight={350} width="100%">
           <AreaChart
             data={data}
             width={800}
@@ -174,7 +174,7 @@ export const AreaChartWithCustomStyling = () => {
               dataKey="date"
               domain={[bounds.x1, bounds.x2]}
               style={axisStyle}
-              tickFormatter={(unixTime) => format(new Date(unixTime), "HH:mm")}
+              tickFormatter={(unixTime) => format(new Date(unixTime), 'HH:mm')}
               tick={{ fill: CPChartColors.gray }}
               tickCount={6}
               type="number"
@@ -193,7 +193,7 @@ export const AreaChartWithCustomStyling = () => {
               animationDuration={600}
               animationEasing="ease-out"
               type={InterpolationType.basis}
-              dataKey={"value"}
+              dataKey="value"
               fill="url(#gradient)"
               stroke={CPChartColors.blue}
               strokeWidth={2}
@@ -217,9 +217,9 @@ export const AreaChartWithCustomStyling = () => {
       </ChartContainer>
     </StoryWrapper>
   );
-};
+}
 
 export default {
-  title: "Charts/Area",
+  title: 'Charts/Area',
   component: AreaChart,
 };

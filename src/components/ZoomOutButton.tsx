@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import { KitButton, KitIcon } from "@chargepoint/cp-toolkit";
+import { KitButton } from '@chargepoint/cp-toolkit';
 
 export interface ZoomButtonProps {
   onClick: () => void;
@@ -21,7 +21,7 @@ const ZoomOutButton: FC<ZoomButtonProps> = ({
       title={ariaLabel}
     >
       <svg
-        style={{ width: "24px", height: "24px" }}
+        style={{ width: '24px', height: '24px' }}
         viewBox="0 0 24 24"
         aria-label={ariaLabel}
       >
