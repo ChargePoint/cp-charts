@@ -17,3 +17,14 @@ export const CPChartColors = {
   lightBlue: ThemeColors.blue_30,
   blue: ThemeColors.blue_50,
 };
+
+export const CPChartsThemeLight = {
+  components: {
+    tooltip: {
+      bg: ThemeColors.white,
+      border: CPChartColors.gray,
+      text: CPChartColors.darkGray,
+      opacity: `rgba(255, 255, 255, 0.1)`,
+    },
+  },
+};

@@ -8,7 +8,7 @@ import {
   schemeDark2,
 } from "d3-scale-chromatic";
 import { CPChartColors } from "../common/theme";
-import { StoryWrapper } from "../components/Styled";
+import { Info, StoryWrapper } from "../components/Styled";
 const { spacing, fontSize } = ThemeConstants;
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -81,6 +81,10 @@ export const Ordinal = () => {
     <>
       <StoryWrapper>
         <h1>Using d3-scale to dynamically generate chart colors</h1>
+        <Info>
+          d3-scale-chromatic has several color scales that you can use to
+          generate dynamic scales for your data visualizations
+        </Info>
         <ColorStory>
           <h3>schemeCategory10</h3>
           <ColorSwatchContainer>

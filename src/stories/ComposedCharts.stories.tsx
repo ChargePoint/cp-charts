@@ -111,7 +111,7 @@ export const ComposedLineAndAreaChart = ({ interpolationType }) => {
       <h1>Composed Line and Area chart</h1>
       <ComposedChart data={data} height={300} width={500}>
         <CartesianGrid />
-        <Tooltip />
+        <Tooltip content={getCustomToolTip} />
         <Legend />
         <YAxis unit=" kW" />
         <XAxis

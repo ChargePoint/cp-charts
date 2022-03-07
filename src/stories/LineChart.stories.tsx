@@ -15,9 +15,10 @@ import { ChartZoom } from "../common/utils";
 import { CPChartColors } from "../common/theme";
 import { StoryWrapper } from "../components/Styled";
 import ZoomButton from "../components/ZoomOutButton";
-import { ChartEvent, Rect } from "types";
+import { ChartEvent, Rect } from "../types";
 import mockData from "../tests/fixtures/data/traffic.json";
 import { ComposedChart } from "recharts";
+import CPChartToolTip from "../components/CPChartToolTip";
 
 const { spacing } = ThemeConstants;
 
@@ -139,7 +140,7 @@ export const LineChartWithZoom = () => {
             stroke={CPChartColors.pink}
             strokeWidth={2}
           />
-          <Tooltip />
+          <Tooltip content={CPChartToolTip} />
           {isZooming ? (
             <ReferenceArea
               x1={highLight.x1}

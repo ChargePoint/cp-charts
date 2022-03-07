@@ -25,6 +25,7 @@ export interface CPChartTooltipProps {
   options?: CPChartTooltipOptions;
   formatTimeStamp: (row: Record<string, number>) => string;
   formatter: (row: Record<string, number>) => string;
+  theme?: string;
 }
 
 export interface CPChartTooltipItem {
@@ -38,11 +39,11 @@ export interface CPChartTooltipItem {
 }
 
 const CustomTooltipWrapper = styled.div<{ opacity?: number }>`
-  background: ${({ opacity }) =>
-    opacity ? `rgba(0, 0, 0, ${opacity})` : `rgba(0, 0, 0, 0.8)`};
-  color: #fff;
+  background: ${({ theme }) => theme.components.tooltip.bg};
+  boc-shadow: 0px 0px 3px 2px rgba(111, 111, 111, 0.4);
+  color: ${({ theme }) => theme.components.tooltip.text};
   border-radius: ${spacing.absolute.xs}px;
-  border: 1px solid ${CPChartColors.gray};
+  border: 1px solid ${CPChartColors.lightGray};
   padding: ${spacing.absolute.s}px;
   font-size: ${fontSize.text_12}rem;
 `;
@@ -52,7 +53,7 @@ const TooltipTitle = styled.div`
   margin-left: ${spacing.absolute.m + spacing.absolute.xs}px;
   margin-top: ${spacing.absolute.m}px;
   font-size: ${fontSize.text_12}rem;
-  color: ${ThemeColors.gray_40};
+  color: ${ThemeColors.gray_50};
 `;
 
 const List = styled.ul`
@@ -89,7 +90,7 @@ function renderSeriesItem(
     shape,
     strokeDasharray,
     value,
-    unit,
+    unit = "",
   }: CPChartTooltipItem,
   formatter?: (key: string, val: number) => string
 ) {

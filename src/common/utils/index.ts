@@ -74,7 +74,7 @@ export const parseReChartsEventProps = ({
   if (payload && payload.length) {
     return payload?.map(
       ({ dataKey, name, stroke, fill: color, unit, shape, value }) => ({
-        color,
+        color: stroke,
         key: dataKey,
         label: name,
         shape,
