@@ -1,9 +1,14 @@
 {
   "extends": ["@chargepoint/eslint-config", "airbnb-typescript-prettier"],
-  "parser": "@typescript-eslint/parser",
+
   "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
     "import/resolver": {
-      "typescript": {} // this loads <rootdir>/tsconfig.json to eslint
+      "typescript": {
+        "alwaysTryTypes": true
+      }
     }
   },
   "rules": {

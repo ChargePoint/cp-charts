@@ -24,10 +24,10 @@
     "strictPropertyInitialization": false,
     "target": "es5",
     "paths": {
-      "@common": ["src/common/*"],
-      "@components": ["src/components/*"],
-      "@models": ["src/models/*"],
-      "@types": ["src/types/*"]
+      "@common/*": ["src/common/*"],
+      "@components/*": ["src/components/*"],
+      "@models/*": ["src/models/*"],
+      "@types/*": ["src/types/*"]
     },
     "typeRoots": ["src/types", "node_modules/@types"]
   },

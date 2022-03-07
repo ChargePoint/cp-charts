@@ -1,7 +1,6 @@
-import { TimeSeriesRecord } from '@models';
-import { TimeSeriesData } from '@types';
 import { LegendProps } from 'recharts';
-import { ChartEvent, Rect } from 'types';
+import { TimeSeriesRecord } from '@models';
+import { TimeSeriesData, ChartEvent, Rect } from '@types';
 
 export const cleanKey = (s: string) => {
   return s?.replace(/[\s\':+-.]/g, '_').toLocaleLowerCase();

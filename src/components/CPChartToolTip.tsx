@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-
-import { ThemeColors, ThemeConstants } from '@chargepoint/cp-toolkit';
 import { Surface } from 'recharts';
+import { ThemeColors, ThemeConstants } from '@chargepoint/cp-toolkit';
+
 import { renderSymbol, SymbolMap } from '../common/helpers';
 import { CPChartColors } from '../common/theme';
 import { DataKeysProps } from '../types';
@@ -88,7 +88,7 @@ function renderSeriesItem(
     key,
     label,
     shape,
-    strokeDasharray,
+    strokeDashArray,
     value,
     unit = '',
   }: CPChartTooltipItem,
@@ -106,7 +106,7 @@ function renderSeriesItem(
             height={10}
             viewBox={{ x: 0, y: 0, width: 10, height: 10 }}
           >
-            {renderSymbol({ color, shape, strokeDasharray })}
+            {renderSymbol({ color, shape, strokeDashArray })}
           </Surface>
         </TooltipSeriesSymbol>
         <Label>{label}:</Label>

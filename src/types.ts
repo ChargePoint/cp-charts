@@ -36,7 +36,7 @@ export interface ChartElementProps {
   seriesType?: SeriesType;
   stroke?: string;
   strokeWidth?: number;
-  strokeDasharray?: string;
+  strokeDashArray?: string;
   strokeOpacity?: number;
   shape?: string;
   type?: string;
