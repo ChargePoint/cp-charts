@@ -18,6 +18,11 @@ import { StoryWrapper } from '../components/Styled';
 import ZoomButton from '../components/ZoomOutButton';
 import { ChartEvent, InterpolationType, Rect } from '../types';
 import { createDataPoints } from '../tests/testHelpers';
+import {
+  DEFAULT_ZOOM,
+  DEFAULT_HIGHLIGHT_ZOOM,
+  MIN_ZOOM,
+} from '../common/constants';
 
 const { fontSize, spacing } = ThemeConstants;
 
@@ -66,20 +71,6 @@ const ChartContainer = styled.div`
     }
   }
 `;
-
-const MIN_ZOOM = 2; // adjust based on your data
-const DEFAULT_ZOOM: Rect = {
-  x1: 'dataMax',
-  y1: 'dataMax + 1',
-  x2: 'dataMin',
-  y2: 'dataMin + 1',
-};
-const DEFAULT_HIGHLIGHT_ZOOM: Rect = {
-  x1: undefined,
-  y1: 'dataMax',
-  x2: undefined,
-  y2: 'dataMin',
-};
 
 const axisStyle = {
   fontSize: `${fontSize.text_14}rem`,

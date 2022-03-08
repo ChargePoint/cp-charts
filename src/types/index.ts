@@ -25,6 +25,23 @@ export enum InterpolationType {
   stepAfter = 'stepAfter',
 }
 
+export enum UnitsSymbol {
+  kiloWatt = 'kW',
+  kiloWattHour = 'kWh',
+}
+
+export enum LabelPosition {
+  insideBottom = 'insideBottom',
+  insideBottomLeft = 'insideBottomLeft',
+  insideBottomRight = 'insideBottomRight',
+  insideLeft = 'insideLeft',
+  insideRight = 'insideRight',
+  center = 'center',
+  insideTop = 'insideTop',
+  insideTopLeft = 'insideTopLeft',
+  insideTopRight = 'insideTopRight',
+}
+
 // chart element is a generic type that can handle ChartSeries
 export interface ChartElementProps {
   active?: boolean;

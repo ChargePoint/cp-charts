@@ -26,6 +26,7 @@ export interface CPChartTooltipProps {
   formatTimeStamp: (row: Record<string, number>) => string;
   formatter: (row: Record<string, number>) => string;
   theme?: string;
+  type?: string;
 }
 
 export interface CPChartTooltipItem {
@@ -40,7 +41,7 @@ export interface CPChartTooltipItem {
 
 const CustomTooltipWrapper = styled.div<{ opacity?: number }>`
   background: ${({ theme }) => theme.components.tooltip.bg};
-  boc-shadow: 0px 0px 3px 2px rgba(111, 111, 111, 0.4);
+  box-shadow: 0px 0px 3px 2px rgba(111, 111, 111, 0.4);
   color: ${({ theme }) => theme.components.tooltip.text};
   border-radius: ${spacing.absolute.xs}px;
   border: 1px solid ${CPChartColors.lightGray};

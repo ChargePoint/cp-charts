@@ -33,8 +33,10 @@ import ChartService from '../tests/fixtures/ChartService';
 import {
   ChartElementProps,
   InterpolationType,
+  LabelPosition,
   SeriesType,
   TimeSeriesData,
+  UnitsSymbol,
 } from '../types';
 
 import { ISO_DATE_TIME } from '../common/constants';
@@ -88,7 +90,7 @@ function getCustomToolTip(props) {
     <CPChartTooltip
       formatTimeStamp={(row) => format(new Date(row.timestamp), ISO_DATE_TIME)}
       formatter={(key: string, value: number) => {
-        return `${value}kw`;
+        return `${value}${UnitsSymbol.kiloWatt}`;
       }}
       {...props}
     />
@@ -116,7 +118,7 @@ export function ChartExplorer({
 
   const seriesProps = {
     type: interpolationType ?? InterpolationType.monotone,
-    unit: 'kW',
+    unit: UnitsSymbol.kiloWatt,
     connectNulls: true,
   };
   const allFields = getAllDataSetKeys(results, ['timestamp']);
@@ -206,8 +208,8 @@ export function ChartExplorer({
             <YAxis
               domain={['dataMin', 'auto']}
               label={{
-                value: 'kW',
-                position: 'insideLeft',
+                value: UnitsSymbol.kiloWatt,
+                position: LabelPosition.insideLeft,
                 angle: -90,
               }}
             />
