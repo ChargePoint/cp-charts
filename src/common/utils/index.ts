@@ -1,12 +1,16 @@
-import { TimeSeriesRecord } from "@models";
-import { TimeSeriesData } from "@types";
-import { LegendProps } from "recharts";
+import { LegendProps } from 'recharts';
+import { TimeSeriesRecord } from '@models';
+import { TimeSeriesData, ChartEvent, Rect } from '@types';
+
+export const cleanKey = (s: string) => {
+  return s?.replace(/[\s\':+-.]/g, '_').toLocaleLowerCase();
+};
 
 // basic test for required fields
 export const hasValue = (val: unknown | unknown[]): boolean =>
   Array.isArray(val)
     ? val.filter((v) => hasValue(v)).length === val.length
-    : val !== undefined && val !== null && val !== "";
+    : val !== undefined && val !== null && val !== '';
 
 /*
  Returns a list of all the unique keys that are used in the dataset.
@@ -16,7 +20,7 @@ export const hasValue = (val: unknown | unknown[]): boolean =>
 */
 export const getAllDataSetKeys = (
   data: TimeSeriesData[],
-  keysToRemove: string[]
+  keysToRemove?: string[]
 ) => {
   const keyList: string[] = [];
   for (let i = 0; i < data.length; i++) {
@@ -47,7 +51,7 @@ export const processTimeSeriesResponse = (
 
     data.forEach(({ name, value }) => {
       // convert item name to safe key
-      const key = name.replace(/[\s\':+-.]/g, "_").toLocaleLowerCase();
+      const key = cleanKey(name);
       record[key] = value;
       labels[key] = name;
     });
@@ -69,7 +73,7 @@ export const parseReChartsEventProps = ({
   if (payload && payload.length) {
     return payload?.map(
       ({ dataKey, name, stroke, fill: color, unit, shape, value }) => ({
-        color,
+        color: stroke,
         key: dataKey,
         label: name,
         shape,
@@ -99,13 +103,13 @@ export const getYAxisDomain = (
   from: any,
   to: any,
   xKey: string | number,
-  yKey: string | number,
+  yKey: (string | number) | (string | number)[],
   offset?: number
 ) => {
   // Filter the data to show selected range based on X-Axis
   let refData;
   // Check data type
-  if (typeof data[0][xKey] === "string") {
+  if (typeof data[0][xKey] === 'string') {
     // This section finds the array indexes of the from and to values and then slices the data between those values
     // to get the range inbetween
     const fromPoint = data.findIndex((item) => item[xKey] === from);
@@ -115,14 +119,66 @@ export const getYAxisDomain = (
     // Filter by all values that fit in the range between from - to
     refData = data.filter((item) => item[xKey] <= to && item[xKey] >= from);
   }
+
   // Get Y-Axis lower and upper values
-  let [bottom, top] = [refData[0][yKey], refData[0][yKey]];
+  // handle the case where we have multiple series to evaluate zoom bounds for
+  const yKeys = Array.isArray(yKey) ? yKey : [yKey];
+  let [bottom, top] = [refData[0][yKeys[0]], 0];
+
   // This portion sets the lowest and highest (bottom and top respectively) values that will be on the y-Axis
   refData.forEach((data) => {
-    if (data[yKey] > top) top = data[yKey];
-    if (data[yKey] < bottom) bottom = data[yKey];
+    yKeys.forEach((key) => {
+      if (data[key] > top) top = data[key];
+      if (data[key] < bottom) bottom = data[key];
+    });
   });
   // Offset the data if an offset is provided
   // The first part is the lowest yAxis value, the second part is the highest yAxis value
   return [(bottom || 0) - (offset ?? 0), (top || 0) + (offset ?? 0)];
+};
+
+// Helpers for adding chart zoom
+export const ChartZoom = {
+  init(e: ChartEvent, prevZoom: Rect, xKey: string, offset = 0) {
+    const { activePayload } = e || {};
+    const { payload } = activePayload[0];
+    return {
+      ...prevZoom,
+      x1: payload[xKey],
+      x2: payload[xKey] + offset,
+    };
+  },
+  getEventPayloadValue(e: ChartEvent, dataKey: string) {
+    const { activePayload } = e || {};
+    if (activePayload?.length) {
+      return activePayload[0].payload[dataKey];
+    }
+  },
+  getBounds(
+    prevZoom: Rect,
+    data: TimeSeriesData[],
+    xKey: string,
+    yKey: string | string[],
+    minZoom: number,
+    offset = 0
+  ) {
+    let { x1, x2 } = prevZoom;
+    // don't zoom in if the user just clicked the chart without dragging a zoom area
+    if (Math.abs((x1 as number) - (x2 as number)) <= minZoom || !hasValue(x2)) {
+      return { zoomed: false };
+    }
+
+    // ensure x1 <= x2
+    if ((x1 as unknown as number) > (x2 as unknown as number)) {
+      [x1, x2] = [x2, x1];
+    }
+
+    // set new top and bottom values of the yAxis domain
+    const [_y2, _y1] = getYAxisDomain(data, x1, x2, xKey, yKey, offset);
+
+    return {
+      zoomed: true,
+      zoomBounds: { x1, x2, y1: _y1, y2: _y2 } as Rect,
+    };
+  },
 };

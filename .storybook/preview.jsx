@@ -1,7 +1,13 @@
 import { ThemeProvider } from "styled-components";
 import { cpLightTheme, cpDarkTheme } from "@chargepoint/cp-toolkit";
+import { CPChartsThemeLight } from "../src/common/theme";
 
 import "../src/styles/storybook.css";
+
+const lightTheme = {
+  ...cpLightTheme,
+  ...CPChartsThemeLight,
+};
 
 // Adds a global "Theme" switcher to Storybook toolbar
 export const globalTypes = {
@@ -20,7 +26,7 @@ const getTheme = (themeName) => {
   if (themeName === "Dark") {
     return cpDarkTheme;
   }
-  return cpLightTheme;
+  return lightTheme;
 };
 
 const withThemeProvider = (Story, context) => {

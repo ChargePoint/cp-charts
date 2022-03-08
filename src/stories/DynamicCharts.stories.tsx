@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { unstable_batchedUpdates } from "react-dom";
-import { ScaleOrdinal, scaleOrdinal } from "d3-scale";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { ScaleOrdinal, scaleOrdinal } from 'd3-scale';
 import {
   schemeDark2,
   schemeCategory10,
   schemePaired,
   schemeAccent,
   schemeTableau10,
-} from "d3-scale-chromatic";
-import { format } from "date-fns";
-import { extent } from "d3-array";
-import {
-  KitSpinner,
-  KitSelect,
-  KitForm,
-  KitCheck,
-} from "@chargepoint/cp-toolkit";
+} from 'd3-scale-chromatic';
+import { format } from 'date-fns';
+import { extent } from 'd3-array';
+import { KitSelect, KitForm, KitCheck } from '@chargepoint/cp-toolkit';
 
 import {
   ComposedChart,
@@ -26,34 +20,36 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-} from "recharts";
+} from 'recharts';
 
-import { AxisDomain, D3Scale } from "recharts/types/util/types";
+import { AxisDomain } from 'recharts/types/util/types';
 
 import {
   getAllDataSetKeys,
   processTimeSeriesResponse,
-} from "../common/utils/index";
+} from '../common/utils/index';
 
-import ChartService from "../tests/fixtures/ChartService";
+import ChartService from '../tests/fixtures/ChartService';
 import {
   ChartElementProps,
   InterpolationType,
+  LabelPosition,
   SeriesType,
   TimeSeriesData,
-} from "../types";
+  UnitsSymbol,
+} from '../types';
 
-import { ISO_DATE_TIME } from "../common/constants";
-import { renderSeries } from "../common/helpers";
-import CPChartTooltip from "../components/CPChartToolTip";
-import { initialCaps } from "../common/lang";
+import { ISO_DATE_TIME } from '../common/constants';
+import { renderSeries } from '../common/helpers';
+import CPChartTooltip from '../components/CPChartToolTip';
+import { initialCaps } from '../common/lang';
 import {
   ControlBar,
   List,
   ListItem,
   SectionHeader,
   Title,
-} from "../components/Styled";
+} from '../components/Styled';
 
 const ChartWrapper = styled.div`
   min-width: 600px;
@@ -73,7 +69,9 @@ function getSeries(
       ...seriesProps,
       name: labels[dataKey],
       key: `${dataKey}-${index}`,
-      stackId: `area`,
+      stackId: [SeriesType.Area, SeriesType.Bar].includes(seriesType)
+        ? 'stack-it'
+        : null,
       seriesType,
       stroke: colorDomain(dataKey),
       fill: colorDomain(dataKey),
@@ -83,7 +81,7 @@ function getSeries(
 }
 
 export default {
-  title: "Charts/Composed",
+  title: 'Charts/Composed',
   control: ChartWrapper,
 };
 
@@ -92,18 +90,19 @@ function getCustomToolTip(props) {
     <CPChartTooltip
       formatTimeStamp={(row) => format(new Date(row.timestamp), ISO_DATE_TIME)}
       formatter={(key: string, value: number) => {
-        return `${value}kw`;
+        return `${value}${UnitsSymbol.kiloWatt}`;
       }}
       {...props}
     />
   );
 }
 
-export const ChartExplorer = ({
+export function ChartExplorer({
   interpolationType,
 }: {
   interpolationType: InterpolationType;
-}) => {
+}) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [initialized, setInitialized] = useState(false);
   const [seriesType, setSeriesType] = useState(SeriesType.Bar);
   const [colors, setColors] = useState(schemeDark2);
@@ -119,10 +118,10 @@ export const ChartExplorer = ({
 
   const seriesProps = {
     type: interpolationType ?? InterpolationType.monotone,
-    unit: "kW",
+    unit: UnitsSymbol.kiloWatt,
     connectNulls: true,
   };
-  const allFields = getAllDataSetKeys(results, ["timestamp"]);
+  const allFields = getAllDataSetKeys(results, ['timestamp']);
   const colorScale = scaleOrdinal(colors);
   const colorDomain = colorScale.domain(allFields);
   const chartSeries = getSeries(
@@ -168,9 +167,9 @@ export const ChartExplorer = ({
                 setSeriesType(item.value)
               }
               options={[
-                { label: "Area", value: SeriesType.Area },
-                { label: "Bar", value: SeriesType.Bar },
-                { label: "Line", value: SeriesType.Line },
+                { label: 'Area', value: SeriesType.Area },
+                { label: 'Bar', value: SeriesType.Bar },
+                { label: 'Line', value: SeriesType.Line },
               ]}
             />
           </KitForm.Group>
@@ -179,14 +178,14 @@ export const ChartExplorer = ({
             <KitSelect
               id="colorScale"
               name="colorScale"
-              defaultValue={{ value: "schemeDark2", label: "schemeDark2" }}
+              defaultValue={{ value: 'schemeDark2', label: 'schemeDark2' }}
               onChange={(item: { value: SeriesType }) => setColors(item.value)}
               options={[
-                { label: "schemeDark2", value: schemeDark2 },
-                { label: "schemeCategory10", value: schemeCategory10 },
-                { label: "schemePaired", value: schemePaired },
-                { label: "schemeAccent", value: schemeAccent },
-                { label: "schemeTableau10", value: schemeTableau10 },
+                { label: 'schemeDark2', value: schemeDark2 },
+                { label: 'schemeCategory10', value: schemeCategory10 },
+                { label: 'schemePaired', value: schemePaired },
+                { label: 'schemeAccent', value: schemeAccent },
+                { label: 'schemeTableau10', value: schemeTableau10 },
               ]}
             />
           </KitForm.Group>
@@ -201,15 +200,16 @@ export const ChartExplorer = ({
         </KitForm>
       </ControlBar>
       <ChartWrapper>
-        <ResponsiveContainer minHeight={350} width={"100%"}>
+        <ResponsiveContainer minHeight={350} width="100%">
           <ComposedChart data={results} height={300} width={800}>
-            {showGrid && <CartesianGrid />}
+            {showGrid && <CartesianGrid strokeDasharray="3 3" />}
             <Tooltip content={getCustomToolTip} />
             <Legend />
             <YAxis
+              domain={['dataMin', 'auto']}
               label={{
-                value: "kW",
-                position: "insideLeft",
+                value: UnitsSymbol.kiloWatt,
+                position: LabelPosition.insideLeft,
                 angle: -90,
               }}
             />
@@ -219,7 +219,7 @@ export const ChartExplorer = ({
               name="Time"
               type="number"
               tickCount={10}
-              tickFormatter={(unixTime) => format(unixTime, "HH:mm")}
+              tickFormatter={(unixTime) => format(unixTime, 'HH:mm')}
               padding="gap"
             />
             {chartSeries?.map((series) => renderSeries(series))}
@@ -228,7 +228,7 @@ export const ChartExplorer = ({
       </ChartWrapper>
     </>
   );
-};
+}
 
 ChartExplorer.args = {
   interpolationType: InterpolationType.monotone,

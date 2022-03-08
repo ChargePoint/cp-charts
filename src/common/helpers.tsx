@@ -1,14 +1,14 @@
-import { Component, ComponentType, ReactElement, ReactNode } from "react";
-import { Area, Bar, Line, ReferenceLine, Symbols } from "recharts";
-import { LegendType, SymbolType } from "recharts/types/util/types";
-import Shape from "../components/Shape";
-import { ChartElementProps, SeriesType, SymbolProps } from "../types";
+import { Component, ComponentType, ReactElement, ReactNode } from 'react';
+import { Area, Bar, Line, ReferenceLine, Symbols } from 'recharts';
+import { LegendType, SymbolType } from 'recharts/types/util/types';
+import Shape from '../components/Shape';
+import { ChartElementProps, SeriesType, SymbolProps } from '../types';
 
 // tooltip symbols
 export const SymbolMap = {
-  area: "line",
-  bar: "square",
-  line: "line",
+  area: 'line',
+  bar: 'square',
+  line: 'line',
 };
 
 export const componentMap: { [key: string]: ReactNode } = {
@@ -28,22 +28,20 @@ type SeriesProps = ChartElementProps & ReactElement;
 export function renderSeries(chartSeriesProps: SeriesProps) {
   const ChartSeries = componentMap[
     chartSeriesProps.seriesType
-  ] as ComponentType<
-    {
-      [key in SeriesType]: Component<ChartElementProps, unknown>;
-    }
-  >;
+  ] as ComponentType<{
+    [key in SeriesType]: Component<ChartElementProps, unknown>;
+  }>;
   return <ChartSeries {...chartSeriesProps} />;
 }
 
-export const getSymbolType = (symbolType: string): SymbolType | "line" => {
-  if (symbolType === "line") {
-    return "line";
+export const getSymbolType = (symbolType: string): SymbolType | 'line' => {
+  if (symbolType === 'line') {
+    return 'line';
   }
   return (
-    ["circle", "diamond", "square"].includes(symbolType)
+    ['circle', 'diamond', 'square'].includes(symbolType)
       ? (symbolType as LegendType)
-      : "circle"
+      : 'circle'
   ) as SymbolType;
 };
 
@@ -55,7 +53,7 @@ export const renderSymbol = ({
   strokeDasharray,
 }: SymbolProps) => {
   const symbol = shape ?? type;
-  if (!stackId && symbol === "line") {
+  if (!stackId && symbol === 'line') {
     return <Shape type="line" fill={color} strokeDasharray={strokeDasharray} />;
   }
   return (

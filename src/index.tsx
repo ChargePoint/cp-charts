@@ -1,4 +1,4 @@
-import KitChart, { KitChartDataPointProps, KitChartProps, ChartSeries} from "./components/KitCharts";
+import * as ChartUtils from './common/utils/index';
+import * as ChartHelpers from './common/helpers';
 
-export { KitChart }
-export type { KitChartProps, KitChartDataPointProps, ChartSeries}
+export { ChartHelpers, ChartUtils };
