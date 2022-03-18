@@ -6,9 +6,7 @@
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
-      "typescript": {
-        "alwaysTryTypes": true
-      }
+      "typescript": {}
     }
   },
   "rules": {
@@ -23,6 +21,12 @@
         "allowFunctions": true
       }
     ],
-    "react/jsx-props-no-spreading": 0
+    "react/jsx-props-no-spreading": 0,
+    "react/function-component-definition": [
+      1,
+      {
+        "namedComponents": ["function-declaration", "arrow-function"]
+      }
+    ]
   }
 }

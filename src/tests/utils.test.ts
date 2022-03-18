@@ -1,8 +1,10 @@
 import {
   cleanKey,
   getAllDataSetKeys,
+  getEventPayloadValue,
   getYAxisDomain,
   hasValue,
+  processTimeSeriesResponse,
 } from '../common/utils';
 
 describe('Chart Utility tests', () => {
@@ -16,13 +18,13 @@ describe('Chart Utility tests', () => {
 
   test('getAllDataSetKeys returns all unique keys found in dataset', () => {
     const data = [
-      { a: 'Hello', b: 'World' },
-      { a: 'Foo', b: 'Bar' },
-      { b: 'Farm', c: 'Table' },
-      { a: 'qux', d: 'quux' },
+      { a: 'Hello', b: 'World', timestamp: 123456 },
+      { a: 'Foo', b: 'Bar', timestamp: 123456 },
+      { b: 'Farm', c: 'Table', timestamp: 123456 },
+      { a: 'qux', d: 'quux', timestamp: 123456 },
     ];
 
-    expect(getAllDataSetKeys(data)).toEqual(['a', 'b', 'c', 'd']);
+    expect(getAllDataSetKeys(data)).toEqual(['a', 'b', 'c', 'd', 'timestamp']);
   });
 
   test('hasValue should return true when value is not undefined | null | ""', () => {
@@ -67,4 +69,67 @@ describe('Chart Utility tests', () => {
     const domain = getYAxisDomain(data, 3, 5, 'time', 'value');
     expect(domain).toEqual([0, 6]);
   });
+
+  test('processTimeSeriesResponse converts TimeSeriesRecord format to TimeSeriesData', () => {
+    const result = processTimeSeriesResponse([
+      {
+        time: '2022-01-04 15:15:00.000000000',
+        data: [
+          {
+            name: 'Item One',
+            value: 6.174,
+          },
+        ],
+      },
+      {
+        time: '2022-01-04 15:30:00.000000000',
+        data: [
+          {
+            name: 'Item One',
+            value: 4.3,
+          },
+          {
+            name: 'Item Two',
+            value: 5.23,
+          },
+        ],
+      },
+    ]);
+
+    expect(result).toEqual({
+      labels: { item_one: 'Item One', item_two: 'Item Two' },
+      results: [
+        {
+          timestamp: 1641338100000,
+          item_one: 6.174,
+        },
+        {
+          timestamp: 1641339000000,
+          item_one: 4.3,
+          item_two: 5.23,
+        },
+      ],
+    });
+  });
+
+  test('getEventPayloadValue should return value of Chart Mouse event if one exists', () => {
+    expect(
+      getEventPayloadValue(
+        {
+          chartX: 0,
+          chartY: 0,
+          activePayload: [
+            {
+              payload: { foo: 1, qux: 2 },
+            },
+          ],
+        },
+        'foo'
+      )
+    ).toEqual(1);
+  });
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  expect(getEventPayloadValue({}, 'foo')).toBeNull();
 });

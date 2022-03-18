@@ -8,7 +8,7 @@ export interface ZoomButtonProps {
   ariaLabel: string;
 }
 
-const ZoomOutButton: FC<ZoomButtonProps> = ({
+const CPChartZoomOutButton: FC<ZoomButtonProps> = ({
   className,
   onClick,
   ariaLabel,
@@ -34,4 +34,8 @@ const ZoomOutButton: FC<ZoomButtonProps> = ({
   );
 };
 
-export default ZoomOutButton;
+CPChartZoomOutButton.defaultProps = {
+  className: null,
+};
+
+export default CPChartZoomOutButton;

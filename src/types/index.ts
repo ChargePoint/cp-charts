@@ -53,7 +53,7 @@ export interface ChartElementProps {
   seriesType?: SeriesType;
   stroke?: string;
   strokeWidth?: number;
-  strokeDashArray?: string;
+  strokeDasharray?: string;
   strokeOpacity?: number;
   shape?: string;
   type?: string;
@@ -106,3 +106,8 @@ export interface ChartEvent extends CategoricalChartState {
     payload: Record<string, number>;
   }[];
 }
+
+export type FormatterFunc = (
+  row: string | Record<string, number>,
+  value: number | string
+) => string;

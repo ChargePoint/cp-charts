@@ -1,28 +1,57 @@
-This repository consists of the migrated [amCharts](https://github.com/amcharts/amcharts4) components and stories from the `cp-toolkit` repo. It was at - the time this README was created - not being used and making the bundle size of `cp-toolkit` unnecessarily large as it was including everything, thus the decision to migrate it into its own repo.
-### Install and run
+# cp-charts
 
-1.  Install `NodeJS`. Preferably using [NVM](https://github.com/nvm-sh/nvm) so that you can easily switch node versions if necessary.
-2.  Install [Yarn](https://classic.yarnpkg.com/en/docs/install).
-3.  Ensure `package.json` file is there and run the command `yarn` to install all dependencies. (If for some reason a dependency failed to install, you can run `yarn add <dependency_name>` to try install it manually)
-4.  After successfully installing the dependencies, run `yarn start` to startup the application
+**cp-charts**
 
-## Storybook
+This repo is new and doesn't yet contain much. Contributions are welcome.
 
-You can run the in storybook mode to help you create and visualise certain components within the application. You can run the following command:
+We are using Recharts for React based applications with charting needs.
 
-```
-yarn storybook
-```
+### Recharts was chosen because it of the following criteria:
 
-For more information on storybooks, you can view the docs [here](https://storybook.js.org/docs/react/get-started/whats-a-story)
+- Low barrier to entry. Recharts is built specifically for React
+- Customizability -- it's fairly easy to customize colors, font size, legend icons, as well as provide custom components for things like tooltips, legends, tick marks, reference lines, etc.
+- Documentation is not perfect, but it's decent. You can often find useful posts on StackOverflow because of the large developer community.
+- 17.9k GitHub stars
+  <br /><br />
+  > This could change in the future if new and better open source charting libraries appear, or Recharts Github activity stalls for too long.
+  > <br />
+
+**This repo contains Storybook examples of how to:**
+
+- Create and customize various charts in Recharts
+- How to create a dynamic chart with an unknown number of series
+- Examples of how to use some `d3` utilities, like `d3-scale`
+- How to build a zoom control
+
+## Custom Components
+
+- CPChartToolTip
+- CPChartShape
+- CPChartZoomOutButton
+
+## Utilities
+
+Various utilities to assist with processing time series data, handle Recharts events, etc
+
+## Install
+
+`yarn`
+
+## Develop
+
+`yarn storybook`
+
+### Test
+
+`yarn test`
 
 ## Publishing
 
-1. Increment version number in `package.json`. 
-    - increment last digit for minor changes and bugfixes
-    - increment middle digit for new features and/or changes to current ones
-    - increment first digit in the event of complete overhauls/major changes
-    - for testing, append with `-beta<revision_number>`
+1. Increment version number in `package.json`.
+   - increment last digit for minor changes and bugfixes
+   - increment middle digit for new features and/or changes to current ones
+   - increment first digit in the event of complete overhauls/major changes
+   - for testing, append with `-beta<revision_number>`
 2. Commit changes
 3. Create PR and have it approved for merging into `master` branch
 4. Run `yarn publish`

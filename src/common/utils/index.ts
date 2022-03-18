@@ -1,9 +1,14 @@
-import { LegendProps } from 'recharts';
 import { TimeSeriesRecord } from '@models';
-import { TimeSeriesData, ChartEvent, Rect } from '@types';
+import { TimeSeriesData, ChartEvent, Rect } from 'types/index';
+import { ReChartsEventPayload } from 'types/recharts';
 
+/**
+ * returns clean key with special chars and spaces replaced with underscores
+ * @param s
+ * @returns
+ */
 export const cleanKey = (s: string) => {
-  return s?.replace(/[\s\':+-.]/g, '_').toLocaleLowerCase();
+  return s?.replace(/[\s':+-.#,]/g, '_').toLocaleLowerCase();
 };
 
 // basic test for required fields
@@ -36,7 +41,7 @@ export const getAllDataSetKeys = (
   if (keysToRemove) {
     return keyList.filter((key) => !keysToRemove.includes(key));
   }
-  return keyList;
+  return keyList.sort();
 };
 
 // converts timeseries api response format to common format that recharts uses
@@ -68,12 +73,12 @@ export const processTimeSeriesResponse = (
 export const parseReChartsEventProps = ({
   payload,
 }: {
-  payload: LegendProps[];
+  payload: ReChartsEventPayload[];
 }) => {
   if (payload && payload.length) {
     return payload?.map(
       ({ dataKey, name, stroke, fill: color, unit, shape, value }) => ({
-        color: stroke,
+        color: stroke ?? color,
         key: dataKey,
         label: name,
         shape,
@@ -99,9 +104,10 @@ export const parseReChartsEventProps = ({
    offset - the value to offset the yAxis by. Eg if offset is 1 and the yAxis starts at 1, then it will instead start at 0
 */
 export const getYAxisDomain = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any[],
-  from: any,
-  to: any,
+  from: string | number,
+  to: string | number,
   xKey: string | number,
   yKey: (string | number) | (string | number)[],
   offset?: number
@@ -126,16 +132,25 @@ export const getYAxisDomain = (
   let [bottom, top] = [refData[0][yKeys[0]], 0];
 
   // This portion sets the lowest and highest (bottom and top respectively) values that will be on the y-Axis
-  refData.forEach((data) => {
+  refData.forEach((d) => {
     yKeys.forEach((key) => {
-      if (data[key] > top) top = data[key];
-      if (data[key] < bottom) bottom = data[key];
+      if (d[key] > top) top = d[key];
+      if (d[key] < bottom) bottom = d[key];
     });
   });
   // Offset the data if an offset is provided
   // The first part is the lowest yAxis value, the second part is the highest yAxis value
   return [(bottom || 0) - (offset ?? 0), (top || 0) + (offset ?? 0)];
 };
+
+// Return value from Recharts mouse event
+export function getEventPayloadValue(e: ChartEvent, dataKey: string) {
+  const { activePayload } = e || {};
+  if (activePayload?.length) {
+    return activePayload[0].payload[dataKey];
+  }
+  return null;
+}
 
 // Helpers for adding chart zoom
 export const ChartZoom = {
@@ -147,12 +162,6 @@ export const ChartZoom = {
       x1: payload[xKey],
       x2: payload[xKey] + offset,
     };
-  },
-  getEventPayloadValue(e: ChartEvent, dataKey: string) {
-    const { activePayload } = e || {};
-    if (activePayload?.length) {
-      return activePayload[0].payload[dataKey];
-    }
   },
   getBounds(
     prevZoom: Rect,

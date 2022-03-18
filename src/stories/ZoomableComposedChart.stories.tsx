@@ -12,10 +12,10 @@ import {
 } from 'recharts';
 import styled from 'styled-components';
 import { ThemeConstants } from '@chargepoint/cp-toolkit';
-import { ChartZoom } from '../common/utils';
+import { ChartZoom, getEventPayloadValue } from '../common/utils';
 import { CPChartColors } from '../common/theme';
 import { StoryWrapper } from '../components/Styled';
-import ZoomButton from '../components/ZoomOutButton';
+import ZoomButton from '../components/CPChartZoomOutButton';
 import mockData from '../tests/fixtures/data/traffic.json';
 import { ChartEvent, Rect } from '../types';
 import CPChartTooltip from '../components/CPChartToolTip';
@@ -65,7 +65,7 @@ export function MultipleSeriesChartWithZoom() {
   }
 
   function handleMouseMove(e: ChartEvent) {
-    const x2 = ChartZoom.getEventPayloadValue(e, xDataKey);
+    const x2 = getEventPayloadValue(e, xDataKey);
     if (isZooming) {
       setHighLight((prev) => ({ ...prev, x2 }));
     }

@@ -54,6 +54,10 @@ export function Ordinal() {
     'key8',
     'key9',
     'key10',
+    'key11',
+    'key12',
+    'key13',
+    'key14',
   ];
 
   const scale1 = scaleOrdinal(schemeCategory10);
@@ -65,17 +69,7 @@ export function Ordinal() {
   const scale3 = scaleOrdinal(schemeDark2);
   const domain3 = scale3.domain(keys);
 
-  const scale4 = scaleOrdinal([
-    CPChartColors.darkGray,
-    CPChartColors.turquoiseBlue,
-    CPChartColors.lightGreen,
-    CPChartColors.orange,
-    CPChartColors.lightPurple,
-    CPChartColors.pink,
-    CPChartColors.darkYellow,
-    CPChartColors.darkPurple,
-    CPChartColors.lightOrange,
-  ]);
+  const scale4 = scaleOrdinal(Object.values(CPChartColors));
   const domain4 = scale4.domain(keys);
 
   return (
