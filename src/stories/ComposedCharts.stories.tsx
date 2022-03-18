@@ -13,6 +13,8 @@ import {
 
 import styled from 'styled-components';
 import { extent } from 'd3-array';
+import { ThemeConstants } from '@chargepoint/cp-toolkit';
+
 import { TimeSeriesData } from '../types';
 import { ISO_DATE_TIME } from '../common/constants';
 import CPChartTooltip from '../components/CPChartToolTip';
@@ -72,7 +74,7 @@ const mockData = [
 ];
 
 const ChartWrapper = styled.div`
-  padding: ;
+  padding: ${ThemeConstants.spacing.absolute.s}px;
 `;
 
 function prepareData(response: Record<string, unknown | string>[]) {
@@ -95,13 +97,14 @@ function getCustomToolTip(props) {
         if (key === 'soc') {
           return `${value}%`;
         }
+        return value;
       }}
       {...props}
     />
   );
 }
 
-export function ComposedLineAndAreaChart({ interpolationType }) {
+export function ComposedLineAndAreaChart() {
   const data = prepareData(mockData.concat());
   const xDomain = extent(data, (d: TimeSeriesData) => d.timestamp);
 
@@ -128,7 +131,7 @@ export function ComposedLineAndAreaChart({ interpolationType }) {
   );
 }
 
-export function WithCustomToolTip({ interpolationType }) {
+export function WithCustomToolTip() {
   const data = prepareData(mockData.concat());
   const xDomain = extent(data, (d: TimeSeriesData) => d.timestamp);
 

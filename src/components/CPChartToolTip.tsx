@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import { Surface } from 'recharts';
 import { ThemeColors, ThemeConstants } from '@chargepoint/cp-toolkit';
 
+import { FormatterFunc } from 'types/index';
+import { ReChartsEventPayload } from 'types/recharts';
+
 import { renderSymbol, SymbolMap } from '../common/helpers';
 import { CPChartColors } from '../common/theme';
-import { DataKeysProps } from '../types';
 import { hasValue, parseReChartsEventProps } from '../common/utils';
 import { Spacer } from './Styled';
 
@@ -15,20 +17,6 @@ export interface CPChartTooltipOptions {
   opacity?: number;
 }
 
-export interface CPChartTooltipProps {
-  items: DataKeysProps[];
-  payload: {
-    color: string;
-    payload: Record<string, number>;
-  }[];
-  xAxisKey: string;
-  options?: CPChartTooltipOptions;
-  formatTimeStamp: (row: Record<string, number>) => string;
-  formatter: (row: Record<string, number>) => string;
-  theme?: string;
-  type?: string;
-}
-
 export interface CPChartTooltipItem {
   key: string;
   label?: string;
@@ -36,12 +24,21 @@ export interface CPChartTooltipItem {
   value?: unknown;
   unit?: string;
   shape: string;
-  strokeDashArray?: string;
+  strokeDasharray?: string;
+}
+
+export interface CPChartTooltipProps {
+  items: CPChartTooltipItem[];
+  payload: ReChartsEventPayload[];
+  formatTimeStamp: (row: Record<string, number>) => string;
+  formatter: FormatterFunc;
+  // eslint-disable-next-line react/require-default-props
+  type?: string;
 }
 
 const CustomTooltipWrapper = styled.div<{ opacity?: number }>`
   background: ${({ theme }) => theme.components.tooltip.bg};
-  box-shadow: 0px 0px 3px 2px rgba(111, 111, 111, 0.4);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   color: ${({ theme }) => theme.components.tooltip.text};
   border-radius: ${spacing.absolute.xs}px;
   border: 1px solid ${CPChartColors.lightGray};
@@ -89,11 +86,11 @@ function renderSeriesItem(
     key,
     label,
     shape,
-    strokeDashArray,
+    strokeDasharray,
     value,
     unit = '',
   }: CPChartTooltipItem,
-  formatter?: (key: string, val: number) => string
+  formatter?: FormatterFunc
 ) {
   const format = (): string => {
     return formatter ? formatter(key, value as number) : `${value} ${unit}`;
@@ -107,7 +104,7 @@ function renderSeriesItem(
             height={10}
             viewBox={{ x: 0, y: 0, width: 10, height: 10 }}
           >
-            {renderSymbol({ color, shape, strokeDashArray })}
+            {renderSymbol({ color, shape, strokeDasharray })}
           </Surface>
         </TooltipSeriesSymbol>
         <Label>{label}:</Label>

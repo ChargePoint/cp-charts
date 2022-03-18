@@ -120,7 +120,7 @@ export function Basic() {
       <BarChart data={mockData} width={700} height={200}>
         <Tooltip
           cursor={false}
-          labelFormatter={(value, payload) => {
+          labelFormatter={(value) => {
             return format(new Date(value), 'h b');
           }}
         />
@@ -135,7 +135,7 @@ export function Basic() {
         />
         <YAxis fontSize="12px" />
         <Bar dataKey="traffic">
-          {mockData.map((entry, index) => (
+          {mockData.map((entry) => (
             <Cell
               fill={entry.now ? CPChartColors.pink : CPChartColors.lightGray}
             />

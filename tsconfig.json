@@ -8,29 +8,28 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "lib": ["dom", "dom.iterable", "esnext"],
-
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
     "module": "esnext",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
     "moduleResolution": "node",
-    "strictFunctionTypes": false,
-    "strictNullChecks": false,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": false,
+    "strictFunctionTypes": false,
+    "strictNullChecks": false,
     "strictPropertyInitialization": false,
     "target": "es5",
     "paths": {
       "@common/*": ["src/common/*"],
       "@components/*": ["src/components/*"],
-      "@models/*": ["src/models/*"],
-      "@types/*": ["src/types/*"]
+      "@models": ["src/models"],
+      "types/*": ["src/types/*"]
     },
     "typeRoots": ["src/types", "node_modules/@types"]
   },
-  "include": ["src", "rollup.config.js"],
+  "include": ["src/**/*", "rollup.config.js"],
   "exclude": ["src/stories/**/**"]
 }
