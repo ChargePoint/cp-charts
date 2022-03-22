@@ -47,7 +47,7 @@ const ChartWrapper = styled.div`
   padding: ${ThemeConstants.spacing.absolute.s}px;
 `;
 
-const ToolTipContainer = styled.div`
+const TooltipContainer = styled.div`
   background: ${ThemeColors.white}cc;
   box-shadow: 0 0 4px 0px rgba(100, 100, 100, 0.2);
   padding: ${ThemeConstants.spacing.absolute.m}px;
@@ -71,10 +71,10 @@ const renderTooltip = (props) => {
     const item = payload[0]?.payload;
 
     return (
-      <ToolTipContainer>
+      <TooltipContainer>
         <h4>{item.hour}</h4>
         <div>{item.value} alerts</div>
-      </ToolTipContainer>
+      </TooltipContainer>
     );
   }
 

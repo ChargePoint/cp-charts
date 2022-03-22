@@ -2,7 +2,7 @@ import { ComponentType, ReactElement, ReactNode } from 'react';
 import { Area, Bar, Line, ReferenceLine, Symbols } from 'recharts';
 import { LegendType, SymbolType } from 'recharts/types/util/types';
 import { ChartElementProps, SymbolProps } from '../types';
-import Shape from '../components/CPChartShape';
+import CPChartShape from '../components/CPChartShape';
 
 // tooltip symbols
 export const SymbolMap = {
@@ -55,7 +55,7 @@ export const getSymbolType = (symbolType: SymbolTypes): SymbolType | 'line' => {
 
 /**
  * Renders shape symbol
- * Used with ReferenceLine, ToolTip, and Legend components
+ * Used with ReferenceLine, Tooltip, and Legend components
  */
 export const renderSymbol = ({
   color,
@@ -66,7 +66,13 @@ export const renderSymbol = ({
 }: SymbolProps) => {
   const symbol = shape ?? type;
   if (!stackId && symbol === SymbolTypes.LINE) {
-    return <Shape type="line" fill={color} strokeDasharray={strokeDasharray} />;
+    return (
+      <CPChartShape
+        type="line"
+        fill={color}
+        strokeDasharray={strokeDasharray}
+      />
+    );
   }
   return (
     <Symbols

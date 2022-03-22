@@ -13,7 +13,9 @@ import typescript from '@rollup/plugin-typescript';
 import { terser } from 'rollup-plugin-terser';
 import dts from 'rollup-plugin-dts';
 
-const packageJson = require('./package.json');
+import packageJson from './package.json';
+
+const libName = 'cp-charts';
 
 export default [
   {
@@ -24,6 +26,7 @@ export default [
         file: packageJson.main,
         format: 'cjs',
         sourcemap: true,
+        name: libName,
       },
       {
         file: packageJson.module,
@@ -43,8 +46,8 @@ export default [
     ],
   },
   {
-    input: 'dist/types/index.d.ts',
-    output: [{ file: 'dist/index.d.ts', format: 'es' }],
+    input: 'dist/esm/d/index.d.ts',
+    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
     plugins: [
       dts({
         compilerOptions: {

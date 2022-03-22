@@ -147,7 +147,7 @@ export function ZoomableBarChart() {
       highlightRightArea,
       'timestamp',
       'traffic',
-      1
+      2
     );
 
     setIsZoomedIn(true);

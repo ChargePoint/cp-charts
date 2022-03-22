@@ -17,7 +17,7 @@ import { ThemeConstants } from '@chargepoint/cp-toolkit';
 
 import { TimeSeriesData } from '../types';
 import { ISO_DATE_TIME } from '../common/constants';
-import CPChartTooltip from '../components/CPChartToolTip';
+import CPChartTooltip from '../components/CPChartTooltip';
 import { StoryWrapper } from '../components/Styled';
 
 const mockData = [
@@ -89,7 +89,7 @@ export default {
   control: ChartWrapper,
 };
 
-function getCustomToolTip(props) {
+function getCustomTooltip(props) {
   return (
     <CPChartTooltip
       formatTimeStamp={(row) => format(row.timestamp, ISO_DATE_TIME)}
@@ -113,7 +113,7 @@ export function ComposedLineAndAreaChart() {
       <h1>Composed Line and Area chart</h1>
       <ComposedChart data={data} height={300} width={500}>
         <CartesianGrid />
-        <Tooltip content={getCustomToolTip} />
+        <Tooltip content={getCustomTooltip} />
         <Legend />
         <YAxis unit=" kW" />
         <XAxis
@@ -131,16 +131,16 @@ export function ComposedLineAndAreaChart() {
   );
 }
 
-export function WithCustomToolTip() {
+export function WithCustomTooltip() {
   const data = prepareData(mockData.concat());
   const xDomain = extent(data, (d: TimeSeriesData) => d.timestamp);
 
   return (
     <StoryWrapper>
-      <h1>Composed Line and Area chart w/ custom ToolTip</h1>
+      <h1>Composed Line and Area chart w/ custom Tooltip</h1>
       <ComposedChart data={data} height={300} width={500}>
         <CartesianGrid />
-        <Tooltip content={getCustomToolTip} />
+        <Tooltip content={getCustomTooltip} />
         <Legend />
         <YAxis unit=" kW" />
         <XAxis

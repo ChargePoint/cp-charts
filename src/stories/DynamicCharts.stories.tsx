@@ -30,18 +30,11 @@ import {
 } from '../common/utils/index';
 
 import ChartService from '../tests/fixtures/ChartService';
-import {
-  ChartElementProps,
-  InterpolationType,
-  LabelPosition,
-  SeriesType,
-  TimeSeriesData,
-  UnitsSymbol,
-} from '../types';
+import { ChartElementProps, TimeSeriesData } from '../types';
 
 import { ISO_DATE_TIME } from '../common/constants';
 import { renderSeries } from '../common/helpers';
-import CPChartTooltip from '../components/CPChartToolTip';
+import CPChartTooltip from '../components/CPChartTooltip';
 import { initialCaps } from '../common/lang';
 import {
   ControlBar,
@@ -50,6 +43,12 @@ import {
   SectionHeader,
   Title,
 } from '../components/Styled';
+import {
+  InterpolationType,
+  LabelPosition,
+  SeriesType,
+  UnitsSymbol,
+} from '../types/enums';
 
 const ChartWrapper = styled.div`
   min-width: 600px;
@@ -85,7 +84,7 @@ export default {
   control: ChartWrapper,
 };
 
-function getCustomToolTip(props) {
+function getCustomTooltip(props) {
   return (
     <CPChartTooltip
       formatTimeStamp={(row) => format(new Date(row.timestamp), ISO_DATE_TIME)}
@@ -203,7 +202,7 @@ export function ChartExplorer({
         <ResponsiveContainer minHeight={350} width="100%">
           <ComposedChart data={results} height={300} width={800}>
             {showGrid && <CartesianGrid strokeDasharray="3 3" />}
-            <Tooltip content={getCustomToolTip} />
+            <Tooltip content={getCustomTooltip} />
             <Legend />
             <YAxis
               domain={['dataMin', 'auto']}
