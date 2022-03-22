@@ -17,8 +17,8 @@ import { CPChartColors } from '../common/theme';
 import { StoryWrapper } from '../components/Styled';
 import ZoomButton from '../components/CPChartZoomOutButton';
 import mockData from '../tests/fixtures/data/traffic.json';
-import { ChartEvent, Rect } from '../types';
-import CPChartTooltip from '../components/CPChartToolTip';
+import { ChartEvent, CPChartRect } from '../types';
+import CPChartTooltip from '../components/CPChartTooltip';
 
 const { spacing } = ThemeConstants;
 
@@ -38,13 +38,13 @@ const ChartContainer = styled.div`
 `;
 
 const MIN_ZOOM = 2; // adjust based on your data
-const DEFAULT_ZOOM: Rect = {
+const DEFAULT_ZOOM: CPChartRect = {
   x1: 'dataMax',
   y1: 'dataMax + 1',
   x2: 'dataMin',
   y2: 'dataMin',
 };
-const DEFAULT_HIGHLIGHT_ZOOM: Rect = {
+const DEFAULT_HIGHLIGHT_ZOOM: CPChartRect = {
   x1: undefined,
   y1: 'dataMax + 1',
   x2: undefined,
@@ -54,7 +54,7 @@ const DEFAULT_HIGHLIGHT_ZOOM: Rect = {
 export function MultipleSeriesChartWithZoom() {
   const [isZooming, setIsZooming] = useState(false);
   const [isZoomedIn, setIsZoomedIn] = useState(false);
-  const [bounds, setBounds] = useState<Rect>(DEFAULT_ZOOM);
+  const [bounds, setBounds] = useState<CPChartRect>(DEFAULT_ZOOM);
   const [highLight, setHighLight] = useState(DEFAULT_HIGHLIGHT_ZOOM);
   const [data, setData] = useState(mockData);
   const xDataKey = 'timestamp';
@@ -86,7 +86,7 @@ export function MultipleSeriesChartWithZoom() {
         setData(data.slice());
         setIsZoomedIn(true);
         setHighLight(DEFAULT_HIGHLIGHT_ZOOM);
-        setBounds(zoomBounds as Rect);
+        setBounds(zoomBounds as CPChartRect);
       }
 
       setIsZooming(false);

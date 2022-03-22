@@ -1,46 +1,6 @@
 import { ReactElement } from 'react';
 import { CategoricalChartState } from 'recharts/types/chart/generateCategoricalChart';
-
-export enum SeriesType {
-  Area = 'area',
-  Bar = 'bar',
-  Line = 'line',
-  ReferenceLine = 'referenceLine',
-}
-
-// curve interpolation type for chart series
-//  @see https://github.com/d3/d3-shape#curves
-export enum InterpolationType {
-  basis = 'basis',
-  basisClosed = 'basisClosed',
-  basisOpen = 'basisOpen',
-  linear = 'linear',
-  linearClosed = 'linearClosed',
-  natural = 'natural',
-  monotoneX = 'monotoneX',
-  monotoneY = 'monotoneY',
-  monotone = 'monotone',
-  step = 'step',
-  stepBefore = 'stepBefore',
-  stepAfter = 'stepAfter',
-}
-
-export enum UnitsSymbol {
-  kiloWatt = 'kW',
-  kiloWattHour = 'kWh',
-}
-
-export enum LabelPosition {
-  insideBottom = 'insideBottom',
-  insideBottomLeft = 'insideBottomLeft',
-  insideBottomRight = 'insideBottomRight',
-  insideLeft = 'insideLeft',
-  insideRight = 'insideRight',
-  center = 'center',
-  insideTop = 'insideTop',
-  insideTopLeft = 'insideTopLeft',
-  insideTopRight = 'insideTopRight',
-}
+import { SeriesType } from './enums';
 
 // chart element is a generic type that can handle ChartSeries
 export interface ChartElementProps {
@@ -90,7 +50,7 @@ export interface DataKeysProps {
   color?: string;
 }
 
-export interface Rect {
+export interface CPChartRect {
   height?: number;
   width?: number;
   x1?: number | string;

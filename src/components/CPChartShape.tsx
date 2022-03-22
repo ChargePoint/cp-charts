@@ -2,7 +2,7 @@ import { FC, ReactElement } from 'react';
 
 const SIZE = 32;
 
-const Shape: FC<{
+const CPChartShape: FC<{
   fill: string;
   type: string;
   strokeDasharray?: string | undefined;
@@ -48,4 +48,4 @@ const Shape: FC<{
   return map[type];
 };
 
-export default Shape;
+export default CPChartShape;

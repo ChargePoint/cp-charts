@@ -1,5 +1,5 @@
 import { TimeSeriesRecord } from '@models';
-import { TimeSeriesData, ChartEvent, Rect } from 'types/index';
+import { TimeSeriesData, ChartEvent, CPChartRect } from 'types/index';
 import { ReChartsEventPayload } from 'types/recharts';
 
 /**
@@ -154,7 +154,7 @@ export function getEventPayloadValue(e: ChartEvent, dataKey: string) {
 
 // Helpers for adding chart zoom
 export const ChartZoom = {
-  init(e: ChartEvent, prevZoom: Rect, xKey: string, offset = 0) {
+  init(e: ChartEvent, prevZoom: CPChartRect, xKey: string, offset = 0) {
     const { activePayload } = e || {};
     const { payload } = activePayload[0];
     return {
@@ -164,7 +164,7 @@ export const ChartZoom = {
     };
   },
   getBounds(
-    prevZoom: Rect,
+    prevZoom: CPChartRect,
     data: TimeSeriesData[],
     xKey: string,
     yKey: string | string[],
@@ -187,7 +187,7 @@ export const ChartZoom = {
 
     return {
       zoomed: true,
-      zoomBounds: { x1, x2, y1: _y1, y2: _y2 } as Rect,
+      zoomBounds: { x1, x2, y1: _y1, y2: _y2 } as CPChartRect,
     };
   },
 };

@@ -15,9 +15,9 @@ import { ChartZoom, getEventPayloadValue } from '../common/utils';
 import { CPChartColors } from '../common/theme';
 import { StoryWrapper } from '../components/Styled';
 import ZoomButton from '../components/CPChartZoomOutButton';
-import { ChartEvent, Rect } from '../types';
+import { ChartEvent, CPChartRect } from '../types';
 import mockData from '../tests/fixtures/data/traffic.json';
-import CPChartToolTip from '../components/CPChartToolTip';
+import CPChartTooltip from '../components/CPChartTooltip';
 
 const { spacing } = ThemeConstants;
 
@@ -37,13 +37,13 @@ const ChartContainer = styled.div`
 `;
 
 const MIN_ZOOM = 2; // adjust based on your data
-const DEFAULT_ZOOM: Rect = {
+const DEFAULT_ZOOM: CPChartRect = {
   x1: 'dataMax',
   y1: 'dataMax + 1',
   x2: 'dataMin',
   y2: 'dataMin',
 };
-const DEFAULT_HIGHLIGHT_ZOOM: Rect = {
+const DEFAULT_HIGHLIGHT_ZOOM: CPChartRect = {
   x1: undefined,
   y1: 'dataMax + 1',
   x2: undefined,
@@ -139,7 +139,7 @@ export function LineChartWithZoom() {
             stroke={CPChartColors.pink}
             strokeWidth={2}
           />
-          <Tooltip content={CPChartToolTip} />
+          <Tooltip content={CPChartTooltip} />
           {isZooming ? (
             <ReferenceArea
               x1={highLight.x1}

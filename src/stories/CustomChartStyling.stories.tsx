@@ -16,7 +16,8 @@ import { ChartZoom, getEventPayloadValue } from '../common/utils';
 import { CPChartColors } from '../common/theme';
 import { StoryWrapper } from '../components/Styled';
 import ZoomButton from '../components/CPChartZoomOutButton';
-import { ChartEvent, InterpolationType, Rect } from '../types';
+import { ChartEvent, CPChartRect } from '../types';
+import { InterpolationType } from '../types/enums';
 import { createDataPoints } from '../tests/testHelpers';
 import {
   DEFAULT_ZOOM,
@@ -82,8 +83,10 @@ export function AreaChartWithCustomStyling() {
   const [isZoomedIn, setIsZoomedIn] = useState(false);
 
   // data bounds a.k.a 'domain' -- used for zooming in o data using domain attribute in recharts
-  const [bounds, setBounds] = useState<Rect>(DEFAULT_ZOOM);
-  const [highLight, setHighLight] = useState<Rect>(DEFAULT_HIGHLIGHT_ZOOM);
+  const [bounds, setBounds] = useState<CPChartRect>(DEFAULT_ZOOM);
+  const [highLight, setHighLight] = useState<CPChartRect>(
+    DEFAULT_HIGHLIGHT_ZOOM
+  );
   const xDataKey = 'date';
 
   function handleMouseDown(e: ChartEvent) {
@@ -112,7 +115,7 @@ export function AreaChartWithCustomStyling() {
         setIsZoomedIn(true);
         setData(data.slice());
         setHighLight(DEFAULT_HIGHLIGHT_ZOOM);
-        setBounds(zoomBounds as Rect);
+        setBounds(zoomBounds as CPChartRect);
       }
 
       setIsZooming(false);

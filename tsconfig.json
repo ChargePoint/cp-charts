@@ -3,8 +3,9 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "declaration": true,
-    "declarationDir": "types",
+    "declarationDir": "d",
     "emitDeclarationOnly": true,
+    "declarationMap": true,
     "esModuleInterop": true,
     "isolatedModules": true,
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -17,7 +18,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "strict": false,
+    "strict": true,
     "strictFunctionTypes": false,
     "strictNullChecks": false,
     "strictPropertyInitialization": false,
@@ -27,9 +28,8 @@
       "@components/*": ["src/components/*"],
       "@models": ["src/models"],
       "types/*": ["src/types/*"]
-    },
-    "typeRoots": ["src/types", "node_modules/@types"]
+    }
   },
   "include": ["src/**/*", "rollup.config.js"],
-  "exclude": ["src/stories/**/**"]
+  "exclude": ["src/stories/**/*", "./tests/**/*", "dist"]
 }
