@@ -19,6 +19,7 @@ import ZoomButton from '../components/CPChartZoomOutButton';
 import mockData from '../tests/fixtures/data/traffic.json';
 import { ChartEvent, CPChartRect } from '../types';
 import CPChartTooltip from '../components/CPChartTooltip';
+import { InterpolationType } from '../types/enums';
 
 const { spacing } = ThemeConstants;
 
@@ -51,7 +52,7 @@ const DEFAULT_HIGHLIGHT_ZOOM: CPChartRect = {
   y2: 'dataMin',
 };
 
-export function MultipleSeriesChartWithZoom() {
+export function StackedAreaChartWithZoom() {
   const [isZooming, setIsZooming] = useState(false);
   const [isZoomedIn, setIsZoomedIn] = useState(false);
   const [bounds, setBounds] = useState<CPChartRect>(DEFAULT_ZOOM);
@@ -77,9 +78,9 @@ export function MultipleSeriesChartWithZoom() {
         highLight,
         data,
         xDataKey,
-        ['traffic', 'foo'],
+        ['traffic', 'foo', 'qux'],
         MIN_ZOOM,
-        0.5
+        { isStacked: true, offset: 0.5, excludeFromStackKeys: ['qux'] }
       );
 
       if (zoomed) {
@@ -101,7 +102,12 @@ export function MultipleSeriesChartWithZoom() {
 
   return (
     <StoryWrapper>
-      <h1>Multiple Series Area Chart with Zoom</h1>
+      <h1>Stacked Area Chart with Zoom</h1>
+      <p>
+        Zooming a stacked area chart involves a bit more complexity to calculate
+        the yAxis domain, but this is handled by the ChartZoom utility
+      </p>
+      <br /> <br />
       <ChartContainer>
         {isZoomedIn && (
           <ZoomButton
@@ -136,17 +142,31 @@ export function MultipleSeriesChartWithZoom() {
             isAnimationActive
             animationEasing="ease-in-out"
             animationDuration={300}
-            type="natural"
+            type={InterpolationType.stepAfter}
             dataKey="traffic"
-            fill={CPChartColors.lightBlue}
-            stroke={CPChartColors.blue}
+            fill={CPChartColors.lightPurple}
+            stackId="stacked-area"
+            stroke={CPChartColors.darkPurple}
+            strokeWidth={2}
+          />
+          <Area
+            isAnimationActive
+            animationEasing="ease-in-out"
+            animationDuration={300}
+            type={InterpolationType.stepAfter}
+            dataKey="foo"
+            stackId="stacked-area"
+            fill={CPChartColors.turquoiseBlue}
+            stroke={CPChartColors.turquoiseBlue}
             strokeWidth={2}
           />
           <Line
             isAnimationActive
+            animationEasing="ease-in-out"
             animationDuration={300}
-            type="natural"
-            dataKey="foo"
+            type={InterpolationType.stepAfter}
+            dataKey="qux"
+            fill={CPChartColors.lightOrange}
             stroke={CPChartColors.orange}
             strokeWidth={2}
           />

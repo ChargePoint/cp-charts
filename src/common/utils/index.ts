@@ -1,4 +1,4 @@
-import { TimeSeriesRecord } from '@models';
+import { TimeSeriesRecord, ZoomOptions } from '@models';
 import { TimeSeriesData, ChartEvent, CPChartRect } from 'types/index';
 import { ReChartsEventPayload } from 'types/recharts';
 
@@ -108,10 +108,22 @@ export const getYAxisDomain = (
   data: any[],
   from: string | number,
   to: string | number,
-  xKey: string | number,
-  yKey: (string | number) | (string | number)[],
-  offset?: number
+  xKey: string,
+  yKey: string | string[],
+  options?: ZoomOptions
 ) => {
+  const opts = options
+    ? {
+        isStacked: false,
+        excludeFromStackKeys: [],
+        offset: 0,
+        ...options,
+      }
+    : {
+        isStacked: false,
+        excludeFromStackKeys: [],
+        offset: 0,
+      };
   // Filter the data to show selected range based on X-Axis
   let refData;
   // Check data type
@@ -129,34 +141,41 @@ export const getYAxisDomain = (
   // Get Y-Axis lower and upper values
   // handle the case where we have multiple series to evaluate zoom bounds for
   const yKeys = Array.isArray(yKey) ? yKey : [yKey];
-  let [bottom, top] = [refData[0][yKeys[0]], 0];
+  let [bottom, top] = [9999999, 0];
 
   // This portion sets the lowest and highest (bottom and top respectively) values that will be on the y-Axis
   refData.forEach((d) => {
+    let yTop = 0;
     yKeys.forEach((key) => {
-      if (d[key] > top) top = d[key];
-      if (d[key] < bottom) bottom = d[key];
+      const val = d[key];
+      if (!Number.isNaN(parseFloat(val))) {
+        if (
+          opts.isStacked &&
+          !opts.excludeFromStackKeys.includes(key as string)
+        ) {
+          if (!opts.excludeFromStackKeys.includes(key as string)) {
+            yTop += val;
+          }
+        } else if (val > top) {
+          top = val;
+        }
+      }
+      if (val < bottom) bottom = val;
     });
+    if (opts.isStacked && yTop > top) top = yTop;
   });
+
   // Offset the data if an offset is provided
   // The first part is the lowest yAxis value, the second part is the highest yAxis value
-  return [(bottom || 0) - (offset ?? 0), (top || 0) + (offset ?? 0)];
+  return [(bottom || 0) - (opts.offset ?? 0), (top || 0) + (opts.offset ?? 0)];
 };
-
-// Return value from Recharts mouse event
-export function getEventPayloadValue(e: ChartEvent, dataKey: string) {
-  const { activePayload } = e || {};
-  if (activePayload?.length) {
-    return activePayload[0].payload[dataKey];
-  }
-  return null;
-}
 
 // Helpers for adding chart zoom
 export const ChartZoom = {
   init(e: ChartEvent, prevZoom: CPChartRect, xKey: string, offset = 0) {
     const { activePayload } = e || {};
     const { payload } = activePayload[0];
+
     return {
       ...prevZoom,
       x1: payload[xKey],
@@ -169,9 +188,10 @@ export const ChartZoom = {
     xKey: string,
     yKey: string | string[],
     minZoom: number,
-    offset = 0
+    options?: ZoomOptions
   ) {
     let { x1, x2 } = prevZoom;
+
     // don't zoom in if the user just clicked the chart without dragging a zoom area
     if (Math.abs((x1 as number) - (x2 as number)) <= minZoom || !hasValue(x2)) {
       return { zoomed: false };
@@ -183,7 +203,7 @@ export const ChartZoom = {
     }
 
     // set new top and bottom values of the yAxis domain
-    const [_y2, _y1] = getYAxisDomain(data, x1, x2, xKey, yKey, offset);
+    const [_y2, _y1] = getYAxisDomain(data, x1, x2, xKey, yKey, options);
 
     return {
       zoomed: true,
@@ -191,3 +211,12 @@ export const ChartZoom = {
     };
   },
 };
+
+// Return value from Recharts mouse event
+export function getEventPayloadValue(e: ChartEvent, dataKey: string) {
+  const { activePayload } = e || {};
+  if (activePayload?.length) {
+    return activePayload[0].payload[dataKey];
+  }
+  return null;
+}

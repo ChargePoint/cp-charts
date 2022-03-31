@@ -7,6 +7,53 @@ import {
   processTimeSeriesResponse,
 } from '../common/utils';
 
+import energyManagementData from './fixtures/data/energy-management-data.json';
+
+const domainTestData = [
+  {
+    time: 0,
+    setpoint: 2,
+    a: 1,
+    b: 1,
+  },
+  {
+    time: 1,
+    setpoint: 3,
+    a: 2,
+    b: 1,
+  },
+  {
+    time: 2,
+    setpoint: 7,
+    a: 4,
+    b: 6,
+  },
+  {
+    time: 3,
+    setpoint: 6,
+    a: 2,
+    b: 1.4,
+  },
+  {
+    time: 4,
+    setpoint: 6,
+    a: 3.2,
+    b: 4.1,
+  },
+  {
+    time: 4.5,
+    setpoint: 4,
+    a: 2,
+    b: 2,
+  },
+  {
+    time: 5,
+    setpoint: 9,
+    a: 4.1,
+    b: 5.1,
+  },
+];
+
 describe('Chart Utility tests', () => {
   test('cleanKey strips invalid chars from string', () => {
     expect(cleanKey('Name with spaces')).toEqual('name_with_spaces');
@@ -68,6 +115,35 @@ describe('Chart Utility tests', () => {
     ];
     const domain = getYAxisDomain(data, 3, 5, 'time', 'value');
     expect(domain).toEqual([0, 6]);
+  });
+
+  test('getYAxisDomain should handle zooming for stacked area charts', () => {
+    const domain = getYAxisDomain(domainTestData, 3, 5, 'time', ['a', 'b'], {
+      isStacked: true,
+    });
+    expect(domain).toEqual([1.4, 9.2]);
+  });
+
+  test('getYAxisDomain should handle zooming for multiple series on the yAxis', () => {
+    const domain = getYAxisDomain(domainTestData, 3, 5, 'time', [
+      'a',
+      'setpoint',
+    ]);
+    expect(domain).toEqual([2, 9]);
+  });
+
+  test('getYAxisDomain should handle zooming for multiple series on the yAxis for large datasets', () => {
+    const { results } = processTimeSeriesResponse(energyManagementData);
+    const keys = getAllDataSetKeys(results, ['timestamp']);
+    const domain = getYAxisDomain(
+      results,
+      1648018800000,
+      1648278000000,
+      'timestamp',
+      keys,
+      { isStacked: true }
+    );
+    expect(domain).toEqual([0, 187.5]);
   });
 
   test('processTimeSeriesResponse converts TimeSeriesRecord format to TimeSeriesData', () => {

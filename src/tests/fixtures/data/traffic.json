@@ -2,98 +2,117 @@
     {
         "timestamp": 1643702400000,
         "foo": 1,
-        "traffic": 2
+        "traffic": 2,
+        "qux": 2
     },
     {
         "timestamp": 1643706000000,
         "traffic": 1,
-        "foo": 2
+        "foo": 2,
+        "qux": 6
     },
     {
         "timestamp": 1643709600000,
         "traffic": 1,
-        "foo": 2
+        "foo": 2,
+        "qux": 20
     },
     {
         "timestamp": 1643713200000,
         "traffic": 0.5,
-        "foo": 3
+        "foo": 3,
+        "qux": 4
     },
     {
         "timestamp": 1643716800000,
         "traffic": 0.5,
-        "foo": 3
+        "foo": 3,
+        "qux": 4
     },
     {
         "timestamp": 1643720400000,
-        "traffic": 1,
-        "foo": 2.1
+        "traffic": 8,
+        "foo": 8,
+        "qux": 5
     },
     {
         "timestamp": 1643724000000,
         "traffic": 3,
-        "foo": 3
+        "foo": 3,
+        "qux": 5
     },
     {
         "timestamp": 1643727600000,
         "traffic": 4,
-        "foo": 3.8
+        "foo": 3.8,
+        "qux": 6
     },
     {
         "timestamp": 1643731200000,
         "traffic": 7,
-        "foo": 6
+        "foo": 6,
+        "qux": 8
     },
     {
         "timestamp": 1643734800000,
         "traffic": 6,
-        "foo": 6
+        "foo": 6,
+        "qux": 7
     },
     {
         "timestamp": 1643738400000,
         "traffic": 8,
-        "foo": 9
+        "foo": 9,
+        "qux": 12
     },
     {
         "timestamp": 1643742000000,
         "traffic": 5,
-        "foo": 5
+        "foo": 5,
+        "qux": 7
     },
     {
         "timestamp": 1643745600000,
         "traffic": 8,
-        "foo": 7
+        "foo": 7,
+        "qux": 5
     },
     {
         "timestamp": 1643749200000,
         "traffic": 6,
-        "foo": 6
+        "foo": 6,
+        "qux": 5
     },
     {
         "timestamp": 1643752800000,
         "traffic": 5,
-        "foo": 5
+        "foo": 5,
+        "qux": 5
     },
     {
         "timestamp": 1643756400000,
         "traffic": 4,
         "foo": 4.1,
+        "qux": 8,
         "now": true
     },
     {
         "timestamp": 1643760000000,
         "traffic": 3,
-        "foo": 3
+        "foo": 3,
+        "qux": 5
     },
     {
         "timestamp": 1643763600000,
         "traffic": 4,
-        "foo": 4
+        "foo": 4,
+        "qux": 4
     },
     {
         "timestamp": 1643767200000,
         "traffic": 5,
-        "foo": 4
+        "foo": 4,
+        "qux": 5
     },
     {
         "timestamp": 1643770800000,
@@ -107,16 +126,19 @@
     {
         "timestamp": 1643778000000,
         "traffic": 2,
-        "foo": 2.5
+        "foo": 2.5,
+        "qux": 3
     },
     {
         "timestamp": 1643781600000,
         "traffic": 3,
-        "foo": 3
+        "foo": 3,
+        "qux": 2
     },
     {
         "timestamp": 1643785200000,
         "traffic": 2,
-        "foo": 3
+        "foo": 3,
+        "qux": 2
     }
 ]
