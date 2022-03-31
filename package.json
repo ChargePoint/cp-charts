@@ -5,9 +5,10 @@
   "main": "dist/cjs/index.js",
   "types": "dist/index.d.ts",
   "license": "UNLICENSED",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "files": [
     "dist",
+    "src",
     "package.json",
     "README.md"
   ],
@@ -64,7 +65,8 @@
     "build-storybook": "build-storybook",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "eslint \"{src, test}/**/*.{ts,tsx}\""
+    "lint": "eslint \"{src, test}/**/*.{ts,tsx}\"",
+    "prepack": "yarn build:clean"
   },
   "devDependencies": {
     "@babel/core": "^7.17.7",
