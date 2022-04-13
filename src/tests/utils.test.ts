@@ -1,3 +1,5 @@
+import { CPChartColors } from '@common/theme';
+import { ReChartsEventPayload } from 'types/recharts';
 import {
   cleanKey,
   getAllDataSetKeys,
@@ -5,9 +7,11 @@ import {
   getYAxisDomain,
   hasValue,
   processTimeSeriesResponse,
+  parseReChartsEventProps,
 } from '../common/utils';
 
 import energyManagementData from './fixtures/data/energy-management-data.json';
+import { multipleSeriesPayload_1 } from './fixtures/rechartsPayloads';
 
 const domainTestData = [
   {
@@ -208,4 +212,28 @@ describe('Chart Utility tests', () => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   expect(getEventPayloadValue({}, 'foo')).toBeNull();
+
+  test('parseReChartsEventProps should parse a recharts mouseover event', () => {
+    const result = parseReChartsEventProps({
+      payload: multipleSeriesPayload_1,
+    });
+    expect(result).toEqual([
+      {
+        color: CPChartColors.gray,
+        key: 'hello',
+        label: 'Hello',
+        shape: 'bar',
+        unit: undefined,
+        value: 1234,
+      },
+      {
+        color: CPChartColors.blue,
+        key: 'world',
+        label: 'World',
+        shape: 'bar',
+        unit: undefined,
+        value: 1235,
+      },
+    ]);
+  });
 });
