@@ -31,5 +31,5 @@
     }
   },
   "include": ["src/**/*", "rollup.config.js"],
-  "exclude": ["src/stories/**/*", "./tests/**/*", "dist"]
+  "exclude": ["src/stories/**/*", "src/tests/**/*", "dist"]
 }

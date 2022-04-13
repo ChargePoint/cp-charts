@@ -28,7 +28,7 @@ export const getAllDataSetKeys = (
   keysToRemove?: string[]
 ) => {
   const keyList: string[] = [];
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < data?.length; i++) {
     const row = data[i];
     const keys = Object.keys(row);
     keys.forEach((key) => {

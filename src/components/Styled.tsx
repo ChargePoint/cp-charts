@@ -6,6 +6,7 @@ const { spacing, fontWeight } = ThemeConstants;
 // styled components for Storybook
 export const StoryWrapper = styled.div`
   padding: ${spacing.absolute.m}px;
+  color: ${({ theme }) => theme.page.header.text};
 `;
 
 export const List = styled.ul<{ type?: string }>`
@@ -62,4 +63,8 @@ export const Spacer = styled.div<{ orientation?: string; size: number }>`
       : css`
           width: ${size}px;
         `}
+`;
+
+export const Table = styled.table`
+  border: 0;
 `;

@@ -1,32 +1,29 @@
-import { ThemeProvider } from "styled-components";
-import { cpLightTheme, cpDarkTheme } from "@chargepoint/cp-toolkit";
-import { CPChartsThemeLight } from "../src/common/theme";
+import { ThemeProvider } from 'styled-components';
+import { CPChartsThemeLight, CPChartsThemeDark } from '../src/common/theme';
 
-import "../src/styles/storybook.css";
+import '../src/styles/storybook.css';
 
-const lightTheme = {
-  ...cpLightTheme,
-  ...CPChartsThemeLight,
-};
+const lightTheme = {};
 
 // Adds a global "Theme" switcher to Storybook toolbar
 export const globalTypes = {
   theme: {
-    name: "Theme",
-    description: "Global theme for storybook components",
-    defaultValue: "Light",
+    name: 'Theme',
+    description: 'Global theme for storybook components',
+    defaultValue: 'Light',
     toolbar: {
-      icon: "lightning",
-      items: ["Light", "Dark"],
+      icon: 'lightning',
+      items: ['Light', 'Dark'],
     },
   },
 };
 
 const getTheme = (themeName) => {
-  if (themeName === "Dark") {
-    return cpDarkTheme;
+  console.log('getTheme', themeName);
+  if (themeName.toLowerCase() === 'dark') {
+    return CPChartsThemeDark;
   }
-  return lightTheme;
+  return CPChartsThemeLight;
 };
 
 const withThemeProvider = (Story, context) => {
