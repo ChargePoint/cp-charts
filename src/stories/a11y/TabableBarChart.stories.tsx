@@ -183,6 +183,7 @@ export function KeyboardNavigableBarChart() {
                 getCustomLabel(props, {
                   label: selectedBarProps.label as string[],
                   index: activeBarIndex,
+                  now: selectedBarProps.now,
                 })
               }
               stroke={ThemeColors.gray_20}
