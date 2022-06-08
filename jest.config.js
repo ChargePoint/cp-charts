@@ -13,6 +13,7 @@ module.exports = {
     '@models/(.*)$': '<rootDir>/src/models/$1',
     '@services/(.*)$': '<rootDir>/src/services/$1',
   },
+  setupFilesAfterEnv: ['<rootDir>/setup-tests.ts'],
   globals: {
     'ts-jest': {
       isolatedModules: true,

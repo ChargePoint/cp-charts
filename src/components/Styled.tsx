@@ -7,6 +7,11 @@ const { spacing, fontWeight } = ThemeConstants;
 export const StoryWrapper = styled.div`
   padding: ${spacing.absolute.m}px;
   color: ${({ theme }) => theme.page.header.text};
+
+  .sr-only {
+    position: absolute;
+    left: -3000px;
+  }
 `;
 
 export const List = styled.ul<{ type?: string }>`
