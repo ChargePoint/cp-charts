@@ -13,7 +13,6 @@ import { CPChartColors } from '../../common/theme';
 import { hasValue } from '../../common/utils';
 import { StoryWrapper } from '../../components/Styled';
 import PulsingSVGCircle from '../../components/PulsingCircle';
-import { SROnlyTable } from '../../common/utils/A11Y';
 
 import mockData from '../../tests/fixtures/data/traffic.json';
 
