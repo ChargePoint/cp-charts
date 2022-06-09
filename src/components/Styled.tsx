@@ -11,6 +11,8 @@ export const StoryWrapper = styled.div`
   .sr-only {
     position: absolute;
     left: -3000px;
+    width: 1px;
+    height: 1px;
   }
 `;
 

@@ -82,6 +82,7 @@ function getCustomLabel(
       )}
       {label.map((txt, i) => (
         <text
+          aria-live="polite"
           x={computedX}
           y={10 + i * 16}
           fill={ThemeColors.gray_50}
