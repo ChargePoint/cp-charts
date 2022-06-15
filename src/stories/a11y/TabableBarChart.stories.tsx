@@ -1,23 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, Cell, ReferenceLine } from 'recharts';
-import { format } from 'date-fns';
 import {
+  KitTabs,
   KitUtilCommon,
   KitConstants,
   ThemeColors,
   ThemeConstants,
+  KitTabList,
+  KitTab,
 } from '@chargepoint/cp-toolkit';
 import styled from 'styled-components';
 import { CartesianViewBox } from 'recharts/types/util/types';
 import { CPChartColors } from '../../common/theme';
-import { hasValue } from '../../common/utils';
+import { getWeekDayNames, hasValue } from '../../common/utils';
 import { StoryWrapper } from '../../components/Styled';
 import PulsingSVGCircle from '../../components/PulsingCircle';
 
 import mockData from '../../tests/fixtures/data/traffic.json';
+import { format } from 'date-fns';
 
 const { KeyConstants } = KitConstants;
 const { isKey } = KitUtilCommon;
+
+const Container = styled(KitTabList)`
+  justify-content: center;
+  width: fit-content;
+`;
+
+const StyledTabsList = styled(KitTabList)`
+  justify-content: center;
+  margin-bottom: ${ThemeConstants.spacing.absolute.l}px !important;
+`;
 
 interface BarProps {
   x: number;
@@ -120,10 +133,26 @@ function getBarStroke(isActive: boolean, isNow: boolean) {
   return isActive ? CPChartColors.lightBlue : CPChartColors.lightGray;
 }
 
+const tabs = [
+  { label: 'Sun', day: 0 },
+  { label: 'Mon', day: 1 },
+  { label: 'Tue', day: 2 },
+  { label: 'Wed', day: 3 },
+  { label: 'Thu', day: 4 },
+  { label: 'Fri', day: 5 },
+  { label: 'Sat', day: 6 },
+];
+
 export function KeyboardNavigableBarChart() {
   const [data] = useState(mockData);
   const [activeBarIndex, setActiveBarIndex] = useState<number>();
   const [selectedBarProps, setSelectedBarProps] = useState<BarProps>();
+  const [selectedDay, setSelectedDay] = useState(0);
+  const selectedDayName = getWeekDayNames()[selectedDay];
+
+  const handleTabChange = (idx: number) => {
+    setSelectedDay(idx);
+  };
 
   const handleBarClick = ({ timestamp }) => {
     const idx = data.findIndex((d) => d.timestamp === timestamp);
@@ -152,66 +181,85 @@ export function KeyboardNavigableBarChart() {
     }
   };
 
+\const debouncedKeyDown = useCallback(utils.debounce(handleKeyDown, 500), [activeBarIndex]);
+
+
   useEffect(() => {
     const idx = data.findIndex((d) => d.now);
     const val = data[idx];
     setActiveBarIndex(idx);
     setSelectedBarProps(getSelectedBarProps(val));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+    const today = new Date().getDay();
+    setSelectedDay(today);
+  }, [data]);
 
   return (
     <StoryWrapper>
       <h1>Keyboard Navigable BarChart</h1>
-      <ChartsWrapper
-        tabIndex={0}
-        className="cp-charts-wrapper"
-        onKeyDown={handleKeyDown}
-      >
-        <div className="sr-only">Chart showing popular station times</div>
-        <BarChart
-          data={data}
-          width={700}
-          height={250}
-          margin={{ top: 35, left: 25, right: 25 }}
-        >
-          {hasValue(activeBarIndex) && (
-            <ReferenceLine
-              ifOverflow="extendDomain"
-              orientation="vertical"
-              x={selectedBarProps.x}
-              label={(props) =>
-                getCustomLabel(props, {
-                  label: selectedBarProps.label as string[],
-                  index: activeBarIndex,
-                  now: selectedBarProps.now,
-                })
-              }
-              stroke={ThemeColors.gray_20}
-            />
-          )}
-          <XAxis
-            height={48}
-            tickMargin={8}
-            tickCount={24}
-            interval={0}
-            fontSize="12px"
-            dataKey="timestamp"
-            tickFormatter={(unixTime) => format(new Date(unixTime), 'h')}
-          />
-          <Bar dataKey="traffic" onClick={handleBarClick}>
-            {data.map((entry, idx) => (
-              <Cell
-                aria-selected={idx === activeBarIndex}
-                aria-label={`Some label that makes sense ${entry}`}
-                strokeWidth={idx === activeBarIndex ? 2 : null}
-                stroke={getBarStroke(idx === activeBarIndex, entry.now)}
-                fill={getBarFill(idx === activeBarIndex, entry.now)}
-              />
+
+      <Container>
+        <KitTabs selectedIndex={selectedDay} onSelect={handleTabChange}>
+          <StyledTabsList>
+            {tabs.map((tab, i) => (
+              <KitTab>{tab.label}</KitTab>
             ))}
-          </Bar>
-        </BarChart>
-      </ChartsWrapper>
+          </StyledTabsList>
+        </KitTabs>
+
+        <ChartsWrapper
+          tabIndex={0}
+          className="cp-charts-wrapper"
+          onKeyDown={handleKeyDown}
+        >
+          <div className="sr-only">
+            Chart showing popular station times for {selectedDayName}
+          </div>
+          <BarChart
+            data={data}
+            width={700}
+            height={250}
+            margin={{ top: 35, left: 25, right: 25 }}
+          >
+            {hasValue(activeBarIndex) && (
+              <ReferenceLine
+                ifOverflow="extendDomain"
+                orientation="vertical"
+                x={selectedBarProps.x}
+                label={(props) =>
+                  getCustomLabel(props, {
+                    label: selectedBarProps.label as string[],
+                    index: activeBarIndex,
+                    now: selectedBarProps.now,
+                  })
+                }
+                stroke={ThemeColors.gray_20}
+              />
+            )}
+            <XAxis
+              height={48}
+              tickMargin={8}
+              tickCount={24}
+              interval={0}
+              fontSize="12px"
+              dataKey="timestamp"
+              tickFormatter={(unixTime) => format(new Date(unixTime), 'h')}
+            />
+            <Bar dataKey="traffic" onClick={handleBarClick}>
+              {data.map((entry, idx) => (
+                <Cell
+                  aria-selected={idx === activeBarIndex}
+                  aria-label={`Some label that makes sense ${entry}`}
+                  strokeWidth={idx === activeBarIndex ? 2 : null}
+                  stroke={getBarStroke(idx === activeBarIndex, entry.now)}
+                  fill={getBarFill(idx === activeBarIndex, entry.now)}
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ChartsWrapper>
+      </Container>
     </StoryWrapper>
   );
 }
