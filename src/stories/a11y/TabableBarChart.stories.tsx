@@ -22,9 +22,12 @@ import mockData from '../../tests/fixtures/data/traffic.json';
 const { KeyConstants } = KitConstants;
 const { isKey } = KitUtilCommon;
 
-const Container = styled(KitTabList)`
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   width: fit-content;
+  margin: auto;
 `;
 
 const StyledTabsList = styled(KitTabList)`
@@ -70,6 +73,20 @@ function getBusyLabel(traffic) {
   return 'unknown';
 }
 
+// determine 'Now' bar
+function processData(data, weekDay) {
+  const now = new Date();
+  const nowWeekDay = format(now, 'EEE');
+
+  return data.map((item) => {
+    const ts = new Date(item.timestamp);
+    return {
+      ...item,
+      now: nowWeekDay === weekDay && ts.getHours() === now.getHours(),
+    };
+  });
+}
+
 function getCustomLabel(
   props,
   {
@@ -109,6 +126,9 @@ function getCustomLabel(
 }
 
 function getSelectedBarProps(val): BarProps {
+  if (!val) {
+    return {};
+  }
   return {
     x: val.timestamp,
     now: val.now,
@@ -144,11 +164,11 @@ const tabs = [
 ];
 
 export function KeyboardNavigableBarChart() {
-  const [data] = useState(mockData);
   const [activeBarIndex, setActiveBarIndex] = useState<number>();
   const [selectedBarProps, setSelectedBarProps] = useState<BarProps>();
-  const [selectedDay, setSelectedDay] = useState(0);
+  const [selectedDay, setSelectedDay] = useState(new Date().getDay());
   const selectedDayName = getWeekDayNames()[selectedDay];
+  const [data, setData] = useState(processData(mockData, selectedDayName));
 
   const handleTabChange = (idx: number) => {
     setSelectedDay(idx);
@@ -182,15 +202,14 @@ export function KeyboardNavigableBarChart() {
   };
 
   useEffect(() => {
-    const idx = data.findIndex((d) => d.now);
-    const val = data[idx];
+    const processed = processData(mockData, selectedDayName);
+    const idx = processed.findIndex((d) => d.now);
+    const val = processed[idx];
     setActiveBarIndex(idx);
     setSelectedBarProps(getSelectedBarProps(val));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
 
-    const today = new Date().getDay();
-    setSelectedDay(today);
-  }, [data]);
+    setData(processed);
+  }, [selectedDayName]);
 
   return (
     <StoryWrapper>
@@ -247,7 +266,6 @@ export function KeyboardNavigableBarChart() {
               {data.map((entry, idx) => (
                 <Cell
                   aria-selected={idx === activeBarIndex}
-                  aria-label={`Some label that makes sense ${entry}`}
                   strokeWidth={idx === activeBarIndex ? 2 : null}
                   stroke={getBarStroke(idx === activeBarIndex, entry.now)}
                   fill={getBarFill(idx === activeBarIndex, entry.now)}
