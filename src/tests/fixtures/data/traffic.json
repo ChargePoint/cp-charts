@@ -93,8 +93,7 @@
         "timestamp": 1643756400000,
         "traffic": 4,
         "foo": 4.1,
-        "qux": 8,
-        "now": true
+        "qux": 8
     },
     {
         "timestamp": 1643760000000,

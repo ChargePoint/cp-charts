@@ -1,6 +1,16 @@
 import { TimeSeriesRecord, ZoomOptions } from '@models';
+
 import { TimeSeriesData, ChartEvent, CPChartRect } from 'types/index';
 import { ReChartsEventPayload } from 'types/recharts';
+
+import { addDays, format, startOfWeek } from 'date-fns';
+
+export const getWeekDayNames = (dayFormat: string = 'EEE') => {
+  const sunday = startOfWeek(new Date());
+  return Array.from(Array(7)).map((e, i) =>
+    format(addDays(sunday, i), dayFormat)
+  );
+};
 
 /**
  * returns clean key with special chars and spaces replaced with underscores
@@ -219,4 +229,8 @@ export function getEventPayloadValue(e: ChartEvent, dataKey: string) {
     return activePayload[0].payload[dataKey];
   }
   return null;
+}
+
+export function randRange(min: number, max: number) {
+  return Math.random() * (max - min) + min;
 }

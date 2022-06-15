@@ -8,6 +8,7 @@ import {
   hasValue,
   processTimeSeriesResponse,
   parseReChartsEventProps,
+  getWeekDayNames,
 } from '../common/utils';
 
 import energyManagementData from './fixtures/data/energy-management-data.json';
@@ -234,6 +235,19 @@ describe('Chart Utility tests', () => {
         unit: undefined,
         value: 1235,
       },
+    ]);
+  });
+
+  test('getWeekDayNames, should return the 7 days of the week, beginning with Sunday', () => {
+    const result = getWeekDayNames();
+    expect(result).toStrictEqual([
+      'Sun',
+      'Mon',
+      'Tue',
+      'Wed',
+      'Thu',
+      'Fri',
+      'Sat',
     ]);
   });
 });

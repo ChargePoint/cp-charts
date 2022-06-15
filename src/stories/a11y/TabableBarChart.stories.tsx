@@ -1,23 +1,40 @@
 import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, Cell, ReferenceLine } from 'recharts';
-import { format } from 'date-fns';
 import {
+  KitTabs,
   KitUtilCommon,
   KitConstants,
   ThemeColors,
   ThemeConstants,
+  KitTabList,
+  KitTab,
 } from '@chargepoint/cp-toolkit';
 import styled from 'styled-components';
 import { CartesianViewBox } from 'recharts/types/util/types';
+import { format } from 'date-fns';
 import { CPChartColors } from '../../common/theme';
-import { hasValue } from '../../common/utils';
+import { getWeekDayNames, hasValue, randRange } from '../../common/utils';
 import { StoryWrapper } from '../../components/Styled';
 import PulsingSVGCircle from '../../components/PulsingCircle';
 
 import mockData from '../../tests/fixtures/data/traffic.json';
+import { idText } from 'typescript';
 
 const { KeyConstants } = KitConstants;
 const { isKey } = KitUtilCommon;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: fit-content;
+  margin: auto;
+`;
+
+const StyledTabsList = styled(KitTabList)`
+  justify-content: center;
+  margin-bottom: ${ThemeConstants.spacing.absolute.l}px !important;
+`;
 
 interface BarProps {
   x: number;
@@ -55,6 +72,22 @@ function getBusyLabel(traffic) {
     return 'usually crowded';
   }
   return 'unknown';
+}
+
+// determine 'Now' bar
+function processData(data, weekDay) {
+  const now = new Date();
+  const nowWeekDay = format(now, 'EEE');
+
+  return data.map((item) => {
+    const ts = new Date(item.timestamp);
+    return {
+      ...item,
+      // for this story, add some randomization into the data (do not use for real chart)
+      traffic: item.traffic * randRange(0.1, 0.8),
+      now: nowWeekDay === weekDay && ts.getHours() === now.getHours(),
+    };
+  });
 }
 
 function getCustomLabel(
@@ -96,6 +129,9 @@ function getCustomLabel(
 }
 
 function getSelectedBarProps(val): BarProps {
+  if (!val) {
+    return {};
+  }
   return {
     x: val.timestamp,
     now: val.now,
@@ -120,10 +156,21 @@ function getBarStroke(isActive: boolean, isNow: boolean) {
   return isActive ? CPChartColors.lightBlue : CPChartColors.lightGray;
 }
 
+const tabs = getWeekDayNames().map((day, idx) => ({
+  label: day,
+  day: idx,
+}));
+
 export function KeyboardNavigableBarChart() {
-  const [data] = useState(mockData);
   const [activeBarIndex, setActiveBarIndex] = useState<number>();
   const [selectedBarProps, setSelectedBarProps] = useState<BarProps>();
+  const [selectedDay, setSelectedDay] = useState(new Date().getDay());
+  const selectedDayName = getWeekDayNames()[selectedDay];
+  const [data, setData] = useState(processData(mockData, selectedDayName));
+
+  const handleTabChange = (idx: number) => {
+    setSelectedDay(idx);
+  };
 
   const handleBarClick = ({ timestamp }) => {
     const idx = data.findIndex((d) => d.timestamp === timestamp);
@@ -153,65 +200,79 @@ export function KeyboardNavigableBarChart() {
   };
 
   useEffect(() => {
-    const idx = data.findIndex((d) => d.now);
-    const val = data[idx];
+    const processed = processData(mockData, selectedDayName);
+    const idx = processed.findIndex((d) => d.now);
+    const val = processed[idx];
     setActiveBarIndex(idx);
     setSelectedBarProps(getSelectedBarProps(val));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+    setData(processed);
+  }, [selectedDayName]);
 
   return (
     <StoryWrapper>
       <h1>Keyboard Navigable BarChart</h1>
-      <ChartsWrapper
-        tabIndex={0}
-        className="cp-charts-wrapper"
-        onKeyDown={handleKeyDown}
-      >
-        <div className="sr-only">Chart showing popular station times</div>
-        <BarChart
-          data={data}
-          width={700}
-          height={250}
-          margin={{ top: 35, left: 25, right: 25 }}
-        >
-          {hasValue(activeBarIndex) && (
-            <ReferenceLine
-              ifOverflow="extendDomain"
-              orientation="vertical"
-              x={selectedBarProps.x}
-              label={(props) =>
-                getCustomLabel(props, {
-                  label: selectedBarProps.label as string[],
-                  index: activeBarIndex,
-                  now: selectedBarProps.now,
-                })
-              }
-              stroke={ThemeColors.gray_20}
-            />
-          )}
-          <XAxis
-            height={48}
-            tickMargin={8}
-            tickCount={24}
-            interval={0}
-            fontSize="12px"
-            dataKey="timestamp"
-            tickFormatter={(unixTime) => format(new Date(unixTime), 'h')}
-          />
-          <Bar dataKey="traffic" onClick={handleBarClick}>
-            {data.map((entry, idx) => (
-              <Cell
-                aria-selected={idx === activeBarIndex}
-                aria-label={`Some label that makes sense ${entry}`}
-                strokeWidth={idx === activeBarIndex ? 2 : null}
-                stroke={getBarStroke(idx === activeBarIndex, entry.now)}
-                fill={getBarFill(idx === activeBarIndex, entry.now)}
-              />
+
+      <Container>
+        <KitTabs selectedIndex={selectedDay} onSelect={handleTabChange}>
+          <StyledTabsList>
+            {tabs.map((tab, i) => (
+              <KitTab>{tab.label}</KitTab>
             ))}
-          </Bar>
-        </BarChart>
-      </ChartsWrapper>
+          </StyledTabsList>
+        </KitTabs>
+
+        <ChartsWrapper
+          tabIndex={0}
+          className="cp-charts-wrapper"
+          onKeyDown={handleKeyDown}
+        >
+          <div className="sr-only">
+            Chart showing popular station times for {selectedDayName}
+          </div>
+          <BarChart
+            data={data}
+            width={700}
+            height={250}
+            margin={{ top: 35, left: 25, right: 25 }}
+          >
+            {hasValue(activeBarIndex) && (
+              <ReferenceLine
+                ifOverflow="extendDomain"
+                orientation="vertical"
+                x={selectedBarProps.x}
+                label={(props) =>
+                  getCustomLabel(props, {
+                    label: selectedBarProps.label as string[],
+                    index: activeBarIndex,
+                    now: selectedBarProps.now,
+                  })
+                }
+                stroke={ThemeColors.gray_20}
+              />
+            )}
+            <XAxis
+              height={48}
+              tickMargin={8}
+              tickCount={24}
+              interval={0}
+              fontSize="12px"
+              dataKey="timestamp"
+              tickFormatter={(unixTime) => format(new Date(unixTime), 'h')}
+            />
+            <Bar dataKey="traffic" onClick={handleBarClick}>
+              {data.map((entry, idx) => (
+                <Cell
+                  aria-selected={idx === activeBarIndex}
+                  strokeWidth={idx === activeBarIndex ? 2 : null}
+                  stroke={getBarStroke(idx === activeBarIndex, entry.now)}
+                  fill={getBarFill(idx === activeBarIndex, entry.now)}
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ChartsWrapper>
+      </Container>
     </StoryWrapper>
   );
 }
