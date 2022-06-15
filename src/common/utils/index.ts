@@ -230,3 +230,7 @@ export function getEventPayloadValue(e: ChartEvent, dataKey: string) {
   }
   return null;
 }
+
+export function randRange(min: number, max: number) {
+  return Math.random() * (max - min) + min;
+}

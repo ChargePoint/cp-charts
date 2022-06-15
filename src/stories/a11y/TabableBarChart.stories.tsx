@@ -13,11 +13,12 @@ import styled from 'styled-components';
 import { CartesianViewBox } from 'recharts/types/util/types';
 import { format } from 'date-fns';
 import { CPChartColors } from '../../common/theme';
-import { getWeekDayNames, hasValue } from '../../common/utils';
+import { getWeekDayNames, hasValue, randRange } from '../../common/utils';
 import { StoryWrapper } from '../../components/Styled';
 import PulsingSVGCircle from '../../components/PulsingCircle';
 
 import mockData from '../../tests/fixtures/data/traffic.json';
+import { idText } from 'typescript';
 
 const { KeyConstants } = KitConstants;
 const { isKey } = KitUtilCommon;
@@ -82,6 +83,8 @@ function processData(data, weekDay) {
     const ts = new Date(item.timestamp);
     return {
       ...item,
+      // for this story, add some randomization into the data (do not use for real chart)
+      traffic: item.traffic * randRange(0.1, 0.8),
       now: nowWeekDay === weekDay && ts.getHours() === now.getHours(),
     };
   });
@@ -153,15 +156,10 @@ function getBarStroke(isActive: boolean, isNow: boolean) {
   return isActive ? CPChartColors.lightBlue : CPChartColors.lightGray;
 }
 
-const tabs = [
-  { label: 'Sun', day: 0 },
-  { label: 'Mon', day: 1 },
-  { label: 'Tue', day: 2 },
-  { label: 'Wed', day: 3 },
-  { label: 'Thu', day: 4 },
-  { label: 'Fri', day: 5 },
-  { label: 'Sat', day: 6 },
-];
+const tabs = getWeekDayNames().map((day, idx) => ({
+  label: day,
+  day: idx,
+}));
 
 export function KeyboardNavigableBarChart() {
   const [activeBarIndex, setActiveBarIndex] = useState<number>();
