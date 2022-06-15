@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, Cell, ReferenceLine } from 'recharts';
 import {
   KitTabs,
@@ -11,13 +11,13 @@ import {
 } from '@chargepoint/cp-toolkit';
 import styled from 'styled-components';
 import { CartesianViewBox } from 'recharts/types/util/types';
+import { format } from 'date-fns';
 import { CPChartColors } from '../../common/theme';
 import { getWeekDayNames, hasValue } from '../../common/utils';
 import { StoryWrapper } from '../../components/Styled';
 import PulsingSVGCircle from '../../components/PulsingCircle';
 
 import mockData from '../../tests/fixtures/data/traffic.json';
-import { format } from 'date-fns';
 
 const { KeyConstants } = KitConstants;
 const { isKey } = KitUtilCommon;
@@ -180,9 +180,6 @@ export function KeyboardNavigableBarChart() {
       }
     }
   };
-
-\const debouncedKeyDown = useCallback(utils.debounce(handleKeyDown, 500), [activeBarIndex]);
-
 
   useEffect(() => {
     const idx = data.findIndex((d) => d.now);

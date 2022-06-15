@@ -5,9 +5,11 @@ import { ReChartsEventPayload } from 'types/recharts';
 
 import { addDays, format, startOfWeek } from 'date-fns';
 
-export const getWeekDayNames = () => {
+export const getWeekDayNames = (dayFormat: string = 'EEE') => {
   const sunday = startOfWeek(new Date());
-  return Array.from(Array(7)).map((e, i) => format(addDays(sunday, i), 'EEEE'));
+  return Array.from(Array(7)).map((e, i) =>
+    format(addDays(sunday, i), dayFormat)
+  );
 };
 
 /**
