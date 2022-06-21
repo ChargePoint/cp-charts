@@ -5,7 +5,7 @@
   "main": "dist/cjs/index.js",
   "types": "dist/index.d.ts",
   "license": "UNLICENSED",
-  "version": "0.3.4",
+  "version": "0.3.4-beta",
   "files": [
     "dist",
     "src",
@@ -52,6 +52,7 @@
     "@chargepoint/cp-toolkit": "^0.7.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-i18next": "^11.16.9",
     "recharts": "^2.1.10",
     "styled-components": "^5.3.5"
   },
@@ -101,6 +102,7 @@
     "prettier": "^2.6.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-i18next": "^11.16.9",
     "react-router-dom": "^6.3.0",
     "recharts": "^2.1.10",
     "rollup": "^2.74.1",
