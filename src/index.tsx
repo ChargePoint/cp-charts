@@ -6,6 +6,7 @@ import { CPChartsThemeDark, CPChartsThemeLight } from './common/theme';
 import CPChartZoomOutButton from './components/CPChartZoomOutButton';
 import CPChartShape from './components/CPChartShape';
 import CPChartTooltip from './components/CPChartTooltip';
+import CPChartPopularTimes from './components/CPChartPopularTimes';
 
 import { CPChartRect, ChartElementProps, ChartEvent } from './types/index';
 import {
@@ -25,6 +26,7 @@ export {
   ChartHelpers,
   ChartUtils,
   ChartConstants,
+  CPChartPopularTimes,
   CPChartShape,
   CPChartTooltip,
   CPChartZoomOutButton,

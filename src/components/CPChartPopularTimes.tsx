@@ -12,6 +12,7 @@ import {
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, ReferenceLine } from 'recharts';
 import { hasValue } from '../common/utils';
 const { isKey } = KitUtilCommon;
+import { CPChartColors } from '../common/theme';
 
 const { KeyConstants } = KitConstants;
 
@@ -30,7 +31,6 @@ const Text = styled.text<{ index: number }>`
 
 interface BarProps {
   x: number;
-  now?: number;
   hour?: number;
   label?: string | string[];
 }
@@ -50,7 +50,6 @@ interface CustomLabelProps {
 
 function getSelectedBarProps(val: {
   x: number;
-  now?: number;
   hour?: number;
   label: string[];
 }): BarProps {
@@ -61,7 +60,6 @@ function getSelectedBarProps(val: {
   }
   return {
     x: val.x,
-    now: val.now,
     label: val.label,
     hour: val.hour || 0,
   };
@@ -75,6 +73,7 @@ const StyledResponsiveContainer = styled(ResponsiveContainer)`
 `;
 
 const PopularTimesChart: FC<PopularTimesChartProps> = ({ occupancyForCurrentDay }) => {
+  console.info(occupancyForCurrentDay, 'occupancyForCurrentDay2');
   const { t, i18n } = useTranslation();
   const theme = useTheme() as ThemeSchema;
   const [activeBarIndex, setActiveBarIndex] = useState<number>(1);
@@ -84,6 +83,7 @@ const PopularTimesChart: FC<PopularTimesChartProps> = ({ occupancyForCurrentDay 
     hour: 0,
   });
   const [keyPressed, setKeyPressed] = useState(false);
+  const [currentHour, setCurrentHour] = useState<number>(0);
   const [data, setData] = useState<StationOccupancyPerHour[]>([]);
 
   const getCustomLabel = (
@@ -115,9 +115,11 @@ const PopularTimesChart: FC<PopularTimesChartProps> = ({ occupancyForCurrentDay 
     return max.occupancy > current.occupancy ? max : current;
   });
 
-  const getBarColor = (currentOccupancy: number) => {
-    const { occupancy } = hourWithHighestOccupancy;
-    return occupancy === currentOccupancy ? colors.blue_gray_50 : colors.blue_30;
+  const getBarColor = (isActive: boolean, isNow: boolean) => {
+    if (isActive && isNow) {
+      return CPChartColors.pink;
+    }
+    return isActive ? CPChartColors.lightBlue : CPChartColors.lightGray;
   };
 
   const formatXAxisHours = (hours: number) => {
@@ -151,7 +153,7 @@ const PopularTimesChart: FC<PopularTimesChartProps> = ({ occupancyForCurrentDay 
     if (!activeBarIndex === undefined) {
       return;
     }
-    if (isKey([KeyConstants.LEFT], e)) {
+    if (isKey([KeyConstants.LEFT], e as KeyboardEvent)) {
       const idx = hasValue(activeBarIndex) ? activeBarIndex - 1 : 0;
       if (idx >= 0) {
         const val = data[idx];
@@ -165,7 +167,7 @@ const PopularTimesChart: FC<PopularTimesChartProps> = ({ occupancyForCurrentDay 
         );
       }
     }
-    if (isKey([KeyConstants.RIGHT], e)) {
+    if (isKey([KeyConstants.RIGHT], e as KeyboardEvent)) {
       const idx = hasValue(activeBarIndex) ? activeBarIndex + 1 : 0;
       if (idx < data.length) {
         const val = data[idx];
@@ -179,10 +181,6 @@ const PopularTimesChart: FC<PopularTimesChartProps> = ({ occupancyForCurrentDay 
         );
       }
     }
-  };
-
-  const getBarStroke = (isActive: boolean) => {
-    return isActive ? 'black' : 'gray';
   };
 
   const handleBarClick = ({ hour }: BarProps) => {
@@ -201,6 +199,7 @@ const PopularTimesChart: FC<PopularTimesChartProps> = ({ occupancyForCurrentDay 
   useEffect(() => {
     const currentDate = new Date();
     const currentHour = currentDate.getHours();
+    setCurrentHour(currentHour);
     const idx = occupancyForCurrentDay.findIndex((d) => d.hour === currentHour);
     const index = idx >= 0 ? idx : 0;
     setActiveBarIndex(index);
@@ -254,8 +253,7 @@ const PopularTimesChart: FC<PopularTimesChartProps> = ({ occupancyForCurrentDay 
               <Cell
                 aria-selected={idx === activeBarIndex}
                 key={`cell-${entry.hour}`}
-                fill={getBarColor(entry.occupancy)}
-                stroke={getBarStroke(idx === activeBarIndex)}
+                fill={getBarColor(idx === activeBarIndex, currentHour === entry.hour)}
               />
             ))}
           </Bar>
