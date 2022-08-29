@@ -19,7 +19,6 @@ import PulsingCircle from '../components/PulsingCircle';
 import mockData from '../tests/fixtures/data/traffic.json';
 // eslint-disable-next-line camelcase
 import { multipleSeriesPayload_1 } from '../tests/fixtures/rechartsPayloads';
-import { fil } from 'date-fns/locale';
 
 const { spacing } = ThemeConstants;
 
@@ -57,7 +56,7 @@ const Content = styled.div`
   }
 `;
 
-export const CustomToolTip = ({}) => {
+export const CustomToolTip = () => {
   const formatTimeStamp = (row) =>
     format(new Date(row.timestamp), ISO_DATE_TIME);
 
@@ -74,7 +73,7 @@ export const CustomToolTip = ({}) => {
 
       <Content>
         <CPChartTooltip
-          className={`tooltip-standalone-example`}
+          className="tooltip-standalone-example"
           payload={multipleSeriesPayload_1}
           formatTimeStamp={formatTimeStamp}
         />

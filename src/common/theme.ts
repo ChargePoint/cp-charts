@@ -1,5 +1,9 @@
-import { ThemeColors, ThemeSchema } from '@chargepoint/cp-toolkit';
-import { cpLightTheme, cpDarkTheme } from '@chargepoint/cp-toolkit';
+import {
+  ThemeColors,
+  ThemeSchema,
+  cpLightTheme,
+  cpDarkTheme,
+} from '@chargepoint/cp-toolkit';
 
 export interface TooltipTheme {
   bg: string;
