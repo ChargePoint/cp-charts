@@ -1,5 +1,5 @@
-import { CPChartColors } from '@common/theme';
-import { ReChartsEventPayload } from 'types/recharts';
+/* eslint-disable camelcase */
+import { CPChartColors } from '../common/theme';
 import {
   cleanKey,
   getAllDataSetKeys,

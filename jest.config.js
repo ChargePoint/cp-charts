@@ -12,6 +12,7 @@ module.exports = {
     '@components/(.*)$': '<rootDir>/src/components/$1',
     '@models/(.*)$': '<rootDir>/src/models/$1',
     '@services/(.*)$': '<rootDir>/src/services/$1',
+    '^d3-(.*)$': '<rootDir>/node_modules/d3-$1/dist/d3-$1',
   },
   setupFilesAfterEnv: ['<rootDir>/setup-tests.ts'],
   globals: {
