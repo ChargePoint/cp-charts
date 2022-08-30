@@ -25,13 +25,11 @@ export default [
       {
         file: packageJson.main,
         format: 'cjs',
-        sourcemap: true,
         name: libName,
       },
       {
         file: packageJson.module,
         format: 'esm',
-        sourcemap: true,
       },
     ],
     plugins: [
@@ -46,14 +44,13 @@ export default [
     ],
   },
   {
-    input: 'dist/esm/d/index.d.ts',
+    input: 'dist/esm/types/index.d.ts',
     output: [{ file: 'dist/index.d.ts', format: 'esm' }],
     plugins: [
       dts({
         compilerOptions: {
-          paths: ts.readConfigFile(
-            path.resolve(__dirname, 'tsconfig.json'),
-            (p) => readFileSync(p, 'utf8')
+          paths: ts.readConfigFile(path.resolve(__dirname, 'tsconfig.json'), (p) =>
+            readFileSync(p, 'utf8')
           ).config.compilerOptions.paths,
         },
       }),
