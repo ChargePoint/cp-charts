@@ -99,7 +99,25 @@ export const PieChartWithLegend = () => {
 };
 
 export const Donut = () => {
-  const names = data.map((d) => d.name);
+  const testData = [
+    {
+      name: 'Glazed',
+      value: 119,
+    },
+    {
+      name: 'Jelly',
+      value: 18,
+    },
+    {
+      name: 'Maple Bar',
+      value: 69,
+    },
+    {
+      name: 'Old Fashioned',
+      value: 76,
+    },
+  ];
+  const names = testData.map((d) => d.name);
   const scale = scaleOrdinal(Object.values(CPChartColors).reverse());
   const domain = scale.domain(names);
 
@@ -109,7 +127,7 @@ export const Donut = () => {
         <PieChart width={400} height={400}>
           <Tooltip content={renderTooltip} />
           <Pie
-            data={data}
+            data={testData}
             cx='50%'
             cy='50%'
             nameKey='name'
@@ -118,7 +136,7 @@ export const Donut = () => {
             fill='#8884d8'
             dataKey='value'
           >
-            {data.map((entry, index) => (
+            {testData.map((entry, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <Cell key={`cell-${index}`} fill={domain(entry.name)} />
             ))}
