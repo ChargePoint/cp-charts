@@ -1,4 +1,4 @@
-import { ComponentType, ReactElement, ReactNode } from 'react';
+import { ComponentType, FunctionComponent, ReactElement, ReactNode } from 'react';
 import { Area, Bar, Line, ReferenceLine, Symbols } from 'recharts';
 import { LegendType, SymbolType } from 'recharts/types/util/types';
 import { ChartElementProps, SymbolProps } from '../types';
@@ -18,14 +18,16 @@ export enum SymbolTypes {
   SQUARE = 'square',
 }
 
-export const componentMap: { [key: string]: ReactNode } = {
+export const componentMap: {
+  [key: string]: ComponentType;
+} = {
   line: Line,
   bar: Bar,
   area: Area,
   referenceLine: ReferenceLine,
 };
 
-type SeriesProps = ChartElementProps & ReactElement;
+type SeriesProps = ChartElementProps;
 
 /**
  * Renders a chart series
@@ -33,11 +35,13 @@ type SeriesProps = ChartElementProps & ReactElement;
  * @param chartSeriesProps
  * @returns
  */
-export function renderSeries(chartSeriesProps: SeriesProps) {
+export function renderSeries(chartSeriesProps: SeriesProps){
   const ChartSeries = componentMap[
     chartSeriesProps.seriesType
   ] as ComponentType<ChartElementProps>;
-  return <ChartSeries {...(chartSeriesProps as ChartElementProps)} />;
+  return (
+    <ChartSeries {...(chartSeriesProps as ChartElementProps)} />
+  ) as unknown as JSX.IntrinsicElements;
 }
 
 /**
