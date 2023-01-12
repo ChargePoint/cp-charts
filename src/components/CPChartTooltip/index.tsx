@@ -36,15 +36,7 @@ export interface CPChartTooltipItem {
 }
 
 export function renderSeriesItem(
-  {
-    color,
-    key,
-    label,
-    shape,
-    strokeDasharray,
-    value,
-    unit = '',
-  }: CPChartTooltipItem,
+  { color, key, label, shape, strokeDasharray, value, unit = '' }: CPChartTooltipItem,
   formatter?: FormatterFunc
 ) {
   const format = (): string => {
@@ -97,15 +89,7 @@ export interface CPChartTooltipProps {
  * @returns
  */
 const CPChartTooltip: FC<CPChartTooltipProps> = (props) => {
-  const {
-    className,
-    timeStampFormatter,
-    valueFormatter,
-    items,
-    mode,
-    payload,
-    type,
-  } = props;
+  const { className, timeStampFormatter, valueFormatter, items, mode, payload, type } = props;
   if (payload && payload.length) {
     const row = payload[0].payload as Record<string, number>;
 
@@ -113,9 +97,7 @@ const CPChartTooltip: FC<CPChartTooltipProps> = (props) => {
       if (mode === 'mergeItemsWithPayload' && items && payload) {
         return combineToolTipItems(payload, items, row, type);
       }
-      return items
-        ? mapToolTipItems(items, row, type)
-        : parseReChartsEventProps(props);
+      return items ? mapToolTipItems(items, row, type) : parseReChartsEventProps(props);
     })();
 
     return (
@@ -125,9 +107,7 @@ const CPChartTooltip: FC<CPChartTooltipProps> = (props) => {
             <li key={field.label}>{renderSeriesItem(field, valueFormatter)}</li>
           ))}
         </List>
-        {timeStampFormatter && (
-          <TooltipTitle>{timeStampFormatter(row)}</TooltipTitle>
-        )}
+        {timeStampFormatter && <TooltipTitle>{timeStampFormatter(row)}</TooltipTitle>}
       </CustomTooltipWrapper>
     );
   }

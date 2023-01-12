@@ -3,7 +3,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "declaration": true,
-    "declarationDir": "d",
+    "declarationDir": "types",
     "emitDeclarationOnly": true,
     "declarationMap": true,
     "esModuleInterop": true,

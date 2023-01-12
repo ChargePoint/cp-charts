@@ -1,0 +1,600 @@
+[
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 19:10:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 19:15:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 19:20:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 19:25:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 19:30:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 19:35:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 19:40:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 19:45:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 19:50:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 19:55:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 20:00:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IF-QA-250-3 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 20:05:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 20:10:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 54.000000000002046
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 20:15:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 20:20:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 20:25:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 20:30:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 20:35:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 20:40:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 62.5
+            }
+        ],
+        "time": "2023-01-04 20:45:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 54.000000000002046
+            }
+        ],
+        "time": "2023-01-04 20:50:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 20:55:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 21:00:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 21:05:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 21:10:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 21:15:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 21:20:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 21:25:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 21:30:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#5 - Port 1",
+                "value": 62.5
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 21:35:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 21:40:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 21:45:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 21:50:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 21:55:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IF-QA-250-2 - Port 1",
+                "value": 27.000000000001023
+            },
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 22:00:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 22:05:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 22:10:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 22:15:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 22:20:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 22:25:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 22:30:00.000000000"
+    },
+    {
+        "data": [
+            {
+                "name": "IFQATEST-EVSE#6 - Port 1",
+                "value": 27.000000000001023
+            }
+        ],
+        "time": "2023-01-04 22:35:00.000000000"
+    }
+]

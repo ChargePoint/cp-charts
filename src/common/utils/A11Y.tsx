@@ -9,11 +9,11 @@ export const SROnlyTable = ({
 }: {
   data: Record<string, number | unknown>[];
   cols: { field: string; label: string }[];
-  formatter: () => string;
+  formatter: (col: unknown, row: unknown) => string;
   title: string;
 }) => {
   return (
-    <table className="sr-only">
+    <table className='sr-only'>
       <legend>{title}</legend>
       <thead>
         <tr>
@@ -26,7 +26,7 @@ export const SROnlyTable = ({
         {data.map((row) => (
           <tr>
             {cols.map((col) => {
-              return formatter ? formatter(col, row) : row[col.field];
+              return formatter ? formatter(col, row) : (row[col.field] as string);
             })}
           </tr>
         ))}

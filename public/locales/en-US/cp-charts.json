@@ -1,0 +1,41 @@
+{
+    "dates": {
+        "daysOfTheWeek": {
+            "sun": {
+                "char": "S",
+                "short": "Sun",
+                "full": "Sunday"
+            },
+            "mon": {
+                "char": "M",
+                "symbol": "Mon",
+                "full": "Monday"
+            },
+            "tue": {
+                "char": "T",
+                "symbol": "Tue",
+                "full": "Tuesday"
+            },
+            "wed": {
+                "char": "W",
+                "symbol": "Wed",
+                "full": "Wednesday"
+            },
+            "thu": {
+                "char": "T",
+                "symbol": "Thu",
+                "full": "Thursday"
+            },
+            "fri": {
+                "char": "F",
+                "short": "Fri",
+                "full": "Friday"
+            },
+            "sat": {
+                "char": "S",
+                "short": "Sat",
+                "full": "Saturday"
+            }
+        }
+    }
+}

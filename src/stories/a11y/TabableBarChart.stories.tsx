@@ -18,7 +18,6 @@ import { StoryWrapper } from '../../components/Styled';
 import PulsingSVGCircle from '../../components/PulsingCircle';
 
 import mockData from '../../tests/fixtures/data/traffic.json';
-import { idText } from 'typescript';
 
 const { KeyConstants } = KitConstants;
 const { isKey } = KitUtilCommon;
@@ -217,7 +216,8 @@ export function KeyboardNavigableBarChart() {
         <KitTabs selectedIndex={selectedDay} onSelect={handleTabChange}>
           <StyledTabsList>
             {tabs.map((tab, i) => (
-              <KitTab>{tab.label}</KitTab>
+              // eslint-disable-next-line react/no-array-index-key
+              <KitTab key={`tab-${i}`}>{tab.label}</KitTab>
             ))}
           </StyledTabsList>
         </KitTabs>
