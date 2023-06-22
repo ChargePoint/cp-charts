@@ -184,6 +184,9 @@ export const getYAxisDomain = (
 export const ChartZoom = {
   init(e: ChartEvent, prevZoom: CPChartRect, xKey: string, offset = 0) {
     const { activePayload } = e || {};
+    if(!activePayload?.length) {
+     return prevZoom;
+    }
     const { payload } = activePayload[0];
 
     return {
